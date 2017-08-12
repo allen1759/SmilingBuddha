@@ -13,10 +13,63 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="liblinear">
+      <UniqueIdentifier>{4663a032-3ebc-455c-8e5d-3b3d7561e35a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\WebcamManager.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.cpp">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.cpp">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\daxpy.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\ddot.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\dnrm2.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\dscal.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\WebcamManager.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileProcessDemo.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileProcess.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blas.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blasp.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

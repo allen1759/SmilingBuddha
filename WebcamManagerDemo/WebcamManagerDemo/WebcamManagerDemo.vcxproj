@@ -63,12 +63,16 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SmileBuddhaDebug.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SmileBuddhaRelease.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -110,7 +114,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\daxpy.c" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\ddot.c" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\dnrm2.c" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\dscal.c" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.cpp" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.cpp" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.cpp" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\WebcamManager.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blas.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blasp.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileProcess.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\WebcamManager.h" />
+    <ClInclude Include="SmileProcessDemo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
