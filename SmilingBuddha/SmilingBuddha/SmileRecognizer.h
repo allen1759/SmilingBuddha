@@ -55,7 +55,7 @@ private:
 	const int HOG_NUMBER_OF_BINS = 9;
 
 	// LIBSVM model file
-	const char *MODEL_FILENAME = "LogisticRegression_16_4.model";
+	const char *MODEL_FILENAME = "resources\\LogisticRegression_16_4.model";
 
 	// SmileRecognizer private member
 	cv::HOGDescriptor *featureDescriptor;

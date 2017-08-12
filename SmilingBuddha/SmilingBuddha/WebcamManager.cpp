@@ -32,7 +32,7 @@ WebcamManager::WebcamManager()
 
 	if (!faceClassifier.load("resources\\haarcascade_frontalface_default.xml"))
 		throw std::runtime_error("Cascade file not found.");
-	dlib::deserialize("shape_predictor_68_face_landmarks.dat") >> eyePredictor;
+	dlib::deserialize("resources\\shape_predictor_68_face_landmarks.dat") >> eyePredictor;
 
 	// TODO: singleton
 	recognizer = new SmileRecognizer();
@@ -114,8 +114,8 @@ void WebcamManager::ProcessingFrame()
 						largestFaceIndex = i;
 						largestFaceArea = faceArea;
 					}
-					//cv::Point center(faces[i].x + faces[i].width / 2, faces[i].y + faces[i].height / 2);
-					//cv:x:ellipse(*frame, center, cv::Size(faces[i].width / 2, faces[i].height / 2), 0, 0, 360, cv::Scalar(0, 255, 0), 2, 8, 0);
+					//cv::Point center(faceList[i].x + faceList[i].width / 2, faceList[i].y + faceList[i].height / 2);
+					//cv:x:ellipse(frame, center, cv::Size(faceList[i].width / 2, faceList[i].height / 2), 0, 0, 360, cv::Scalar(0, 255, 0), 2, 8, 0);
 				}
 				cv::Rect &faceRect = faceList[largestFaceIndex];
 				cv::Mat faceFrame = grayFrame(faceRect);
@@ -125,19 +125,17 @@ void WebcamManager::ProcessingFrame()
 				
 				dlib::full_object_detection landmarkResult = eyePredictor(dlibFaceFrame, dlib::rectangle(0, 0, dlibFaceFrame.nc(), dlibFaceFrame.nr()));
 				dlib::point eyeLandmarks[4] = { landmarkResult.part(36), landmarkResult.part(39), landmarkResult.part(42), landmarkResult.part(45) };
-				//cv::circle(*frame, cv::Point(face.x + pt.x(), face.y + pt.y()), 3, cv::Scalar(255, 0, 0), 5);
+				//cv::circle(frame, cv::Point(face.x + pt.x(), face.y + pt.y()), 3, cv::Scalar(255, 0, 0), 5);
 
 				cv::Point leftEyePosition = cv::Point((eyeLandmarks[0].x() + eyeLandmarks[1].x()) >> 1,
 													  (eyeLandmarks[0].y() + eyeLandmarks[1].y()) >> 1);
-				leftEyePosition += cv::Point(faceRect.x, faceRect.y);
+				leftEyePosition += cv::Point(faceRect.x, faceRect.y) + webcamROI.tl();
 				cv::Point rightEyePosition = cv::Point((eyeLandmarks[2].x() + eyeLandmarks[3].x()) >> 1,
 													   (eyeLandmarks[2].y() + eyeLandmarks[3].y()) >> 1);
-				rightEyePosition += cv::Point(faceRect.x, faceRect.y);
+				rightEyePosition += cv::Point(faceRect.x, faceRect.y) + webcamROI.tl();
 
 				currentLeftEyePosition = (lastLeftEyePosition + leftEyePosition) / 2;
 				currentRightEyePosition = (lastRightEyePosition + rightEyePosition) / 2;
-				//currentLeftEyePosition = lastLeftEyePosition;
-				//currentRightEyePosition = lastRightEyePosition;
 				currentIntensity = (lastIntensity + recognizer->Recognize(faceFrame)) * 0.5;
 			}
 			else {

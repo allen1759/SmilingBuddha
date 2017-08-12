@@ -36,8 +36,9 @@ private:
 	
 	void InitializeWebcam();
 
+
 	// Index of the video capturing device to open. If a single camera connected, just set to 0.
-	const int CAMERA_INDEX = 3;
+	const int CAMERA_INDEX = 0;
 
 	bool isRunning;
 	std::shared_ptr<std::thread> processFrameThread;
