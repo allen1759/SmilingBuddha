@@ -63,9 +63,11 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SmileBuddhaDebug.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SmileBuddhaRelease.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -110,7 +112,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="liblinear-2.11\blas\daxpy.c" />
+    <ClCompile Include="liblinear-2.11\blas\ddot.c" />
+    <ClCompile Include="liblinear-2.11\blas\dnrm2.c" />
+    <ClCompile Include="liblinear-2.11\blas\dscal.c" />
+    <ClCompile Include="liblinear-2.11\linear.cpp" />
+    <ClCompile Include="liblinear-2.11\tron.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RegularSmileProcessStrategy.cpp" />
+    <ClCompile Include="SeeEachSmileProcessStrategy.cpp" />
+    <ClCompile Include="SmileRecognizer.cpp" />
+    <ClCompile Include="SmileSaver.cpp" />
+    <ClCompile Include="UserDetector.cpp" />
+    <ClCompile Include="WebcamManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="liblinear-2.11\blas\blas.h" />
+    <ClInclude Include="liblinear-2.11\blas\blasp.h" />
+    <ClInclude Include="liblinear-2.11\linear.h" />
+    <ClInclude Include="liblinear-2.11\tron.h" />
+    <ClInclude Include="RegularSmileProcessStrategy.h" />
+    <ClInclude Include="SeeEachSmileProcessStrategy.h" />
+    <ClInclude Include="SmileObserver.h" />
+    <ClInclude Include="SmileProcessStrategy.h" />
+    <ClInclude Include="SmileRecognizer.h" />
+    <ClInclude Include="SmileSaver.h" />
+    <ClInclude Include="UserDetector.h" />
+    <ClInclude Include="UserObserver.h" />
+    <ClInclude Include="WebcamManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

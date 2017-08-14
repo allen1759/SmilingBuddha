@@ -55,9 +55,9 @@ WebcamManager::~WebcamManager()
 	}
 }
 
-void WebcamManager::SetSmileProcess(SmileProcess *smileProcess)
+void WebcamManager::SetSmileProcess(SmileProcessStrategy *smileProcess)
 {
-	this->smileProcess = smileProcess;
+	this->smileProcessStrategy = smileProcess;
 }
 
 void WebcamManager::Start()
@@ -164,8 +164,8 @@ void WebcamManager::ProcessingFrame()
 
 			std::shared_ptr<cv::Mat> smileFrame = std::make_shared<cv::Mat>(frame(smileRect));
 
-			if (smileProcess)
-				smileProcess->ProcessSmile(smileFrame, currentIntensity);
+			if (smileProcessStrategy)
+				smileProcessStrategy->ProcessSmile(smileFrame, currentIntensity);
 
 			lastIntensity = currentIntensity;
 			lastLeftEyePosition = currentLeftEyePosition;

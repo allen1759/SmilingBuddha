@@ -12,7 +12,7 @@
 
 #include <dlib/image_processing.h>
 
-#include "SmileProcess.h"
+#include "SmileProcessStrategy.h"
 #include "SmileRecognizer.h"
 #include "SmileSaver.h"
 
@@ -23,7 +23,7 @@ public:
 
 	~WebcamManager();
 
-	void SetSmileProcess(SmileProcess *smileProcess);
+	void SetSmileProcess(SmileProcessStrategy *smileProcessStrategy);
 
 	void Start();
 
@@ -50,7 +50,7 @@ private:
 
 	static WebcamManager *instance;
 
-	SmileProcess *smileProcess;
+	SmileProcessStrategy *smileProcessStrategy;
 
 	// For recognize intensity of smile.
 	SmileRecognizer *recognizer;

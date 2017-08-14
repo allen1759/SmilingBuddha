@@ -4,19 +4,19 @@
 *
 */
 
-#ifndef _REGULAR_SMILE_PROCESS_H
-#define _REGULAR_SMILE_PROCESS_H
+#ifndef _REGULAR_SMILE_PROCESS_STRATEGY_H
+#define _REGULAR_SMILE_PROCESS_STRATEGY_H
 
-#include "SmileProcess.h"
+#include "SmileProcessStrategy.h"
 #include <memory>
 #include <vector>
 #include <opencv2/core.hpp>
 
-class RegularSmileProcess : public SmileProcess
+class RegularSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
-	RegularSmileProcess(SmileObserver * observer, int imageSequenceLength);
-	~RegularSmileProcess();
+	RegularSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength);
+	~RegularSmileProcessStrategy();
 
 	virtual void InitializeProcess() override;
 
@@ -32,4 +32,4 @@ private:
 	//std::vector<double> intensityBuffer;
 };
 
-#endif // !_REGULAR_SMILE_PROCESS_H
+#endif // !_REGULAR_SMILE_PROCESS_STRATEGY_H

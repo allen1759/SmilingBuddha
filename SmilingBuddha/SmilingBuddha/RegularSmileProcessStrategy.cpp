@@ -4,22 +4,22 @@
 *
 */
 
-#include "RegularSmileProcess.h"
+#include "RegularSmileProcessStrategy.h"
 
-RegularSmileProcess::RegularSmileProcess(SmileObserver * observer, int imageSequenceLength)
+RegularSmileProcessStrategy::RegularSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength)
 {
 	this->observer = observer;
 }
 
-RegularSmileProcess::~RegularSmileProcess()
+RegularSmileProcessStrategy::~RegularSmileProcessStrategy()
 {
 }
 
-void RegularSmileProcess::InitializeProcess()
+void RegularSmileProcessStrategy::InitializeProcess()
 {
 }
 
-void RegularSmileProcess::ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity)
+void RegularSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity)
 {
 	if (!isRecord) {
 		// if intensity > threshold, start recording smiles.

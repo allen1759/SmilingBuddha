@@ -8,22 +8,22 @@
 #include <thread>
 #include <fstream>
 
-#include "../../smilingbuddha/smilingbuddha/webcammanager.h"
-#include "smileprocessdemo.h"
+#include "../../SmilingBuddha/SmilingBuddha/WebcamManager.h"
+#include "SmileProcessStrategyDemo.h"
 
 int main()
 {
-	SmileProcessDemo *smileProcessDemo = new SmileProcessDemo(NULL);
+	SmileProcessStrategyDemo *smileProcessStrategyDemo = new SmileProcessStrategyDemo(NULL);
 	WebcamManager *webcamManager = WebcamManager::GetInstance();
-	webcamManager->SetSmileProcess(smileProcessDemo);
+	webcamManager->SetSmileProcess(smileProcessStrategyDemo);
 
 	webcamManager->Start();
 	//webcamManager->Stop();
 	//webcamManager->Start();
 
 	while (true) {
-		if (smileProcessDemo->img) {
-			cv::imshow("Smile Image", *smileProcessDemo->img);
+		if (smileProcessStrategyDemo->img) {
+			cv::imshow("Smile Image", *smileProcessStrategyDemo->img);
 			cv::waitKey(1);
 		}
 	}

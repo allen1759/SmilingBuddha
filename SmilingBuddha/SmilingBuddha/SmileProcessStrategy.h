@@ -1,18 +1,18 @@
 /**
-* Created by Zhi-Wei Yang <allen1759@gmail.com>
+* Created by Zhi-Wei Yang <allen1759@gmail.com>.
 * Copyright(c) 2015-2017 imLab. All rights reserved.
 *
 */
 
-#ifndef _SMILE_PROCESS_H
-#define _SMILE_PROCESS_H
+#ifndef _SMILE_PROCESS_STRATEGY_H
+#define _SMILE_PROCESS_STRATEGY_H
 
 #include <memory>
 
 #include <opencv2/core.hpp>
 #include "SmileObserver.h"
 
-class SmileProcess
+class SmileProcessStrategy
 {
 public:
 	virtual void InitializeProcess() = 0;
@@ -25,4 +25,4 @@ private:
 
 };
 
-#endif // !_SMILE_PROCESS_H
+#endif // !_SMILE_PROCESS_STRATEGY_H

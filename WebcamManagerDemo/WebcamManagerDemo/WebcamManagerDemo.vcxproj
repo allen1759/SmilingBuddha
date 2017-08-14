@@ -129,10 +129,10 @@
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blasp.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.h" />
-    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileProcess.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileProcessStrategy.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\WebcamManager.h" />
-    <ClInclude Include="SmileProcessDemo.h" />
+    <ClInclude Include="SmileProcessStrategyDemo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

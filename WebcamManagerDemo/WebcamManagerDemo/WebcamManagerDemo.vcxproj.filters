@@ -50,13 +50,7 @@
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\WebcamManager.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="SmileProcessDemo.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileProcess.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.h">
@@ -70,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blasp.h">
       <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileProcessStrategy.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileProcessStrategyDemo.h">
+      <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

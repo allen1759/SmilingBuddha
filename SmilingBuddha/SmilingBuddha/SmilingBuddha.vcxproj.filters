@@ -13,10 +13,90 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="liblinear">
+      <UniqueIdentifier>{820edd41-7f56-4a2b-976e-367653c531f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
+    <ClCompile Include="WebcamManager.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="UserDetector.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileSaver.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileRecognizer.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="SeeEachSmileProcessStrategy.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularSmileProcessStrategy.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\linear.cpp">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\tron.cpp">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\daxpy.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\ddot.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\dnrm2.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\dscal.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WebcamManager.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="UserObserver.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDetector.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileSaver.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileRecognizer.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileObserver.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileProcessStrategy.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SeeEachSmileProcessStrategy.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="RegularSmileProcessStrategy.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="liblinear-2.11\linear.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="liblinear-2.11\tron.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="liblinear-2.11\blas\blas.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="liblinear-2.11\blas\blasp.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
