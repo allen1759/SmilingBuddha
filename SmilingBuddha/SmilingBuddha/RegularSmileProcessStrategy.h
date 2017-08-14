@@ -24,7 +24,7 @@ public:
 
 private:
 
-	const double SMILE_INTENSITY_THRESHOLD = 0.0;
+	const double SMILE_INTENSITY_THRESHOLD = 0.5;
 	const int IMAGE_SEQUENCE_LENGTH = 40;
 	bool isRecord = false;
 

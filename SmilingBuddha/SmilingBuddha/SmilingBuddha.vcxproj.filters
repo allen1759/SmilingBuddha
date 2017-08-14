@@ -21,9 +21,6 @@
     <ClCompile Include="main.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
-    <ClCompile Include="WebcamManager.cpp">
-      <Filter>原始程式檔</Filter>
-    </ClCompile>
     <ClCompile Include="UserDetector.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
@@ -57,11 +54,14 @@
     <ClCompile Include="liblinear-2.11\blas\dscal.c">
       <Filter>liblinear</Filter>
     </ClCompile>
+    <ClCompile Include="SmileVideoProcessor.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="WebcamSmileVideoProcessor.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WebcamManager.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="UserObserver.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
@@ -97,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="liblinear-2.11\blas\blasp.h">
       <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileVideoProcessor.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="WebcamSmileVideoProcessor.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugSmileVideoProcessor.h">
+      <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

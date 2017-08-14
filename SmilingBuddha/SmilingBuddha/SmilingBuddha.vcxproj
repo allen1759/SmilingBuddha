@@ -124,9 +124,11 @@
     <ClCompile Include="SmileRecognizer.cpp" />
     <ClCompile Include="SmileSaver.cpp" />
     <ClCompile Include="UserDetector.cpp" />
-    <ClCompile Include="WebcamManager.cpp" />
+    <ClCompile Include="SmileVideoProcessor.cpp" />
+    <ClCompile Include="WebcamSmileVideoProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DebugSmileVideoProcessor.h" />
     <ClInclude Include="liblinear-2.11\blas\blas.h" />
     <ClInclude Include="liblinear-2.11\blas\blasp.h" />
     <ClInclude Include="liblinear-2.11\linear.h" />
@@ -139,7 +141,8 @@
     <ClInclude Include="SmileSaver.h" />
     <ClInclude Include="UserDetector.h" />
     <ClInclude Include="UserObserver.h" />
-    <ClInclude Include="WebcamManager.h" />
+    <ClInclude Include="SmileVideoProcessor.h" />
+    <ClInclude Include="WebcamSmileVideoProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
