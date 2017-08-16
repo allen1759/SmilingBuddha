@@ -141,7 +141,7 @@
     <ClInclude Include="SmileProcessStrategy.h" />
     <ClInclude Include="SmileRecognizer.h" />
     <ClInclude Include="SmileSaver.h" />
-    <ClInclude Include="TransitinalVideo.h" />
+    <ClInclude Include="TransitionalVideo.h" />
     <ClInclude Include="UserDetector.h" />
     <ClInclude Include="UserObserver.h" />
     <ClInclude Include="SmileVideoProcessor.h" />

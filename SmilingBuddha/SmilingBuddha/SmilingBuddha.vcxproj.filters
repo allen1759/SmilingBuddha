@@ -119,7 +119,7 @@
     <ClInclude Include="AnimatedVideo.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="TransitinalVideo.h">
+    <ClInclude Include="TransitionalVideo.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
