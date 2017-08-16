@@ -125,6 +125,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\DebugSmileVideoProcessor.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blas.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blasp.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.h" />

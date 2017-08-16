@@ -13,7 +13,7 @@ WebcamSmileVideoProcessor::WebcamSmileVideoProcessor() : SmileVideoProcessor()
 {
 	// TODO: read from text file
 	// TODO: put last eye postion in the middle of ROI
-	webcamROI = cv::Rect(480, 0, 1440, 1080);
+	detectROI = cv::Rect(480, 0, 1440, 1080);
 
 	lastLeftEyePosition = cv::Point(910, 540);
 	lastRightEyePosition = cv::Point(1010, 540);
@@ -57,4 +57,5 @@ std::shared_ptr<cv::Mat> WebcamSmileVideoProcessor::ReadFrame()
 
 void WebcamSmileVideoProcessor::InitializeWebcam()
 {
+	// TODO
 }

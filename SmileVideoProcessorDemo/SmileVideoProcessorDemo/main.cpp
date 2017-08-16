@@ -16,8 +16,8 @@
 int main()
 {
 	SmileProcessStrategyDemo *smileProcessStrategyDemo = new SmileProcessStrategyDemo(NULL);
-	//SmileVideoProcessor *smileVideoProcessor = WebcamSmileVideoProcessor::GetInstance();
-	SmileVideoProcessor *smileVideoProcessor = DebugSmileVideoProcessor::GetInstance();
+	SmileVideoProcessor *smileVideoProcessor = WebcamSmileVideoProcessor::GetInstance();
+	//SmileVideoProcessor *smileVideoProcessor = DebugSmileVideoProcessor::GetInstance();
 	smileVideoProcessor->SetSmileProcessStrategy(smileProcessStrategyDemo);
 
 	smileVideoProcessor->Start();
@@ -26,15 +26,10 @@ int main()
 
 	char ch;
 	while (true) {
-		if (kbhit()) {
-			ch = _getch();
-			if (ch == 's' || ch == 'S')
-				((DebugSmileVideoProcessor *)smileVideoProcessor)->StartSmile();
-			else if (ch == 'u' || ch == 'U')
-				((DebugSmileVideoProcessor *)smileVideoProcessor)->StopSmile();
-		}
-		if (smileProcessStrategyDemo->img) {
-			cv::imshow("Smile Image", *smileProcessStrategyDemo->img);
+		//std::shared_ptr<cv::Mat> img = smileProcessStrategyDemo->GetImg();
+		std::shared_ptr<cv::Mat> img = smileProcessStrategyDemo->img;
+		if (img) {
+			cv::imshow("Smile Image", *img);
 			cv::waitKey(1);
 		}
 	}

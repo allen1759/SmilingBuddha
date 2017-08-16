@@ -21,7 +21,7 @@ SmileVideoProcessor::SmileVideoProcessor()
 	isRunning = false;
 	processSmileVideoThread = NULL;
 
-	webcamROI = cv::Rect(0, 0, 1920, 1080);
+	detectROI = cv::Rect(0, 0, 1920, 1080);
 	if (!faceClassifier.load("resources\\haarcascade_frontalface_default.xml"))
 		throw std::runtime_error("Cascade file not found.");
 	dlib::deserialize("resources\\shape_predictor_68_face_landmarks.dat") >> eyePredictor;
@@ -77,11 +77,10 @@ void SmileVideoProcessor::ProcessFrame()
 		if (frame == NULL)
 			break;
 
-		double currentIntensity;
-		std::shared_ptr<cv::Mat> smileFrame = CaptureFace(*frame, currentIntensity);
+		std::shared_ptr<cv::Mat> smileFrame = CaptureFace(*frame);
 
 		if (smileProcessStrategy)
-			smileProcessStrategy->ProcessSmile(smileFrame, currentIntensity);
+			smileProcessStrategy->ProcessSmile(smileFrame, lastIntensity);
 
 		std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
 		std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
@@ -89,18 +88,46 @@ void SmileVideoProcessor::ProcessFrame()
 	}
 }
 
-std::shared_ptr<cv::Mat> SmileVideoProcessor::CaptureFace(const cv::Mat &originFrame, double &currentIntensity)
+std::shared_ptr<cv::Mat> SmileVideoProcessor::CaptureFace(const cv::Mat &originFrame)
 {
+	double currentIntensity = 0.0;
 	cv::Point currentLeftEyePosition;
 	cv::Point currentRightEyePosition;
 
+	cv::Mat roiFrame = originFrame(detectROI);
 	cv::Mat grayFrame;
-	cv::cvtColor(originFrame(webcamROI), grayFrame, cv::COLOR_BGR2GRAY);
+	cv::cvtColor(roiFrame, grayFrame, cv::COLOR_BGR2GRAY);
 	cv::equalizeHist(grayFrame, grayFrame);
 
+	std::shared_ptr<cv::Rect> faceRect = DetectFace(grayFrame);
+	if (faceRect != NULL) {
+		cv::Mat faceFrame = grayFrame(*faceRect);
+		DetectEyes(faceFrame, currentLeftEyePosition, currentRightEyePosition);
+
+		currentLeftEyePosition += detectROI.tl() + faceRect->tl();
+		currentRightEyePosition += detectROI.tl() + faceRect->tl();
+
+		currentLeftEyePosition = (lastLeftEyePosition + currentLeftEyePosition) / 2;
+		currentRightEyePosition = (lastRightEyePosition + currentRightEyePosition) / 2;
+		currentIntensity = (lastIntensity + recognizer->Recognize(faceFrame)) * 0.5;
+	}
+	else {
+		currentLeftEyePosition = lastLeftEyePosition;
+		currentRightEyePosition = lastRightEyePosition;
+		currentIntensity = 0.0;
+	}
+
+	lastLeftEyePosition = currentLeftEyePosition;
+	lastRightEyePosition = currentRightEyePosition;
+	lastIntensity = currentIntensity;
+
+	return CropSmileFrame(originFrame, currentLeftEyePosition, currentRightEyePosition);
+}
+
+std::shared_ptr<cv::Rect> SmileVideoProcessor::DetectFace(const cv::Mat & frame)
+{
 	std::vector<cv::Rect> faceList;
-	faceClassifier.detectMultiScale(grayFrame, faceList, 1.5, 3, 0 | cv::CASCADE_SCALE_IMAGE, cv::Size(100, 100));
-	//std::cout << "face size: " << faceList.size() << std::endl;
+	faceClassifier.detectMultiScale(frame, faceList, 1.5, 3, 0 | cv::CASCADE_SCALE_IMAGE, cv::Size(100, 100));
 
 	// If faceClassifier can detect any face in frame.
 	if (faceList.size() != 0) {
@@ -114,44 +141,29 @@ std::shared_ptr<cv::Mat> SmileVideoProcessor::CaptureFace(const cv::Mat &originF
 				largestFaceArea = faceArea;
 			}
 		}
-		cv::Rect &faceRect = faceList[largestFaceIndex];
-		cv::Mat faceFrame = grayFrame(faceRect);
-
-		// Use dlib landmark to detect position of eyes.
-		dlib::array2d<unsigned char> dlibFaceFrame;
-		dlib::assign_image(dlibFaceFrame, dlib::cv_image<unsigned char>(faceFrame));
-		dlib::full_object_detection landmarkResult = eyePredictor(dlibFaceFrame, dlib::rectangle(0, 0, dlibFaceFrame.nc(), dlibFaceFrame.nr()));
-		dlib::point eyeLandmarks[4] = { landmarkResult.part(36), landmarkResult.part(39), landmarkResult.part(42), landmarkResult.part(45) };
-
-		// Use lanmark #36, #39 to calculate lefteye.
-		cv::Point leftEyePosition = cv::Point((eyeLandmarks[0].x() + eyeLandmarks[1].x()) >> 1,
-											  (eyeLandmarks[0].y() + eyeLandmarks[1].y()) >> 1);
-		leftEyePosition += cv::Point(faceRect.x, faceRect.y) + webcamROI.tl();
-		// Use lanmark #42, #45 to calculate lefteye.
-		cv::Point rightEyePosition = cv::Point((eyeLandmarks[2].x() + eyeLandmarks[3].x()) >> 1,
-			                                   (eyeLandmarks[2].y() + eyeLandmarks[3].y()) >> 1);
-		rightEyePosition += cv::Point(faceRect.x, faceRect.y) + webcamROI.tl();
-
-		currentLeftEyePosition = (lastLeftEyePosition + leftEyePosition) / 2;
-		currentRightEyePosition = (lastRightEyePosition + rightEyePosition) / 2;
-		currentIntensity = (lastIntensity + recognizer->Recognize(faceFrame)) * 0.5;
-	}
-	// If faceClassifier cannot detect any face in frame.
-	else {
-		currentLeftEyePosition = lastLeftEyePosition;
-		currentRightEyePosition = lastRightEyePosition;
-		currentIntensity = 0.0;
+		return std::make_shared<cv::Rect>(faceList[largestFaceIndex]);
 	}
 
-	lastLeftEyePosition = currentLeftEyePosition;
-	lastRightEyePosition = currentRightEyePosition;
-	lastIntensity = currentIntensity;
-
-	cv::Rect smileRect(CalculateSmileVideoRect(currentLeftEyePosition, currentRightEyePosition));
-	return std::make_shared<cv::Mat>(originFrame(smileRect));
+	return NULL;
 }
 
-cv::Rect SmileVideoProcessor::CalculateSmileVideoRect(const cv::Point &leftEyePosition, const cv::Point &rightEyePosition) const
+void SmileVideoProcessor::DetectEyes(const cv::Mat & faceFrame, cv::Point & left, cv::Point & right)
+{
+	// Use dlib landmark to detect position of eyes.
+	dlib::array2d<unsigned char> dlibFaceFrame;
+	dlib::assign_image(dlibFaceFrame, dlib::cv_image<unsigned char>(faceFrame));
+	dlib::full_object_detection landmarkResult = eyePredictor(dlibFaceFrame, dlib::rectangle(0, 0, dlibFaceFrame.nc(), dlibFaceFrame.nr()));
+	dlib::point eyeLandmarks[4] = { landmarkResult.part(36), landmarkResult.part(39), landmarkResult.part(42), landmarkResult.part(45) };
+
+	// Use lanmark #36, #39 to calculate lefteye.
+	left = cv::Point((eyeLandmarks[0].x() + eyeLandmarks[1].x()) >> 1,
+					(eyeLandmarks[0].y() + eyeLandmarks[1].y()) >> 1);
+	// Use lanmark #42, #45 to calculate lefteye.
+	right = cv::Point((eyeLandmarks[2].x() + eyeLandmarks[3].x()) >> 1,
+					(eyeLandmarks[2].y() + eyeLandmarks[3].y()) >> 1);
+}
+
+std::shared_ptr<cv::Mat> SmileVideoProcessor::CropSmileFrame(const cv::Mat &originFrame, const cv::Point &leftEyePosition, const cv::Point &rightEyePosition) const
 {
 	float eyeDistance = static_cast<float>(rightEyePosition.x - leftEyePosition.x);
 	int eyeHeight = (leftEyePosition.y + rightEyePosition.y) / 2;
@@ -164,14 +176,16 @@ cv::Rect SmileVideoProcessor::CalculateSmileVideoRect(const cv::Point &leftEyePo
 	// Check the edges of Rect.
 	if (x < 0)
 		x = 0;
-	if (x + width >= 1920)
-		x = 1920 - width - 1;
+	if (x + width >= originFrame.cols)
+		x = originFrame.cols - width - 1;
 	if (y < 0)
 		y = 0;
-	if (y + height >= 1080)
-		y = 1080 - height - 1;
+	if (y + height >= originFrame.rows)
+		y = originFrame.rows - height - 1;
 
-	return cv::Rect(x, y, width, height);
+	std::shared_ptr<cv::Mat> smileFrame = std::make_shared<cv::Mat>();
+	cv::resize(originFrame(cv::Rect(x, y, width, height)), *smileFrame, cv::Size(SMILE_FRAME_WIDTH, SMILE_FRAME_HEIGHT));
+	return smileFrame;
 }
 
 

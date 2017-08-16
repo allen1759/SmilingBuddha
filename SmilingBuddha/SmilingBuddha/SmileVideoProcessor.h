@@ -36,17 +36,23 @@ protected:
 
 	virtual std::shared_ptr<cv::Mat> ReadFrame() = 0;
 	
-	std::shared_ptr<cv::Mat> CaptureFace(const cv::Mat &originFrame, double &currentIntensity);
+	std::shared_ptr<cv::Mat> CaptureFace(const cv::Mat &originFrame);
 
-	cv::Rect CalculateSmileVideoRect(const cv::Point &leftEyePosition, const cv::Point &rightEyePosition) const;
+	std::shared_ptr<cv::Rect> DetectFace(const cv::Mat &frame);
+
+	void DetectEyes(const cv::Mat &faceFrame, cv::Point &left, cv::Point &right);
+
+	std::shared_ptr<cv::Mat> CropSmileFrame(const cv::Mat &originFrame, const cv::Point &leftEyePosition, const cv::Point &rightEyePosition) const;
 
 
 	bool isRunning;
 	std::shared_ptr<std::thread> processSmileVideoThread;
 	
-	cv::Rect webcamROI;
+	cv::Rect detectROI;
 	cv::CascadeClassifier faceClassifier;
 	dlib::shape_predictor eyePredictor;
+	const int SMILE_FRAME_WIDTH = 260;
+	const int SMILE_FRAME_HEIGHT = 355;
 
 	SmileProcessStrategy *smileProcessStrategy;
 

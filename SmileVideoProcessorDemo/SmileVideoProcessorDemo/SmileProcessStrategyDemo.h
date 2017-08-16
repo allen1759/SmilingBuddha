@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <memory>
+#include <mutex>
 
 #include <opencv2/highgui/highgui.hpp>
 
@@ -24,11 +25,13 @@ public:
 
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) override;
 
+	std::shared_ptr<cv::Mat> GetImg();
+
 	std::shared_ptr<cv::Mat> img;
 
 private:
 
-
+	std::mutex mutex;
 };
 
 SmileProcessStrategyDemo::SmileProcessStrategyDemo(SmileObserver * observer)
@@ -47,6 +50,8 @@ void SmileProcessStrategyDemo::InitializeProcess()
 void SmileProcessStrategyDemo::ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity)
 {
 	this->img = img;
+
 	std::cout << "intensity: " << intensity << std::endl;
 }
+
 #endif // !_SMILE_PROCESS_DEMO_STRATEGY_H

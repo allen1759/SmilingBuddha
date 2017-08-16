@@ -10,6 +10,7 @@
 #include "SmileVideoProcessor.h"
 
 #include <memory>
+#include <conio.h>
 
 #include <opencv2/highgui/highgui.hpp>
 
@@ -22,14 +23,13 @@ public:
 
 	static DebugSmileVideoProcessor * GetInstance();
 
-	void StartSmile();
-	void StopSmile();
-
 private:
 
 	virtual void ProcessSmileVideo() override;
 
 	virtual std::shared_ptr<cv::Mat> ReadFrame() override;
+
+	void ChangeSmile();
 
 
 	static DebugSmileVideoProcessor *instance;
@@ -60,14 +60,9 @@ DebugSmileVideoProcessor * DebugSmileVideoProcessor::GetInstance()
 	return instance;
 }
 
-void DebugSmileVideoProcessor::StartSmile()
+void DebugSmileVideoProcessor::ChangeSmile()
 {
-	isSmile = true;
-}
-
-void DebugSmileVideoProcessor::StopSmile()
-{
-	isSmile = false;
+	isSmile = !isSmile;
 }
 
 void DebugSmileVideoProcessor::ProcessSmileVideo()
@@ -79,6 +74,13 @@ void DebugSmileVideoProcessor::ProcessSmileVideo()
 
 std::shared_ptr<cv::Mat> DebugSmileVideoProcessor::ReadFrame()
 {
+	char ch;
+	if (kbhit()) {
+		ch = getch();
+		if (ch == 's' || ch == 'S')
+			ChangeSmile();
+	}
+
 	if (isSmile)
 		return std::make_shared<cv::Mat>(*smileFrame);
 	else
