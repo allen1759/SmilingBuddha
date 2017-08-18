@@ -44,6 +44,7 @@ protected:
 
 	std::shared_ptr<cv::Mat> CropSmileFrame(const cv::Mat &originFrame, const cv::Point &leftEyePosition, const cv::Point &rightEyePosition) const;
 
+	float GetSmoothWeight(const cv::Point &leftEyeShift, const cv::Point &rightEyeShift) const;
 
 	bool isRunning;
 	std::shared_ptr<std::thread> processSmileVideoThread;

@@ -107,8 +107,10 @@ std::shared_ptr<cv::Mat> SmileVideoProcessor::CaptureFace(const cv::Mat &originF
 		currentLeftEyePosition += detectROI.tl() + faceRect->tl();
 		currentRightEyePosition += detectROI.tl() + faceRect->tl();
 
-		currentLeftEyePosition = (lastLeftEyePosition + currentLeftEyePosition) / 2;
-		currentRightEyePosition = (lastRightEyePosition + currentRightEyePosition) / 2;
+		
+		float weight = GetSmoothWeight(currentLeftEyePosition - lastLeftEyePosition, currentRightEyePosition - lastRightEyePosition);
+		currentLeftEyePosition = (1.0f - weight) * lastLeftEyePosition + weight * currentLeftEyePosition;
+		currentRightEyePosition = (1.0f - weight) * lastRightEyePosition + weight * currentRightEyePosition;
 		currentIntensity = (lastIntensity + recognizer->Recognize(faceFrame)) * 0.5;
 	}
 	else {
@@ -166,12 +168,17 @@ void SmileVideoProcessor::DetectEyes(const cv::Mat & faceFrame, cv::Point & left
 std::shared_ptr<cv::Mat> SmileVideoProcessor::CropSmileFrame(const cv::Mat &originFrame, const cv::Point &leftEyePosition, const cv::Point &rightEyePosition) const
 {
 	float eyeDistance = static_cast<float>(rightEyePosition.x - leftEyePosition.x);
-	int eyeHeight = (leftEyePosition.y + rightEyePosition.y) / 2;
-	
-	int x = leftEyePosition.x - static_cast<int>(1.4f * eyeDistance);
-	int y = eyeHeight - static_cast<int>(2.2f * eyeDistance);
 	int width = static_cast<int>(3.8f * eyeDistance);
 	int height = static_cast<int>(5.3f * eyeDistance);
+
+	cv::Point eyeCenter = (leftEyePosition + rightEyePosition) / 2;
+
+	width = std::min(originFrame.cols - 1, width);
+	height = std::min(originFrame.rows - 1, height);
+	
+	int x = eyeCenter.x - (width >> 1);
+	int y = eyeCenter.y - static_cast<int>(height * 0.42307692f);
+
 
 	// Check the edges of Rect.
 	if (x < 0)
@@ -186,6 +193,17 @@ std::shared_ptr<cv::Mat> SmileVideoProcessor::CropSmileFrame(const cv::Mat &orig
 	std::shared_ptr<cv::Mat> smileFrame = std::make_shared<cv::Mat>();
 	cv::resize(originFrame(cv::Rect(x, y, width, height)), *smileFrame, cv::Size(SMILE_FRAME_WIDTH, SMILE_FRAME_HEIGHT));
 	return smileFrame;
+}
+
+float SmileVideoProcessor::GetSmoothWeight(const cv::Point & leftEyeShift, const cv::Point & rightEyeShift) const
+{
+	const int CLAMP_SHIFT_LOWER_THRESHOLD = 30;
+	const int CLAMP_SHIFT_UPPER_THRESHOLD = 300;
+
+	int totalShiftPixel = std::abs(leftEyeShift.x) + std::abs(leftEyeShift.y) + std::abs(rightEyeShift.x) + std::abs(rightEyeShift.y);
+	totalShiftPixel = std::min(CLAMP_SHIFT_UPPER_THRESHOLD, std::max(0, totalShiftPixel - CLAMP_SHIFT_LOWER_THRESHOLD));
+	
+	return totalShiftPixel / static_cast<float>(CLAMP_SHIFT_UPPER_THRESHOLD*3);
 }
 
 
