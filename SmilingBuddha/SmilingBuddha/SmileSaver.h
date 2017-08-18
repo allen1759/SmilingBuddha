@@ -9,7 +9,10 @@
 
 #include <string>
 #include <vector>
+#include <queue>
 #include <memory>
+#include <mutex>
+#include <thread>
 
 #include <boost/filesystem.hpp>
 
@@ -17,7 +20,12 @@
 
 class SmileSaver
 {
+private:
+	SmileSaver();
+
 public:
+	~SmileSaver();
+
 	static SmileSaver * GetInstance();
 	/**
 	* Save images.
@@ -25,7 +33,8 @@ public:
 	* @param images	Vector of cv::Mat images to be saved.
 	*
 	*/
-	void BeginSaveImages(const std::shared_ptr<const std::vector<cv::Mat>> images);
+
+	void SaveImages(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images);
 
 	/**
 	* Call this function to save image to next user. It should be called if any
@@ -34,7 +43,6 @@ public:
 	void NextUser();
 
 private:
-	SmileSaver();
 
 	/**
 	* Get path of local date. The file system hierarchy show as follow:
@@ -65,12 +73,8 @@ private:
 	/**
 	* Save images.
 	*
-	* @param images	Vector of cv::Mat images to be saved.
-	* @param userCount Index for user folder.
-	* @param smileCount Index for smile folder.
-	*
 	*/
-	void SaveImages(const std::shared_ptr<const std::vector<cv::Mat>> images, int userCount, int smileCount) const;
+	void Saving();
 
 	void InitializeUserCount();
 
@@ -85,6 +89,11 @@ private:
 	int userCount;
 	// Counting the number of smiling in the current user folder.
 	int smileCount;
+
+	std::mutex queueMutex;
+	std::queue <std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> imageSequenceQueue;
+	bool isRunning;
+	std::thread saveThread;
 };
 
 #endif // !_SMILE_SAVER_H

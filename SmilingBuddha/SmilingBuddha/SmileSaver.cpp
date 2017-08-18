@@ -16,8 +16,16 @@
 
 #include <opencv2/imgcodecs.hpp>
 
+#include <thread>
+#include <chrono>
 
 SmileSaver * SmileSaver::instance = NULL;
+
+SmileSaver::~SmileSaver()
+{
+	isRunning = false;
+	saveThread.join();
+}
 
 SmileSaver * SmileSaver::GetInstance()
 {
@@ -27,12 +35,12 @@ SmileSaver * SmileSaver::GetInstance()
 	return instance;
 }
 
-void SmileSaver::BeginSaveImages(const std::shared_ptr<const std::vector<cv::Mat>> images)
+void SmileSaver::SaveImages(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
-	std::async(std::launch::async, &SmileSaver::SaveImages, this, images, userCount, smileCount);
-	++smileCount;
+	queueMutex.lock();
+	imageSequenceQueue.push(images);
+	queueMutex.unlock();
 }
-
 
 void SmileSaver::NextUser()
 {
@@ -56,6 +64,9 @@ SmileSaver::SmileSaver()
 
 	InitializeUserCount();
 	smileCount = 0;
+
+	isRunning = true;
+	saveThread = std::thread(&SmileSaver::Saving, this);
 }
 
 std::string SmileSaver::GetDatePath() const
@@ -81,22 +92,39 @@ std::string SmileSaver::GetTime() const
 	return boost::posix_time::to_iso_string(now);
 }
 
-void SmileSaver::SaveImages(const std::shared_ptr<const std::vector<cv::Mat>> images, int userCount, int smileCount) const
+void SmileSaver::Saving()
 {
-	boost::posix_time::ptime start = boost::posix_time::microsec_clock::local_time();
-	boost::filesystem::path p{ todayPath.string() + "\\" + std::to_string(userCount) + "\\" + std::to_string(smileCount) };
-	try {
-		boost::filesystem::create_directories(p);
+	while (isRunning) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-		std::string fileName = GetTime();
-		for (int i = 0; i < images->size(); ++i)
-			cv::imwrite(p.string() + "\\" + GetTime() + "_" + std::to_string(i) + ".jpg", images->at(i));
+		boost::posix_time::ptime start = boost::posix_time::microsec_clock::local_time();
+		boost::filesystem::path p{ todayPath.string() + "\\" + std::to_string(userCount) + "\\" + std::to_string(smileCount) };
+		
+		queueMutex.lock();
+		if (imageSequenceQueue.empty()) {
+			queueMutex.unlock();
+			continue;
+		}
+		std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images = imageSequenceQueue.front();
+		imageSequenceQueue.pop();
+		queueMutex.unlock();
+		
+		try {
+			boost::filesystem::create_directories(p);
+
+			std::string fileName = GetTime();
+			for (int i = 0; i < images->size(); ++i)
+				cv::imwrite(p.string() + "\\" + GetTime() + "_" + std::to_string(i) + ".jpg", *images->at(i));
+		}
+		catch (const boost::filesystem::filesystem_error & e) {
+			std::cerr << e.what() << std::endl;
+		}
+
+		smileCount++;
+
+		boost::posix_time::ptime end = boost::posix_time::microsec_clock::local_time();
+		std::cout << "duration: " << (end - start).total_milliseconds() << std::endl;
 	}
-	catch (const boost::filesystem::filesystem_error & e) {
-		std::cerr << e.what() << std::endl;
-	}
-	boost::posix_time::ptime end = boost::posix_time::microsec_clock::local_time();
-	std::cout << "duration: " << (end - start).total_milliseconds() << std::endl;
 }
 
 void SmileSaver::InitializeUserCount()
