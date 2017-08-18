@@ -8,9 +8,12 @@
 #define _REGULAR_SMILE_PROCESS_STRATEGY_H
 
 #include "SmileProcessStrategy.h"
+
 #include <memory>
 #include <vector>
 #include <opencv2/core.hpp>
+
+#include "SmileSaver.h"
 
 class RegularSmileProcessStrategy : public SmileProcessStrategy
 {
@@ -30,6 +33,8 @@ private:
 
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageBuffer = NULL;
 	//std::vector<double> intensityBuffer;
+
+	SmileSaver *saver;
 };
 
 #endif // !_REGULAR_SMILE_PROCESS_STRATEGY_H

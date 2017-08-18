@@ -12,24 +12,24 @@
 #include "../../SmilingBuddha/SmilingBuddha/WebcamSmileVideoProcessor.h"
 #include "../../SmilingBuddha/SmilingBuddha/DebugSmileVideoProcessor.h"
 #include "SmileProcessStrategyDemo.h"
+#include "../../SmilingBuddha/SmilingBuddha/RegularSmileProcessStrategy.h"
 
 int main()
 {
-	SmileProcessStrategyDemo *smileProcessStrategyDemo = new SmileProcessStrategyDemo(NULL);
+	SmileProcessStrategy *smileProcessStrategy = new SmileProcessStrategyDemo(NULL);
+	//SmileProcessStrategy *smileProcessStrategy = new RegularSmileProcessStrategy(NULL, 40);
+
 	SmileVideoProcessor *smileVideoProcessor = WebcamSmileVideoProcessor::GetInstance();
 	//SmileVideoProcessor *smileVideoProcessor = DebugSmileVideoProcessor::GetInstance();
-	smileVideoProcessor->SetSmileProcessStrategy(smileProcessStrategyDemo);
+	smileVideoProcessor->SetSmileProcessStrategy(smileProcessStrategy);
 
 	smileVideoProcessor->Start();
-	//smileVideoProcessor->Stop();
-	//smileVideoProcessor->Start();
 
 	char ch;
 	while (true) {
-		//std::shared_ptr<cv::Mat> img = smileProcessStrategyDemo->GetImg();
-		std::shared_ptr<cv::Mat> img = smileProcessStrategyDemo->img;
+		std::shared_ptr<cv::Mat> img = ((SmileProcessStrategyDemo *)smileProcessStrategy)->img;
 		if (img) {
-			cv::imshow("Smile Image", *img);
+			cv::imshow("test", *img);
 			cv::waitKey(1);
 		}
 	}

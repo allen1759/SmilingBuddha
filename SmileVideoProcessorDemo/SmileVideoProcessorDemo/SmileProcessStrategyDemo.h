@@ -25,8 +25,6 @@ public:
 
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) override;
 
-	std::shared_ptr<cv::Mat> GetImg();
-
 	std::shared_ptr<cv::Mat> img;
 
 private:

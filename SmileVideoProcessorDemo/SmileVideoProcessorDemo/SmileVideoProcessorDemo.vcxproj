@@ -118,6 +118,7 @@
     <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\dscal.c" />
     <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.cpp" />
     <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.cpp" />
+    <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\RegularSmileProcessStrategy.cpp" />
     <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.cpp" />
     <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\SmileSaver.cpp" />
     <ClCompile Include="..\..\SmilingBuddha\SmilingBuddha\SmileVideoProcessor.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\blas\blasp.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\linear.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\liblinear-2.11\tron.h" />
+    <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\RegularSmileProcessStrategy.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileProcessStrategy.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileRecognizer.h" />
     <ClInclude Include="..\..\SmilingBuddha\SmilingBuddha\SmileSaver.h" />

@@ -9,6 +9,7 @@
 RegularSmileProcessStrategy::RegularSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength)
 {
 	this->observer = observer;
+	this->saver = SmileSaver::GetInstance();
 }
 
 RegularSmileProcessStrategy::~RegularSmileProcessStrategy()
@@ -27,7 +28,8 @@ void RegularSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, dou
 			imageBuffer = std::make_shared<std::vector<std::shared_ptr<cv::Mat>>>();
 			//intensityBuffer.clear();
 
-			observer->OnSmile();
+			if (observer)
+				observer->OnSmile();
 			isRecord = true;
 			imageBuffer->push_back(img);
 			//intensityBuffer.push_back(intensity);
@@ -39,7 +41,10 @@ void RegularSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, dou
 
 		// if buffer size reach target length, stop recording and pass images to SmileObserver.
 		if (imageBuffer->size() == IMAGE_SEQUENCE_LENGTH) {
-			observer->OnRecorded(imageBuffer);
+			if (observer)
+				observer->OnRecorded(imageBuffer);
+			saver->SaveImages(imageBuffer);
+			// saver->BeginSaveImages(imageBuffer);
 			isRecord = false;
 			imageBuffer = NULL;
 			//intensityBuffer.clear();
