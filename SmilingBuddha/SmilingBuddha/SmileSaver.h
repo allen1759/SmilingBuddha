@@ -83,6 +83,7 @@ private:
 
 	// The path to store all images.
 	const std::string PATH = "D:\\smileVideo";
+	const int INDEX_PADDING_LENGTH = 2;
 	boost::filesystem::path todayPath;
 	
 	// Counting the number of user in the current day folder.

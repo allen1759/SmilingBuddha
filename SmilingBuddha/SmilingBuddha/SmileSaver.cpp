@@ -97,7 +97,7 @@ void SmileSaver::Saving()
 	while (isRunning) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-		boost::posix_time::ptime start = boost::posix_time::microsec_clock::local_time();
+		//boost::posix_time::ptime start = boost::posix_time::microsec_clock::local_time();
 		boost::filesystem::path p{ todayPath.string() + "\\" + std::to_string(userCount) + "\\" + std::to_string(smileCount) };
 		
 		queueMutex.lock();
@@ -113,8 +113,12 @@ void SmileSaver::Saving()
 			boost::filesystem::create_directories(p);
 
 			std::string fileName = GetTime();
-			for (int i = 0; i < images->size(); ++i)
-				cv::imwrite(p.string() + "\\" + GetTime() + "_" + std::to_string(i) + ".jpg", *images->at(i));
+			for (int i = 0; i < images->size(); ++i) {
+				std::string index = std::to_string(i);
+				if (index.size() < INDEX_PADDING_LENGTH)
+					index.insert(0, INDEX_PADDING_LENGTH - index.size(), '0');
+				cv::imwrite(p.string() + "\\" + fileName + "_" + index + ".jpg", *images->at(i));
+			}
 		}
 		catch (const boost::filesystem::filesystem_error & e) {
 			std::cerr << e.what() << std::endl;
@@ -122,8 +126,8 @@ void SmileSaver::Saving()
 
 		smileCount++;
 
-		boost::posix_time::ptime end = boost::posix_time::microsec_clock::local_time();
-		std::cout << "duration: " << (end - start).total_milliseconds() << std::endl;
+		//boost::posix_time::ptime end = boost::posix_time::microsec_clock::local_time();
+		//std::cout << "duration: " << (end - start).total_milliseconds() << std::endl;
 	}
 }
 
