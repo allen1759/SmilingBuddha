@@ -3,12 +3,12 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>C:\dlib-19.4;C:\opencv\build\include;C:\boost_1_64_0;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>C:\dlib-19.4\build;C:\boost_1_64_0\lib64-msvc-14.0;C:\opencv\build\x64\vc14\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <IncludePath>C:\Program Files %28x86%29\Intel\OpenCL SDK\6.3\include;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Include;C:\glfw-3.2.1\include;C:\glew-2.1.0\include;C:\dlib-19.4;C:\opencv\build\include;C:\boost_1_64_0;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Intel\OpenCL SDK\6.3\lib\x64;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Lib\x64;C:\glfw-3.2.1\lib-vc2015;C:\glew-2.1.0\lib\Release\x64;C:\dlib-19.4\build;C:\boost_1_64_0\lib64-msvc-14.0;C:\opencv\build\x64\vc14\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>opencv_world330d.lib;dlibd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenCL.lib;glew32.lib;glfw3dll.lib;OpenGL32.lib;opencv_world330d.lib;dlibd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
