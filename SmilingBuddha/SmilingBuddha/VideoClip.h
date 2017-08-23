@@ -10,20 +10,25 @@
 #include "Video.h"
 
 #include <vector>
+#include <chrono>
 
 class VideoClip : public Video
 {
 public:
-	VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence);
+	VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence, float duration);
 
 	virtual ~VideoClip() override;
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
-	virtual Video * GetVideo() override;
+	virtual std::shared_ptr<Video> GetVideo() override;
 
 private:
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence;
+
+	std::chrono::milliseconds duration;
+
+	std::chrono::high_resolution_clock::time_point startTime;
 };
 
 

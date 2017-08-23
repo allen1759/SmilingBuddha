@@ -9,6 +9,8 @@
 
 #include "Video.h"
 
+#include <chrono>
+
 #include <iostream>
 
 // TODO: this is abstract class
@@ -16,30 +18,31 @@
 class AnimatedVideo : public Video
 {
 public:
-	AnimatedVideo(Video * video)
+	AnimatedVideo(std::shared_ptr<Video> video, float duration)
 	{
 		this->video = video->GetVideo();
+
+		this->duration = std::chrono::milliseconds(static_cast<int>(duration * 1000));
+		startTime = std::chrono::high_resolution_clock::now();
 	}
 	virtual ~AnimatedVideo()
 	{}
 
-	virtual std::shared_ptr<cv::Mat> GetFrame() override;
+	virtual std::shared_ptr<cv::Mat> GetFrame() = 0;
 
-	virtual Video * GetVideo() override;
+	virtual std::shared_ptr<Video> GetVideo() override;
 
 protected:
 
-	Video * video;
+	std::shared_ptr<Video> video;
+
+	std::chrono::milliseconds duration;
+
+	std::chrono::high_resolution_clock::time_point startTime;
 };
 
 
-std::shared_ptr<cv::Mat> AnimatedVideo::GetFrame()
-{
-	video->GetFrame();
-	std::cout << "Animated Video" << std::endl;
-	return NULL;
-}
-Video * AnimatedVideo::GetVideo()
+std::shared_ptr<Video> AnimatedVideo::GetVideo()
 {
 	return video;
 }

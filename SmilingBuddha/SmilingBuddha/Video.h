@@ -14,20 +14,17 @@
 
 class Video
 {
-public:
-	virtual std::shared_ptr<cv::Mat> GetFrame()
-	{
-		std::cout << "Video" << std::endl;
-		return NULL;
-	}
-	virtual Video * GetVideo() = 0;
-
 protected:
 	Video()
-	{
-	}
+	{}
 	virtual ~Video()
 	{}
+
+public:
+	virtual std::shared_ptr<cv::Mat> GetFrame() = 0;
+
+	virtual std::shared_ptr<Video> GetVideo() = 0;
+
 };
 
 
