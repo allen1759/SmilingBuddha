@@ -20,8 +20,9 @@ VideoPool::VideoPool()
 
 	LoadAllSmileVideo(Wall::WINDOW_COL_COUNT * Wall::WINDOW_ROW_COUNT);
 
-	//for (int i = 0; i < ACTOR_COUNT; ++i)
-	//	actorVideoSets.push_back(std::make_shared<ActorVideoSet>(i));
+	for (int i = 0; i < ACTOR_COUNT; ++i)
+	//for (int i = 0; i < 9; ++i)
+		actorVideoSets.push_back(std::make_shared<ActorVideoSet>(i));
 }
 
 VideoPool::~VideoPool()

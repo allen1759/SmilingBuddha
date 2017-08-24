@@ -6,8 +6,6 @@
 
 #include "ActorVideoSet.h"
 
-cv::Mat ActorVideoSet::cacheMat;
-
 ActorVideoSet::ActorVideoSet(int order)
 {
 	// Read every direction video.

@@ -29,18 +29,6 @@ public:
 	std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> GetMorphingVideo(int index);
 
 
-private:
-
-	void ReadDirectionVideo(int order, int direction);
-
-	void ReadMorphingVideo(int order);
-
-	// Read image from file and resize.
-	std::shared_ptr<cv::Mat> ReadImage(const std::string &path);
-
-	static cv::Mat cacheMat;
-
-
 	// Index of each direction in 3x3.
 	const static int NEUTRAL = 0;
 	const static int LEFT_DOWN = 1;
@@ -53,6 +41,18 @@ private:
 	const static int UP = 8;
 	const static int RIGHT_UP = 9;
 	const static int RANDOM = 10;
+
+private:
+
+	void ReadDirectionVideo(int order, int direction);
+
+	void ReadMorphingVideo(int order);
+
+	// Read image from file and resize.
+	std::shared_ptr<cv::Mat> ReadImage(const std::string &path);
+
+
+
 	const static int DIRECTION_SIZE = 11;
 
 	const static int MORPHING_SIZE = 9;
