@@ -81,8 +81,8 @@ void SmileWindow::Draw()
 
 void SmileWindow::SetPosition(int x, int y)
 {
-	position[0] = x;
-	position[1] = y;
+	position[0] = static_cast<float>(x);
+	position[1] = static_cast<float>(y);
 }
 
 void SmileWindow::SetTexture(std::shared_ptr<cv::Mat> textureMat)
