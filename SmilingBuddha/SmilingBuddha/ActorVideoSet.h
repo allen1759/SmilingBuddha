@@ -26,10 +26,11 @@ public:
 
 	std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> GetDirectionVideo(int direction);
 
-	std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> GetMorphingVideo(int index);
+	// Don't use Morphing anymore.
+	//std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> GetMorphingVideo(int index);
 
 
-	// Index of each direction in 3x3.
+	// Index of direction.
 	const static int NEUTRAL = 0;
 	const static int LEFT_DOWN = 1;
 	const static int DOWN = 2;
@@ -46,23 +47,25 @@ private:
 
 	void ReadDirectionVideo(int order, int direction);
 
-	void ReadMorphingVideo(int order);
+	// Don't use Morphing anymore.
+	//void ReadMorphingVideo(int order);
 
 	// Read image from file and resize.
 	std::shared_ptr<cv::Mat> ReadImage(const std::string &path);
 
 
-
 	const static int DIRECTION_SIZE = 11;
 
-	const static int MORPHING_SIZE = 9;
+	// Don't use Morphing anymore.
+	//const static int MORPHING_SIZE = 9;
 
 	const std::string DIRECTION_PATH = "D:\\Direction";
 	const std::string DIRECTION_FOLDER[DIRECTION_SIZE] = { "Neu", "left_down", "down", "right_down", "left", "center", "right", "left_up", "up", "right_up", "Ran" };
 	const std::string FILE_TYPE = ".png";
 
 	std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> directionSet;
-	std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> morphingSet;
+	// Don't use Morphing anymore.
+	//std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> morphingSet;
 };
 
 
