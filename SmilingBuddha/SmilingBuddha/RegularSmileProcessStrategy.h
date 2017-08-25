@@ -19,9 +19,8 @@ class RegularSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
 	RegularSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength);
-	~RegularSmileProcessStrategy();
 
-	virtual void InitializeProcess() override;
+	~RegularSmileProcessStrategy();
 
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) override;
 

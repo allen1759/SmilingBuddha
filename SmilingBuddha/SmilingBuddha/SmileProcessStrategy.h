@@ -15,11 +15,10 @@
 class SmileProcessStrategy
 {
 public:
-	virtual void InitializeProcess() = 0;
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) = 0;
 
 protected:
-	SmileObserver * observer;
+	SmileObserver *observer;
 
 private:
 

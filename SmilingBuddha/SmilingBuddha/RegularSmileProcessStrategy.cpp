@@ -16,10 +16,6 @@ RegularSmileProcessStrategy::~RegularSmileProcessStrategy()
 {
 }
 
-void RegularSmileProcessStrategy::InitializeProcess()
-{
-}
-
 void RegularSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity)
 {
 	if (!isRecord) {

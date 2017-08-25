@@ -13,9 +13,8 @@ class SeeEachSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
 	SeeEachSmileProcessStrategy(SmileObserver * observer);
-	~SeeEachSmileProcessStrategy();
 
-	virtual void InitializeProcess() override;
+	~SeeEachSmileProcessStrategy();
 
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) override;
 	

@@ -15,10 +15,6 @@ SeeEachSmileProcessStrategy::~SeeEachSmileProcessStrategy()
 {
 }
 
-void SeeEachSmileProcessStrategy::InitializeProcess()
-{
-}
-
 void SeeEachSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity)
 {
 }
