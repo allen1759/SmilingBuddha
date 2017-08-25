@@ -13,8 +13,10 @@
 
 class WebcamSmileVideoProcessor : public SmileVideoProcessor
 {
-public:
+private:
 	WebcamSmileVideoProcessor();
+
+public:
 
 	virtual ~WebcamSmileVideoProcessor() override;
 
