@@ -13,8 +13,6 @@
 #include <vector>
 #include <opencv2/core.hpp>
 
-#include "SmileSaver.h"
-
 class RegularSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
@@ -25,15 +23,13 @@ public:
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) override;
 
 private:
-
 	const double SMILE_INTENSITY_THRESHOLD = 0.5;
+	// TODO: read from director
 	const int IMAGE_SEQUENCE_LENGTH = 40;
-	bool isRecord = false;
 
-	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageBuffer = NULL;
-	//std::vector<double> intensityBuffer;
+	bool isRecord;
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageBuffer;
 
-	SmileSaver *saver;
 };
 
 #endif // !_REGULAR_SMILE_PROCESS_STRATEGY_H

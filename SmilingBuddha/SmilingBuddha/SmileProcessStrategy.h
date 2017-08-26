@@ -11,14 +11,19 @@
 
 #include <opencv2/core.hpp>
 #include "SmileObserver.h"
+#include "SmileSaver.h"
 
 class SmileProcessStrategy
 {
 public:
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) = 0;
 
+	virtual ~SmileProcessStrategy()
+	{}
+
 protected:
 	SmileObserver *observer;
+	SmileSaver *saver;
 
 private:
 
