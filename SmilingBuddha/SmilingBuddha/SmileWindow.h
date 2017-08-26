@@ -11,8 +11,10 @@
 
 #include <opencv2/core/core.hpp>
 
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
 
 #include "VirtualCamera.h"
 
@@ -33,7 +35,7 @@ public:
 
 	static void SetScale(int w, int h);
 
-	//static float * GetScale();
+	static glm::vec2 GetScale();
 
 private:
 	VirtualCamera *virtualCamera;
@@ -77,13 +79,10 @@ private:
 	GLuint textureHandle;
 	GLuint shaderProgram;
 
-	//const int positionZ = 0;
-	//static const int scaleZ = 1;
-	//glm::vec3 position;
-	//glm::vec3 scale;
-
-	float position[3];
-	static float scale[3];
+	const int positionZ = 0;
+	glm::vec3 position;
+	static const int scaleZ = 1;
+	static glm::vec3 scale;
 };
 
 #endif // !_SMILE_WINDOW_H

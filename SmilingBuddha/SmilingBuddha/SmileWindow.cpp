@@ -6,7 +6,8 @@
 
 #include "SmileWindow.h"
 
-float SmileWindow::scale[3];
+glm::vec3 SmileWindow::scale;
+const int SmileWindow::scaleZ;
 
 SmileWindow::SmileWindow()
 {
@@ -81,8 +82,9 @@ void SmileWindow::Draw()
 
 void SmileWindow::SetPosition(int x, int y)
 {
-	position[0] = static_cast<float>(x);
-	position[1] = static_cast<float>(y);
+	position.x = static_cast<float>(x);
+	position.y = static_cast<float>(y);
+	position.z = static_cast<float>(positionZ);
 }
 
 void SmileWindow::SetTexture(std::shared_ptr<cv::Mat> textureMat)
@@ -94,12 +96,12 @@ void SmileWindow::SetTexture(std::shared_ptr<cv::Mat> textureMat)
 
 void SmileWindow::SetScale(int w, int h)
 {
-	scale[0] = 0.0f;
-	//scale[0] = w;
-	//scale[1] = h;
+	scale.x = static_cast<float>(w);
+	scale.y = static_cast<float>(h);
+	scale.z = static_cast<float>(scaleZ);
 }
 
-//float * SmileWindow::GetScale()
-//{
-//	return SmileWindow::scale;
-//}
+glm::vec2 SmileWindow::GetScale()
+{
+	return glm::vec2(scale.x, scale.y);
+}
