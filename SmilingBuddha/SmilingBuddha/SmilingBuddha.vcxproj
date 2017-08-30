@@ -151,7 +151,6 @@
     <ClInclude Include="SmileProcessStrategy.h" />
     <ClInclude Include="SmileRecognizer.h" />
     <ClInclude Include="SmileSaver.h" />
-    <ClInclude Include="SmileWindow.h" />
     <ClInclude Include="TransitionalVideo.h" />
     <ClInclude Include="UserDetector.h" />
     <ClInclude Include="UserObserver.h" />
@@ -161,7 +160,6 @@
     <ClInclude Include="VideoGrid.h" />
     <ClInclude Include="VideoPool.h" />
     <ClInclude Include="VideoRenderer.h" />
-    <ClInclude Include="VirtualCamera.h" />
     <ClInclude Include="WebcamSmileVideoProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

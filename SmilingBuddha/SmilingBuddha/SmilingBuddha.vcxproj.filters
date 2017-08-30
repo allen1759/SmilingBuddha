@@ -158,13 +158,7 @@
     <ClInclude Include="resource.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="SmileWindow.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="VideoPool.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="VirtualCamera.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
