@@ -63,16 +63,19 @@
     <ClCompile Include="VideoClip.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
-    <ClCompile Include="SmileWindow.cpp">
+    <ClCompile Include="VideoRenderer.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
-    <ClCompile Include="VirtualCamera.cpp">
+    <ClCompile Include="Director.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
-    <ClCompile Include="VideoPool.cpp">
+    <ClCompile Include="VideoGrid.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
     <ClCompile Include="ActorVideoSet.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoPool.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,22 +137,34 @@
     <ClInclude Include="TransitionalVideo.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="SmileWindow.h">
+    <ClInclude Include="VideoRenderer.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="VirtualCamera.h">
+    <ClInclude Include="Director.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
+    <ClInclude Include="VideoGrid.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractionState.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorVideoSet.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="FadeAnimation.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileWindow.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
     <ClInclude Include="VideoPool.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="ActorVideoSet.h">
+    <ClInclude Include="VirtualCamera.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

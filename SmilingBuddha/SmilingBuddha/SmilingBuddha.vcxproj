@@ -113,6 +113,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActorVideoSet.cpp" />
+    <ClCompile Include="Director.cpp" />
     <ClCompile Include="liblinear-2.11\blas\daxpy.c" />
     <ClCompile Include="liblinear-2.11\blas\ddot.c" />
     <ClCompile Include="liblinear-2.11\blas\dnrm2.c" />
@@ -127,37 +128,41 @@
     <ClCompile Include="UserDetector.cpp" />
     <ClCompile Include="SmileVideoProcessor.cpp" />
     <ClCompile Include="VideoClip.cpp" />
+    <ClCompile Include="VideoGrid.cpp" />
     <ClCompile Include="VideoPool.cpp" />
-    <ClCompile Include="VirtualCamera.cpp" />
+    <ClCompile Include="VideoRenderer.cpp" />
     <ClCompile Include="WebcamSmileVideoProcessor.cpp" />
-    <ClCompile Include="SmileWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActorVideoSet.h" />
     <ClInclude Include="AnimatedVideo.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
+    <ClInclude Include="Director.h" />
     <ClInclude Include="FadeAnimation.h" />
+    <ClInclude Include="InteractionState.h" />
     <ClInclude Include="liblinear-2.11\blas\blas.h" />
     <ClInclude Include="liblinear-2.11\blas\blasp.h" />
     <ClInclude Include="liblinear-2.11\linear.h" />
     <ClInclude Include="liblinear-2.11\tron.h" />
     <ClInclude Include="RegularSmileProcessStrategy.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SeeEachSmileProcessStrategy.h" />
     <ClInclude Include="SmileObserver.h" />
     <ClInclude Include="SmileProcessStrategy.h" />
     <ClInclude Include="SmileRecognizer.h" />
     <ClInclude Include="SmileSaver.h" />
+    <ClInclude Include="SmileWindow.h" />
     <ClInclude Include="TransitionalVideo.h" />
     <ClInclude Include="UserDetector.h" />
     <ClInclude Include="UserObserver.h" />
     <ClInclude Include="SmileVideoProcessor.h" />
     <ClInclude Include="Video.h" />
     <ClInclude Include="VideoClip.h" />
+    <ClInclude Include="VideoGrid.h" />
     <ClInclude Include="VideoPool.h" />
+    <ClInclude Include="VideoRenderer.h" />
     <ClInclude Include="VirtualCamera.h" />
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="WebcamSmileVideoProcessor.h" />
-    <ClInclude Include="SmileWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
