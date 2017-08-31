@@ -23,9 +23,9 @@ std::shared_ptr<cv::Mat> VideoGrid::GetFrame()
 	return std::shared_ptr<cv::Mat>();
 }
 
-Video * VideoGrid::GetVideo()
+std::shared_ptr<Video> VideoGrid::GetVideo()
 {
-	return this;
+	return std::make_shared<VideoGrid>(*this);
 }
 
 Video * VideoGrid::GetChild(int row, int col)

@@ -75,11 +75,11 @@ private:
 
 	static VideoPool *instance;
 
+	const int WINDOW_COL_COUNT;
+	const int WINDOW_ROW_COUNT;
+	const int IMAGE_SEQUENCE_LENGTH;
+
 	const int ACTOR_COUNT = 38;
-
-	// TODO: get from director
-	const int IMAGE_SEQUENCE_LENGTH = 40;
-
 	const std::string SMILE_VIDEO_PATH = "D:\\smileVideo";
 	const std::string SLOT_PATH = "D:\\smileVideo\\slot";
 	const std::string FILE_TYPE = ".jpg";

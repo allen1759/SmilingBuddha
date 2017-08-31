@@ -8,10 +8,12 @@
 
 #include <algorithm>
 
-SeeEachSmileProcessStrategy::SeeEachSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength, float waitTime)
+#include "Setting.h"
+
+SeeEachSmileProcessStrategy::SeeEachSmileProcessStrategy(SmileObserver * observer, float waitTime)
+	: SmileProcessStrategy(observer)
 {
-	this->observer = observer;
-	this->saver = SmileSaver::GetInstance();
+	this->imageSequenceLength = Setting::GetInstance()->GetImageSequenceLength();
 
 	this->hasAnySmile = false;
 	this->waitTime = std::chrono::milliseconds(static_cast<int>(waitTime * 1000));
@@ -44,7 +46,7 @@ void SeeEachSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, dou
 		imageBuffer->push_back(img);
 
 		// if buffer size reach target length, stop recording and pass images to SmileObserver.
-		if (imageBuffer->size() == IMAGE_SEQUENCE_LENGTH) {
+		if (imageBuffer->size() == imageSequenceLength) {
 			if (observer)
 				observer->OnRecorded(imageBuffer);
 			saver->SaveImages(imageBuffer);
@@ -65,7 +67,7 @@ void SeeEachSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, dou
 
 void SeeEachSmileProcessStrategy::SelectBestSmile()
 {
-	if (allIntensityBuffer.size() < IMAGE_SEQUENCE_LENGTH)
+	if (allIntensityBuffer.size() < imageSequenceLength)
 		return;
 
 	if (observer)
@@ -73,16 +75,16 @@ void SeeEachSmileProcessStrategy::SelectBestSmile()
 
 	std::vector<double>::iterator maxIt = std::max_element(allIntensityBuffer.begin(), allIntensityBuffer.end());
 	int maxIndex = maxIt - allIntensityBuffer.begin();
-	int firstIndex = maxIndex - (IMAGE_SEQUENCE_LENGTH >> 1);
-	int lastIndex = firstIndex + IMAGE_SEQUENCE_LENGTH;
+	int firstIndex = maxIndex - (imageSequenceLength >> 1);
+	int lastIndex = firstIndex + imageSequenceLength;
 
 	if (firstIndex < 0) {
 		firstIndex = 0;
-		lastIndex = IMAGE_SEQUENCE_LENGTH;
+		lastIndex = imageSequenceLength;
 	}
 	else if (lastIndex > allIntensityBuffer.size()) {
 		lastIndex = allIntensityBuffer.size();
-		firstIndex = lastIndex - IMAGE_SEQUENCE_LENGTH;
+		firstIndex = lastIndex - imageSequenceLength;
 	}
 
 	imageBuffer = std::make_shared<std::vector<std::shared_ptr<cv::Mat>>>();

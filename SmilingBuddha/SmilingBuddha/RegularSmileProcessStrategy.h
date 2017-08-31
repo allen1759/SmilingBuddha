@@ -16,16 +16,13 @@
 class RegularSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
-	RegularSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength);
+	RegularSmileProcessStrategy(SmileObserver * observer);
 
 	~RegularSmileProcessStrategy();
 
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) override;
 
 private:
-	const double SMILE_INTENSITY_THRESHOLD = 0.5;
-	// TODO: read from director
-	const int IMAGE_SEQUENCE_LENGTH = 40;
 
 	bool isRecord;
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageBuffer;

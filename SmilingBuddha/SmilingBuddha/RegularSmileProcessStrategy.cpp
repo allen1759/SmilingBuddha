@@ -6,10 +6,12 @@
 
 #include "RegularSmileProcessStrategy.h"
 
-RegularSmileProcessStrategy::RegularSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength)
+#include "Setting.h"
+
+RegularSmileProcessStrategy::RegularSmileProcessStrategy(SmileObserver * observer)
+	: SmileProcessStrategy(observer)
 {
-	this->observer = observer;
-	this->saver = SmileSaver::GetInstance();
+	this->imageSequenceLength = Setting::GetInstance()->GetImageSequenceLength();
 
 	this->isRecord = false;
 	this->imageBuffer = NULL;
@@ -36,7 +38,7 @@ void RegularSmileProcessStrategy::ProcessSmile(std::shared_ptr<cv::Mat> img, dou
 		imageBuffer->push_back(img);
 
 		// if buffer size reach target length, stop recording and pass images to SmileObserver.
-		if (imageBuffer->size() == IMAGE_SEQUENCE_LENGTH) {
+		if (imageBuffer->size() == imageSequenceLength) {
 			if (observer)
 				observer->OnRecorded(imageBuffer);
 			saver->SaveImages(imageBuffer);

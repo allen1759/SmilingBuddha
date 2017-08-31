@@ -9,16 +9,18 @@
 #include <boost/filesystem.hpp>
 #include <boost/date_time.hpp>
 
-#include "Wall.h"
+#include "Setting.h"
 
 VideoPool * VideoPool::instance = NULL;
 
-VideoPool::VideoPool()
+VideoPool::VideoPool() : WINDOW_COL_COUNT(Setting::GetInstance()->GetCol()),
+					     WINDOW_ROW_COUNT(Setting::GetInstance()->GetRow()),
+						 IMAGE_SEQUENCE_LENGTH(Setting::GetInstance()->GetImageSequenceLength())
 {
-	LoadSlotSmileVideo(Wall::WINDOW_COL_COUNT * Wall::WINDOW_ROW_COUNT);
-	LoadNonSlotSmileVideo(Wall::WINDOW_COL_COUNT * Wall::WINDOW_ROW_COUNT);
+	LoadSlotSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
+	LoadNonSlotSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
 
-	LoadAllSmileVideo(Wall::WINDOW_COL_COUNT * Wall::WINDOW_ROW_COUNT);
+	LoadAllSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
 
 	for (int i = 0; i < ACTOR_COUNT; ++i)
 	//for (int i = 0; i < 9; ++i)
@@ -39,7 +41,7 @@ VideoPool * VideoPool::GetInstance()
 
 std::shared_ptr<ActorVideoSet> VideoPool::GetActorVideoSet(int row, int col)
 {
-	return actorVideoSets[row * Wall::WINDOW_COL_COUNT + col];
+	return actorVideoSets[row * WINDOW_COL_COUNT + col];
 }
 
 void VideoPool::AddSmileVideo(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> newSmileVideo)
@@ -47,12 +49,12 @@ void VideoPool::AddSmileVideo(std::shared_ptr<std::vector<std::shared_ptr<cv::Ma
 	nonslotSmileVideoList.pop_back();
 	nonslotSmileVideoList.push_front(newSmileVideo);
 
-	LoadAllSmileVideo(Wall::WINDOW_COL_COUNT * Wall::WINDOW_ROW_COUNT);
+	LoadAllSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetSmileVideoList(int row, int col)
 {
-	return smileVideoList[row * Wall::WINDOW_COL_COUNT + col];
+	return smileVideoList[row * WINDOW_COL_COUNT + col];
 }
 
 void VideoPool::LoadSlotSmileVideo(const int windowCount)
@@ -202,6 +204,4 @@ std::shared_ptr<cv::Mat> VideoPool::ReadImage(const std::string path)
 
 	return dst;
 }
-
-
 

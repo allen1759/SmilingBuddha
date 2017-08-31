@@ -24,7 +24,7 @@ public:
 		this->duration = std::chrono::milliseconds(static_cast<int>(duration * 1000));
 		startTime = std::chrono::high_resolution_clock::now();
 	}
-	~TransitionalVideo()
+	virtual ~TransitionalVideo()
 	{}
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() = 0;
@@ -40,16 +40,6 @@ protected:
 
 	std::chrono::high_resolution_clock::time_point startTime;
 };
-
-
-//std::shared_ptr<cv::Mat> TransitionalVideo::GetFrame()
-//{
-//	std::cout << "Transitional Video" << std::endl;
-//
-//	video->GetFrame();
-//	nextVideo->GetFrame();
-//	return NULL;
-//}
 
 std::shared_ptr<Video> TransitionalVideo::GetVideo()
 {

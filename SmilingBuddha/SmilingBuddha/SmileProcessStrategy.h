@@ -16,6 +16,12 @@
 class SmileProcessStrategy
 {
 public:
+	SmileProcessStrategy(SmileObserver *observer)
+	{
+		this->observer = observer;
+		this->saver = SmileSaver::GetInstance();
+	}
+
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) = 0;
 
 	virtual ~SmileProcessStrategy()
@@ -24,6 +30,9 @@ public:
 protected:
 	SmileObserver *observer;
 	SmileSaver *saver;
+
+	const double SMILE_INTENSITY_THRESHOLD = 0.5;
+	int imageSequenceLength;
 
 private:
 

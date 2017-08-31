@@ -17,7 +17,7 @@ public:
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
-	virtual Video * GetVideo() override;
+	virtual std::shared_ptr<Video> GetVideo() override;
 
 	Video *GetChild(int row, int col);
 

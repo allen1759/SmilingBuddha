@@ -18,7 +18,7 @@
 class SeeEachSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
-	SeeEachSmileProcessStrategy(SmileObserver * observer, int imageSequenceLength, float waitTime);
+	SeeEachSmileProcessStrategy(SmileObserver * observer, float waitTime);
 
 	~SeeEachSmileProcessStrategy();
 
@@ -27,10 +27,6 @@ public:
 private:
 	void SelectBestSmile();
 
-
-	const double SMILE_INTENSITY_THRESHOLD = 0.5;
-	// TODO: read from director
-	const int IMAGE_SEQUENCE_LENGTH = 40;
 
 	// For select the best smile in past.
 	bool hasAnySmile;
