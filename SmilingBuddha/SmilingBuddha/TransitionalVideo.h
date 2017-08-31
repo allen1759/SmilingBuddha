@@ -29,7 +29,10 @@ public:
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() = 0;
 
-	virtual std::shared_ptr<Video> GetVideo() override;
+	virtual std::shared_ptr<Video> GetVideo() override
+	{
+		return nextVideo;
+	}
 
 protected:
 
@@ -40,10 +43,5 @@ protected:
 
 	std::chrono::high_resolution_clock::time_point startTime;
 };
-
-std::shared_ptr<Video> TransitionalVideo::GetVideo()
-{
-	return nextVideo;
-}
 
 #endif // !_TRANSITIONAL_VIDEO_H

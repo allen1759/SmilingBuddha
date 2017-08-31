@@ -113,6 +113,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActorVideoSet.cpp" />
+    <ClCompile Include="BlendingTransition.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="liblinear-2.11\blas\daxpy.c" />
     <ClCompile Include="liblinear-2.11\blas\ddot.c" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="ActorVideoSet.h" />
     <ClInclude Include="AnimatedVideo.h" />
+    <ClInclude Include="BlendingTransition.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="FadeAnimation.h" />
