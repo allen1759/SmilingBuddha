@@ -45,7 +45,7 @@ SmileVideoProcessor::~SmileVideoProcessor()
 	}
 }
 
-void SmileVideoProcessor::SetSmileProcessStrategy(SmileProcessStrategy *smileProcessStrategy)
+void SmileVideoProcessor::SetSmileProcessStrategy(std::shared_ptr<SmileProcessStrategy> smileProcessStrategy)
 {
 	this->smileProcessStrategy = smileProcessStrategy;
 }

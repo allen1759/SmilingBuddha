@@ -19,7 +19,7 @@
 class SmileVideoProcessor
 {
 public:
-	void SetSmileProcessStrategy(SmileProcessStrategy *smileProcessStrategy);
+	void SetSmileProcessStrategy(std::shared_ptr<SmileProcessStrategy> smileProcessStrategy);
 
 	void Start();
 
@@ -46,6 +46,7 @@ protected:
 
 	float GetSmoothWeight(const cv::Point &leftEyeShift, const cv::Point &rightEyeShift) const;
 
+
 	bool isRunning;
 	std::shared_ptr<std::thread> processSmileVideoThread;
 	
@@ -55,7 +56,7 @@ protected:
 	const int SMILE_FRAME_WIDTH = 260;
 	const int SMILE_FRAME_HEIGHT = 355;
 
-	SmileProcessStrategy *smileProcessStrategy;
+	std::shared_ptr<SmileProcessStrategy> smileProcessStrategy;
 
 	// For recognize intensity of smile.
 	SmileRecognizer *recognizer;

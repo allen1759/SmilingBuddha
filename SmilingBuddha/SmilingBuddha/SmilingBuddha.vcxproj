@@ -124,6 +124,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RegularSmileProcessStrategy.cpp" />
     <ClCompile Include="SeeEachSmileProcessStrategy.cpp" />
+    <ClCompile Include="SeeEachState.cpp" />
     <ClCompile Include="Setting.cpp" />
     <ClCompile Include="SmileRecognizer.cpp" />
     <ClCompile Include="SmileSaver.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="RegularSmileProcessStrategy.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SeeEachSmileProcessStrategy.h" />
+    <ClInclude Include="SeeEachState.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="SmileObserver.h" />
     <ClInclude Include="SmileProcessStrategy.h" />

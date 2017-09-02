@@ -84,6 +84,9 @@
     <ClCompile Include="BlendingTransition.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
+    <ClCompile Include="SeeEachState.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UserObserver.h">
@@ -171,6 +174,9 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="BlendingTransition.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SeeEachState.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
