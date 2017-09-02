@@ -30,12 +30,50 @@ ActorVideoSet::~ActorVideoSet()
 {
 }
 
-std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> ActorVideoSet::GetDirectionVideo(int direction)
+std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> ActorVideoSet::GetDirectionVideo(int direction)
 {
 	return directionSet[direction];
 }
 
-//std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> ActorVideoSet::GetMorphingVideo(int index)
+int ActorVideoSet::GetDirectionIndex(int fromRow, int fromCol, int atRow, int atCol)
+{
+	if (fromRow > atRow) {
+		if (fromCol > atCol) {
+			return RIGHT_UP;
+		}
+		else if (fromCol < atCol) {
+			return LEFT_UP;
+		}
+		else {
+			return UP;
+		}
+	}
+	else if (fromRow < atRow) {
+		if (fromCol > atCol) {
+			return RIGHT_DOWN;
+		}
+		else if (fromCol < atCol) {
+			return LEFT_DOWN;
+		}
+		else {
+			return DOWN;
+		}
+	}
+	else {
+		if (fromCol > atCol) {
+			return RIGHT;
+		}
+		else if (fromCol < atCol) {
+			return LEFT;
+		}
+		else {
+			// Should return direction in this case???
+			return CENTER;
+		}
+	}
+}
+
+//std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> ActorVideoSet::GetMorphingVideo(int index)
 //{
 //	return morphingSet[index];
 //}

@@ -24,10 +24,12 @@ public:
 
 	~ActorVideoSet();
 
-	std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> GetDirectionVideo(int direction);
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetDirectionVideo(int direction);
 
 	// Don't use Morphing anymore.
-	//std::shared_ptr<const std::vector<std::shared_ptr<cv::Mat>>> GetMorphingVideo(int index);
+	//std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetMorphingVideo(int index);
+
+	static int GetDirectionIndex(int fromRow, int fromCol, int atRow, int atCol);
 
 
 	// Index of direction.
