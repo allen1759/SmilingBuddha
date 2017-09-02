@@ -15,7 +15,7 @@
 class VideoClip : public Video
 {
 public:
-	VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence, float duration);
+	VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence, float duration, bool loop, bool reverse);
 
 	virtual ~VideoClip() override;
 
@@ -29,6 +29,9 @@ private:
 	std::chrono::milliseconds duration;
 
 	std::chrono::high_resolution_clock::time_point startTime;
+
+	bool loop;
+	bool reverse;
 };
 
 
