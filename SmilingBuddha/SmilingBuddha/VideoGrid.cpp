@@ -6,12 +6,14 @@
 
 #include "VideoGrid.h"
 
-VideoGrid::VideoGrid(int rowCount, int colCount)
-{
-	videoGrid = new Video *[rowCount * colCount];
+#include "Setting.h"
 
-	this->rowCount = rowCount;
-	this->colCount = colCount;
+VideoGrid::VideoGrid()
+{
+	this->rowCount = Setting::GetInstance()->GetRow();
+	this->colCount = Setting::GetInstance()->GetCol();
+
+	videoGrid.resize(rowCount * colCount);
 }
 
 VideoGrid::~VideoGrid()
@@ -28,11 +30,12 @@ std::shared_ptr<Video> VideoGrid::GetVideo()
 	return std::make_shared<VideoGrid>(*this);
 }
 
-Video * VideoGrid::GetChild(int row, int col)
+std::shared_ptr<Video> VideoGrid::GetChild(int row, int col)
 {
-	return nullptr;
+	return videoGrid[row * colCount + col];
 }
 
-void VideoGrid::SetChild(Video * video, int row, int col)
+void VideoGrid::SetChild(std::shared_ptr<Video> video, int row, int col)
 {
+	videoGrid[row * colCount + col] = video;
 }

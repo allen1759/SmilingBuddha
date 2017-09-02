@@ -9,13 +9,15 @@
 #include <iostream>
 #include <chrono>
 
-Director::Director(VideoRenderer* videoRenderer)
+Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor)
 {
-	videoGrid = new VideoGrid(4, 9);
+	videoGrid = new VideoGrid();
 	videoRenderer->SetVideo(videoGrid);
 
 	running = true;
 	updateThread = std::thread(&Director::UpdateLoop, this);
+
+	this->smileVideoProcessor = smileVideoProcessor;
 }
 
 Director::~Director()
@@ -49,4 +51,17 @@ VideoGrid * Director::GetVideoGrid()
 void Director::SetInteractionState(InteractionState * state)
 {
 	this->state = state;
+}
+
+SmileVideoProcessor * Director::GetSmileVideoProcessor()
+{
+	return smileVideoProcessor;
+}
+
+void Director::OnSmile()
+{
+}
+
+void Director::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
+{
 }

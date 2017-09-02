@@ -9,10 +9,12 @@
 
 class Director;
 
-class InteractionState {
+class InteractionState
+{
 protected:
 	InteractionState(Director *director)
 	{
+		this->director = director;
 	}
 
 public:
@@ -21,6 +23,10 @@ public:
 	}
 
 	virtual void Update() = 0;
+
+
+protected:
+	Director *director;
 };
 
 

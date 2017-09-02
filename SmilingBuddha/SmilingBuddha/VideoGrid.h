@@ -9,22 +9,26 @@
 
 #include "Video.h"
 
+#include <vector>
+#include <memory>
+
 class VideoGrid : public Video
 {
 public:
-	VideoGrid(int rowCount, int colCount);
-	~VideoGrid();
+	VideoGrid();
+
+	virtual ~VideoGrid();
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
 	virtual std::shared_ptr<Video> GetVideo() override;
 
-	Video *GetChild(int row, int col);
+	std::shared_ptr<Video> GetChild(int row, int col);
 
-	void SetChild(Video *video, int row, int col);
+	void SetChild(std::shared_ptr<Video> video, int row, int col);
 
 private:
-	Video **videoGrid;
+	std::vector<std::shared_ptr<Video>> videoGrid;
 
 	int rowCount;
 	int colCount;
