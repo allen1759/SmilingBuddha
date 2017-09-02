@@ -40,3 +40,18 @@ int Setting::GetImageSequenceLength()
 {
 	return IMAGE_SEQUENCE_LENGTH;
 }
+
+int Setting::GetActorIndex(int row, int col)
+{
+	return ACTOR_INDEX[row * WINDOW_COL_COUNT + col];
+}
+
+int Setting::GetCenterRow()
+{
+	return CENTER_ROW;
+}
+
+int Setting::GetCenterCol()
+{
+	return CENTER_COL;
+}
