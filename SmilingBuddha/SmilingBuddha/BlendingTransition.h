@@ -20,8 +20,6 @@ public:
 
 private:
 
-	const int BLENDING_SEQUENCE_SIZE = 15;
-	int blendingIndex;
 	std::shared_ptr<cv::Mat> firstFrame;
 	std::shared_ptr<cv::Mat> lastFrame;
 };
