@@ -12,6 +12,7 @@
 #include <chrono>
 
 #include "VideoPool.h"
+#include "Video.h"
 
 class Director;
 
@@ -27,7 +28,9 @@ public:
 private:
 	void InitializeVideoGrid();
 
-	void SetNeutralAnimation(int row, int col);
+	void SetNeutralBlending(int row, int col);
+
+	std::shared_ptr<Video> CreateNeutralVideo(int row, int col);
 
 	void CreateSeeEachAnimation();
 
@@ -49,6 +52,7 @@ private:
 									{1, -1}, {1, 0}, {1, 1} };
 	const float SEE_EACH_STATE_TIME = 20.0f;
 	const float ANIMATION_TIME = 6.0f;
+	const float BLENDING_TIME = 0.5f;
 	// With 80% probability to create SeeEach animation.
 	const int ANIMATION_PROBABILITY = 8;
 	bool isPlayingAnimation;

@@ -24,7 +24,6 @@ public:
 	virtual std::shared_ptr<cv::Mat> GetFrame() = 0;
 
 	virtual std::shared_ptr<Video> GetVideo() = 0;
-
 };
 
 

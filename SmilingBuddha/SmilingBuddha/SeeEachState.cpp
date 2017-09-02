@@ -12,6 +12,7 @@
 #include "SeeEachSmileProcessStrategy.h"
 #include "VideoPool.h"
 #include "VideoClip.h"
+#include "BlendingTransition.h"
 
 SeeEachState::SeeEachState(Director *director)
 	: InteractionState(director)
@@ -43,8 +44,13 @@ void SeeEachState::Update()
 
 	if (delta >= animationDuration) {
 		if (isPlayingAnimation) {
-			SetNeutralAnimation(lastFromRow, lastFromCol);
-			SetNeutralAnimation(lastAtRow, lastAtCol);
+			// Set 'from' grid to Neutral.
+			std::shared_ptr<Video> newVideo = CreateNeutralVideo(lastFromRow, lastFromCol);
+			director->GetVideoGrid()->SetChild(newVideo, lastFromRow, lastFromCol);
+			// Set 'at' grid to Neutral.
+			newVideo = CreateNeutralVideo(lastAtRow, lastAtCol);
+			director->GetVideoGrid()->SetChild(newVideo, lastAtRow, lastAtCol);
+
 			isPlayingAnimation = false;
 		}
 		if (rand() % 10 < ANIMATION_PROBABILITY) {
@@ -63,17 +69,29 @@ void SeeEachState::InitializeVideoGrid()
 		if (row < 0 || row >= rowCount)
 			continue;
 
-		SetNeutralAnimation(row, col);
+		std::shared_ptr<Video> newVideo = CreateNeutralVideo(row, col);
+		director->GetVideoGrid()->SetChild(newVideo, row, col);
 	}
 }
 
-void SeeEachState::SetNeutralAnimation(int row, int col)
+void SeeEachState::SetNeutralBlending(int row, int col)
+{
+	std::shared_ptr<Video> newVideo = CreateNeutralVideo(row, col);
+	std::shared_ptr<Video> transition = std::make_shared<BlendingTransition>(
+		director->GetVideoGrid()->GetChild(row, col),
+		newVideo,
+		BLENDING_TIME);
+	director->GetVideoGrid()->SetChild(transition, row, col);
+}
+
+std::shared_ptr<Video> SeeEachState::CreateNeutralVideo(int row, int col)
 {
 	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
 		actorVideoSet->GetDirectionVideo(ActorVideoSet::NEUTRAL),
 		ANIMATION_TIME, true, true);
-	director->GetVideoGrid()->SetChild(newVideo, row, col);
+	
+	return newVideo;
 }
 
 void SeeEachState::CreateSeeEachAnimation()

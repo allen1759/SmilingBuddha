@@ -44,8 +44,6 @@ private:
 
 	// Controllers
 	SmileVideoProcessor *smileVideoProcessor;
-
-	// ³z¹L SmileObserver Ä~©Ó
 };
 
 #endif

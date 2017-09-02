@@ -23,7 +23,7 @@ public:
 		this->video = video->GetVideo();
 
 		this->duration = std::chrono::milliseconds(static_cast<int>(duration * 1000));
-		startTime = std::chrono::high_resolution_clock::now();
+		this->startTime = std::chrono::high_resolution_clock::now();
 	}
 	virtual ~AnimatedVideo()
 	{}
@@ -37,13 +37,12 @@ protected:
 	std::shared_ptr<Video> video;
 
 	std::chrono::milliseconds duration;
-
 	std::chrono::high_resolution_clock::time_point startTime;
 };
-
 
 std::shared_ptr<Video> AnimatedVideo::GetVideo()
 {
 	return video;
 }
+
 #endif // !_ANIMATED_VIDEO_H
