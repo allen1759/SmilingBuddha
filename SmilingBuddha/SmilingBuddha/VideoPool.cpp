@@ -24,6 +24,13 @@ VideoPool::VideoPool() : WINDOW_COL_COUNT(Setting::GetInstance()->GetCol()),
 
 	for (int i = 0; i < WINDOW_ROW_COUNT; ++i) {
 		for (int j = 0; j < WINDOW_COL_COUNT; ++j) {
+			// ========== for debug ==========
+			if (i != 0 || j != 0) {
+				actorVideoSets.push_back(actorVideoSets[0]);
+				continue;
+			}
+			// ========== for debug ==========
+
 			int index = Setting::GetInstance()->GetActorIndex(i, j);
 			actorVideoSets.push_back(std::make_shared<ActorVideoSet>(index));
 		}

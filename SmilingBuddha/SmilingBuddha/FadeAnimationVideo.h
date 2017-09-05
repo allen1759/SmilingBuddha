@@ -13,12 +13,12 @@
 
 #include <opencv2/highgui/highgui.hpp>
 
-class FadeAnimation : public AnimatedVideo
+class FadeAnimationVideo : public AnimatedVideo
 {
 public:
-	FadeAnimation(std::shared_ptr<Video> video, float duration, unsigned char R, unsigned char G, unsigned char B);
+	FadeAnimationVideo(std::shared_ptr<Video> video, float duration, unsigned char R, unsigned char G, unsigned char B);
 	
-	virtual ~FadeAnimation() override;
+	virtual ~FadeAnimationVideo() override;
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
@@ -28,7 +28,7 @@ private:
 	unsigned char B;
 };
 
-FadeAnimation::FadeAnimation(std::shared_ptr<Video> video, float duration, unsigned char R, unsigned char G, unsigned char B)
+FadeAnimationVideo::FadeAnimationVideo(std::shared_ptr<Video> video, float duration, unsigned char R, unsigned char G, unsigned char B)
 	: AnimatedVideo(video, duration)
 {
 	this->R = R;
@@ -36,11 +36,11 @@ FadeAnimation::FadeAnimation(std::shared_ptr<Video> video, float duration, unsig
 	this->B = B;
 }
 
-FadeAnimation::~FadeAnimation()
+FadeAnimationVideo::~FadeAnimationVideo()
 {
 }
 
-std::shared_ptr<cv::Mat> FadeAnimation::GetFrame()
+std::shared_ptr<cv::Mat> FadeAnimationVideo::GetFrame()
 {
 	std::shared_ptr<cv::Mat> src1 = video->GetFrame();
 	std::shared_ptr<cv::Mat> src2 = std::make_shared<cv::Mat>(cv::Mat(src1->rows, src1->cols, CV_8UC3, cv::Scalar(B, G, R)));

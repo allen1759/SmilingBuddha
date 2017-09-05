@@ -8,6 +8,7 @@
 #define _SEE_EACH_STATE_H
 
 #include "InteractionState.h"
+#include "SmileObserver.h"
 
 #include <chrono>
 
@@ -16,7 +17,7 @@
 
 class Director;
 
-class SeeEachState : InteractionState
+class SeeEachState : public InteractionState, public SmileObserver
 {
 public:
 	SeeEachState(Director *director);
@@ -28,11 +29,15 @@ public:
 private:
 	void InitializeVideoGrid();
 
-	void SetNeutralBlending(int row, int col);
+	void SetSeeEachAnimation();
 
-	std::shared_ptr<Video> CreateNeutralVideo(int row, int col);
+	std::shared_ptr<Video> GetVideoClipByDirection(int row, int col, int direction, bool loop, bool reverse);
 
-	void CreateSeeEachAnimation();
+	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
+
+	virtual void OnSmile() override;
+
+	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;
 
 
 	// Get from Setting class.
@@ -55,9 +60,13 @@ private:
 	const float BLENDING_TIME = 0.5f;
 	// With 80% probability to create SeeEach animation.
 	const int ANIMATION_PROBABILITY = 8;
-	bool isPlayingAnimation;
+
+	bool isPlayingSeeEachAnimation;
 	int lastFromRow, lastFromCol;
 	int lastAtRow, lastAtCol;
+
+	bool isSmiling;
+	bool isPlayingSmilingAnimation;
 
 	std::chrono::high_resolution_clock::time_point startTime;
 	std::chrono::milliseconds animationDuration;

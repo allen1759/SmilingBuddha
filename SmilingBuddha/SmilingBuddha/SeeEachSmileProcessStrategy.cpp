@@ -10,7 +10,7 @@
 
 #include "Setting.h"
 
-SeeEachSmileProcessStrategy::SeeEachSmileProcessStrategy(SmileObserver * observer, float waitTime)
+SeeEachSmileProcessStrategy::SeeEachSmileProcessStrategy(SmileObserver *observer, float waitTime)
 	: SmileProcessStrategy(observer)
 {
 	this->imageSequenceLength = Setting::GetInstance()->GetImageSequenceLength();

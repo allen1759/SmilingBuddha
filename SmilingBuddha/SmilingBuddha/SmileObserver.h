@@ -11,7 +11,7 @@
 #include <vector>
 #include <opencv2/core.hpp>
 
-class SmileObserver
+class SmileObserver : public std::enable_shared_from_this<SmileObserver>
 {
 public:
 	virtual void OnSmile() = 0;

@@ -113,8 +113,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActorVideoSet.cpp" />
-    <ClCompile Include="BlendingTransition.cpp" />
+    <ClCompile Include="BlendingTransitionVideo.cpp" />
     <ClCompile Include="Director.cpp" />
+    <ClCompile Include="InteractionState.cpp" />
+    <ClCompile Include="IntroInitialState.cpp" />
+    <ClCompile Include="IntroNeutralState.cpp" />
+    <ClCompile Include="IntroSeeEachState.cpp" />
+    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="liblinear-2.11\blas\daxpy.c" />
     <ClCompile Include="liblinear-2.11\blas\ddot.c" />
     <ClCompile Include="liblinear-2.11\blas\dnrm2.c" />
@@ -124,7 +129,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RegularSmileProcessStrategy.cpp" />
     <ClCompile Include="SeeEachSmileProcessStrategy.cpp" />
-    <ClCompile Include="SeeEachState.cpp" />
     <ClCompile Include="Setting.cpp" />
     <ClCompile Include="SmileRecognizer.cpp" />
     <ClCompile Include="SmileSaver.cpp" />
@@ -139,11 +143,16 @@
   <ItemGroup>
     <ClInclude Include="ActorVideoSet.h" />
     <ClInclude Include="AnimatedVideo.h" />
-    <ClInclude Include="BlendingTransition.h" />
+    <ClInclude Include="BlendingTransitionVideo.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
     <ClInclude Include="Director.h" />
-    <ClInclude Include="FadeAnimation.h" />
+    <ClInclude Include="FadeAnimationVideo.h" />
     <ClInclude Include="InteractionState.h" />
+    <ClInclude Include="IntroInitialState.h" />
+    <ClInclude Include="IntroNeutralState.h" />
+    <ClInclude Include="IntroSeeEachState.h" />
+    <ClInclude Include="SmileState.h" />
+    <ClInclude Include="IntroState.h" />
     <ClInclude Include="liblinear-2.11\blas\blas.h" />
     <ClInclude Include="liblinear-2.11\blas\blasp.h" />
     <ClInclude Include="liblinear-2.11\linear.h" />
@@ -151,7 +160,6 @@
     <ClInclude Include="RegularSmileProcessStrategy.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SeeEachSmileProcessStrategy.h" />
-    <ClInclude Include="SeeEachState.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="SmileObserver.h" />
     <ClInclude Include="SmileProcessStrategy.h" />

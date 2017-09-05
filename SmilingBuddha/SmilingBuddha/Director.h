@@ -21,18 +21,28 @@ class Director : public SmileObserver
 public:
 	//TODO: Add controller
 	Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor);
+
 	~Director();
 
 	void UpdateLoop();
 
 	VideoGrid *GetVideoGrid();
 
-	void SetInteractionState(InteractionState *state);
+	void SetInteractionState(std::shared_ptr<InteractionState> state);
 
-	SmileVideoProcessor *GetSmileVideoProcessor();
+	void SetRegularSmileProcessorStrategy();
 
-	// TODO: Inherit from SmileObserver.
+	void SetSeeEachSmileProcessorStrategy(float waitTime);
+
+	void StartInteraction();
+
+	void StopInteraction();
+
+	//SmileVideoProcessor *GetSmileVideoProcessor();
+
+	// Inherit from SmileObserver.
 	virtual void OnSmile() override;
+
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;
 
 private:
@@ -40,10 +50,11 @@ private:
 
 	bool running;
 	std::thread updateThread;
-	InteractionState *state;
+	std::shared_ptr<InteractionState> state;
 
 	// Controllers
 	SmileVideoProcessor *smileVideoProcessor;
+
 };
 
 #endif

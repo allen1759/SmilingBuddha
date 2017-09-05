@@ -8,7 +8,7 @@
 
 #include "Setting.h"
 
-RegularSmileProcessStrategy::RegularSmileProcessStrategy(SmileObserver * observer)
+RegularSmileProcessStrategy::RegularSmileProcessStrategy(SmileObserver *observer)
 	: SmileProcessStrategy(observer)
 {
 	this->imageSequenceLength = Setting::GetInstance()->GetImageSequenceLength();

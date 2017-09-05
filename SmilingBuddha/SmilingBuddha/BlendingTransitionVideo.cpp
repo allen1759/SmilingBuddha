@@ -4,20 +4,20 @@
 *
 */
 
-#include "BlendingTransition.h"
+#include "BlendingTransitionVideo.h"
 
-BlendingTransition::BlendingTransition(std::shared_ptr<Video> video, std::shared_ptr<Video> nextVideo, float duration)
+BlendingTransitionVideo::BlendingTransitionVideo(std::shared_ptr<Video> video, std::shared_ptr<Video> nextVideo, float duration)
 	: TransitionalVideo(video, nextVideo, duration)
 {
 	firstFrame = video->GetFrame();
 	lastFrame = nextVideo->GetFrame();
 }
 
-BlendingTransition::~BlendingTransition()
+BlendingTransitionVideo::~BlendingTransitionVideo()
 {
 }
 
-std::shared_ptr<cv::Mat> BlendingTransition::GetFrame()
+std::shared_ptr<cv::Mat> BlendingTransitionVideo::GetFrame()
 {
 	std::shared_ptr<cv::Mat> dst;
 

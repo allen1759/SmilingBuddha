@@ -16,7 +16,7 @@
 class RegularSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
-	RegularSmileProcessStrategy(SmileObserver * observer);
+	RegularSmileProcessStrategy(SmileObserver *observer);
 
 	~RegularSmileProcessStrategy();
 

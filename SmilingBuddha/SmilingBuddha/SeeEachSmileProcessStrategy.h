@@ -18,7 +18,7 @@
 class SeeEachSmileProcessStrategy : public SmileProcessStrategy
 {
 public:
-	SeeEachSmileProcessStrategy(SmileObserver * observer, float waitTime);
+	SeeEachSmileProcessStrategy(SmileObserver *observer, float waitTime);
 
 	~SeeEachSmileProcessStrategy();
 

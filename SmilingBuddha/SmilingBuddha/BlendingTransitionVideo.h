@@ -9,12 +9,12 @@
 
 #include "TransitionalVideo.h"
 
-class BlendingTransition : public TransitionalVideo
+class BlendingTransitionVideo : public TransitionalVideo
 {
 public:
-	BlendingTransition(std::shared_ptr<Video> video, std::shared_ptr<Video> nextVideo, float duration);
+	BlendingTransitionVideo(std::shared_ptr<Video> video, std::shared_ptr<Video> nextVideo, float duration);
 
-	virtual ~BlendingTransition() override;
+	virtual ~BlendingTransitionVideo() override;
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 

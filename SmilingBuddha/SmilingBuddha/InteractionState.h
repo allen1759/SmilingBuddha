@@ -7,22 +7,31 @@
 #ifndef _INTERACTION_STATE_H
 #define _INTERACTION_STATE_H
 
+#include <string>
+#include <vector>
+#include <memory>
+
+#include <opencv2\core\core.hpp>
+
 class Director;
 
 class InteractionState
 {
 protected:
-	InteractionState(Director *director)
-	{
-		this->director = director;
-	}
+	InteractionState(Director *director);
 
 public:
-	virtual ~InteractionState()
-	{
-	}
+	virtual ~InteractionState();
 
+	// Must create new state in Update().
 	virtual void Update() = 0;
+
+	virtual std::string ToString() = 0;
+
+	virtual void OnSmile();
+
+	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images);
+
 
 
 protected:

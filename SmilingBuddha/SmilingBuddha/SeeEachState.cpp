@@ -17,16 +17,20 @@
 SeeEachState::SeeEachState(Director *director)
 	: InteractionState(director)
 {
-	VideoPool *videoPool = VideoPool::GetInstance();
-	int rowCount = Setting::GetInstance()->GetRow();
-	int colCount = Setting::GetInstance()->GetCol();
-	int centerRow = Setting::GetInstance()->GetCenterRow();
-	int centerCol = Setting::GetInstance()->GetCenterRow();
+	this->videoPool = VideoPool::GetInstance();
+	Setting *setting = Setting::GetInstance();
+	this->rowCount = setting->GetRow();
+	this->colCount = setting->GetCol();
+	this->centerRow = setting->GetCenterRow();
+	this->centerCol = setting->GetCenterCol();
 
-	isPlayingAnimation = false;
+	this->isPlayingSeeEachAnimation = false;
+	this->isSmiling = false;
+	this->isPlayingSmilingAnimation = false;
 
+	// TODO: delete
 	director->GetSmileVideoProcessor()->SetSmileProcessStrategy(
-		std::make_shared<SeeEachSmileProcessStrategy>(director, SEE_EACH_STATE_TIME));
+		std::make_shared<SeeEachSmileProcessStrategy>(shared_from_this(), SEE_EACH_STATE_TIME));
 
 	InitializeVideoGrid();
 	this->startTime = std::chrono::high_resolution_clock::now();
@@ -35,6 +39,7 @@ SeeEachState::SeeEachState(Director *director)
 
 SeeEachState::~SeeEachState()
 {
+	// set to null
 }
 
 void SeeEachState::Update()
@@ -42,19 +47,50 @@ void SeeEachState::Update()
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
 	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
 
-	if (delta >= animationDuration) {
-		if (isPlayingAnimation) {
-			// Set 'from' grid to Neutral.
-			std::shared_ptr<Video> newVideo = CreateNeutralVideo(lastFromRow, lastFromCol);
-			director->GetVideoGrid()->SetChild(newVideo, lastFromRow, lastFromCol);
-			// Set 'at' grid to Neutral.
-			newVideo = CreateNeutralVideo(lastAtRow, lastAtCol);
-			director->GetVideoGrid()->SetChild(newVideo, lastAtRow, lastAtCol);
+	if (!isPlayingSmilingAnimation) {
+		if (delta >= animationDuration) {
+			if (isPlayingSeeEachAnimation) {
+				// Set 'from' grid to Neutral.
+				std::shared_ptr<Video> newVideo = GetVideoClipByDirection(lastFromRow, lastFromCol, ActorVideoSet::NEUTRAL, true, true);
+				SetBlendingVideo(lastFromRow, lastFromCol, newVideo);
 
-			isPlayingAnimation = false;
+				// Set 'at' grid to Neutral.
+				newVideo = GetVideoClipByDirection(lastAtRow, lastAtCol, ActorVideoSet::NEUTRAL, true, true);
+				SetBlendingVideo(lastAtRow, lastAtCol, newVideo);
+
+				isPlayingSeeEachAnimation = false;
+			}
+
+			if (rand() % 10 < ANIMATION_PROBABILITY) {
+				SetSeeEachAnimation();
+			}
+
+			startTime = std::chrono::high_resolution_clock::now();
 		}
-		if (rand() % 10 < ANIMATION_PROBABILITY) {
-			CreateSeeEachAnimation();
+		else if (isSmiling) {
+			// do smiling animation
+			for (int i = 0; i < SQUARE_SIZE; ++i) {
+				int row = centerRow + DIRECTION[i][1];
+				int col = centerCol + DIRECTION[i][0];
+				int lookDirection = ActorVideoSet::GetDirectionIndex(row, col, centerRow, centerCol);
+				std::shared_ptr<Video> newVideo = GetVideoClipByDirection(row, col, lookDirection, false, true);
+				SetBlendingVideo(row, col, newVideo);
+			}
+
+			isPlayingSmilingAnimation = true;
+			startTime = std::chrono::high_resolution_clock::now();
+		}
+	}
+	
+	if (isPlayingSmilingAnimation) {
+		if (delta >= animationDuration) {
+			// Set all actor to Neutual direction.
+			for (int i = 0; i < SQUARE_SIZE; ++i) {
+				int row = centerRow + DIRECTION[i][1];
+				int col = centerCol + DIRECTION[i][0];
+				std::shared_ptr<Video> newVideo = GetVideoClipByDirection(row, col, ActorVideoSet::NEUTRAL, true, true);
+				SetBlendingVideo(row, col, newVideo);
+			}
 		}
 	}
 }
@@ -69,32 +105,12 @@ void SeeEachState::InitializeVideoGrid()
 		if (row < 0 || row >= rowCount)
 			continue;
 
-		std::shared_ptr<Video> newVideo = CreateNeutralVideo(row, col);
+		std::shared_ptr<Video> newVideo = GetVideoClipByDirection(row, col, ActorVideoSet::NEUTRAL, true, true);
 		director->GetVideoGrid()->SetChild(newVideo, row, col);
 	}
 }
 
-void SeeEachState::SetNeutralBlending(int row, int col)
-{
-	std::shared_ptr<Video> newVideo = CreateNeutralVideo(row, col);
-	std::shared_ptr<Video> transition = std::make_shared<BlendingTransition>(
-		director->GetVideoGrid()->GetChild(row, col),
-		newVideo,
-		BLENDING_TIME);
-	director->GetVideoGrid()->SetChild(transition, row, col);
-}
-
-std::shared_ptr<Video> SeeEachState::CreateNeutralVideo(int row, int col)
-{
-	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
-	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
-		actorVideoSet->GetDirectionVideo(ActorVideoSet::NEUTRAL),
-		ANIMATION_TIME, true, true);
-	
-	return newVideo;
-}
-
-void SeeEachState::CreateSeeEachAnimation()
+void SeeEachState::SetSeeEachAnimation()
 {
 	int animationIndex = rand() % SQUARE_SIZE;
 	int row = centerRow + DIRECTION[animationIndex][1];
@@ -117,22 +133,46 @@ void SeeEachState::CreateSeeEachAnimation()
 	int anotherLookDirection = ActorVideoSet::GetDirectionIndex(anotherRow, anotherCol, row, col);
 
 	// Set 'frome' grid new video.
-	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
-	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
-		actorVideoSet->GetDirectionVideo(lookDirection),
-		ANIMATION_TIME, false, true);
-	director->GetVideoGrid()->SetChild(newVideo, row, col);
+	std::shared_ptr<Video> newVideo = GetVideoClipByDirection(row, col, lookDirection, false, true);
+	SetBlendingVideo(row, col, newVideo);
 
 	// Set 'at' grid new video.
-	actorVideoSet = videoPool->GetActorVideoSet(anotherRow, anotherCol);
-	std::shared_ptr<Video> anotherNewVideo = std::make_shared<VideoClip>(
-		actorVideoSet->GetDirectionVideo(anotherLookDirection),
-		ANIMATION_TIME, false, true);
-	director->GetVideoGrid()->SetChild(anotherNewVideo, anotherRow, anotherCol);
+	std::shared_ptr<Video> anotherNewVideo = GetVideoClipByDirection(anotherRow, anotherCol, anotherLookDirection, false, true);
+	SetBlendingVideo(anotherRow, anotherCol, anotherNewVideo);
 
-	isPlayingAnimation = true;
+	isPlayingSeeEachAnimation = true;
 	lastFromRow = row;
 	lastFromCol = col;
 	lastAtRow = anotherRow;
 	lastAtCol = anotherCol;
+}
+
+std::shared_ptr<Video> SeeEachState::GetVideoClipByDirection(int row, int col, int direction, bool loop, bool reverse)
+{
+	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
+	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
+		actorVideoSet->GetDirectionVideo(direction),
+		ANIMATION_TIME, loop, reverse);
+
+	return newVideo;
+}
+
+void SeeEachState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
+{
+	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransition>(
+		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
+		newVideo,
+		BLENDING_TIME
+		);
+
+	director->GetVideoGrid()->SetChild(blendingVideo, row, col);
+}
+
+void SeeEachState::OnSmile()
+{
+	// TODO: play audio.
+}
+
+void SeeEachState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
+{
 }
