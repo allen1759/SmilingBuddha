@@ -9,10 +9,13 @@
 
 #include "SmileObserver.h"
 
+#include <queue>
+#include <mutex>
 #include <thread>
 
 #include "VideoRenderer.h"
 #include "VideoGrid.h"
+#include "Event.h"
 #include "InteractionState.h"
 #include "SmileVideoProcessor.h"
 
@@ -38,8 +41,6 @@ public:
 
 	void StopInteraction();
 
-	//SmileVideoProcessor *GetSmileVideoProcessor();
-
 	// Inherit from SmileObserver.
 	virtual void OnSmile() override;
 
@@ -48,13 +49,15 @@ public:
 private:
 	VideoGrid *videoGrid;
 
+	// Controllers
+	SmileVideoProcessor *smileVideoProcessor;
+
 	bool running;
 	std::thread updateThread;
 	std::shared_ptr<InteractionState> state;
 
-	// Controllers
-	SmileVideoProcessor *smileVideoProcessor;
-
+	std::queue<std::shared_ptr<Event>> eventQueue;
+	std::mutex eventQueueMutex;
 };
 
 #endif

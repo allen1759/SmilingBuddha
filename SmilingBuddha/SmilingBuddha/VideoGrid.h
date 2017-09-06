@@ -12,7 +12,10 @@
 #include <vector>
 #include <memory>
 
-class VideoGrid : public Video
+
+#include <mutex>
+
+class VideoGrid : public Video, public std::enable_shared_from_this<VideoGrid>
 {
 public:
 	VideoGrid();
@@ -29,9 +32,11 @@ public:
 
 private:
 	std::vector<std::shared_ptr<Video>> videoGrid;
+	std::mutex videoGridMutex;
 
 	int rowCount;
 	int colCount;
+
 
 };
 #endif // !_VIDEO_GRID_H

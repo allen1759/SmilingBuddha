@@ -58,6 +58,9 @@
     <Filter Include="原始程式檔\State\intro_state">
       <UniqueIdentifier>{244a485a-2653-4131-99cb-a7ac4dfe6f0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Event">
+      <UniqueIdentifier>{d67fe009-109e-4901-8ca5-0328320645a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -140,6 +143,15 @@
     </ClCompile>
     <ClCompile Include="BlendingTransitionVideo.cpp">
       <Filter>原始程式檔\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileProcessStrategy.cpp">
+      <Filter>原始程式檔\Controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="OnRecordedEvent.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugHeadPoseTracker.cpp">
+      <Filter>原始程式檔\Controller\head_pose_tracker</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +256,24 @@
     </ClInclude>
     <ClInclude Include="SmileState.h">
       <Filter>標頭檔\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="OnRecordedEvent.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="OnSmileEvent.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>標頭檔\Controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadPoseTracker.h">
+      <Filter>標頭檔\Controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugHeadPoseTracker.h">
+      <Filter>標頭檔\Controller\head_pose_tracker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

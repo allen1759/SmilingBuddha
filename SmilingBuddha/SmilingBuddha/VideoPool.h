@@ -84,6 +84,9 @@ private:
 	const std::string SLOT_PATH = "D:\\smileVideo\\slot";
 	const std::string FILE_TYPE = ".jpg";
 
+	const int IMAGE_WIDTH;
+	const int IMAGE_HEIGHT;
+
 	std::vector<std::shared_ptr<ActorVideoSet>> actorVideoSets;
 
 	// Slot videos.

@@ -52,5 +52,5 @@ std::shared_ptr<cv::Mat> VideoClip::GetFrame()
 
 std::shared_ptr<Video> VideoClip::GetVideo()
 {
-	return std::make_shared<VideoClip>(*this);
+	return shared_from_this();
 }

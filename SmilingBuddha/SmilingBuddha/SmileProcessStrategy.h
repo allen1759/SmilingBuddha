@@ -7,6 +7,7 @@
 #ifndef _SMILE_PROCESS_STRATEGY_H
 #define _SMILE_PROCESS_STRATEGY_H
 
+#include <vector>
 #include <memory>
 
 #include <opencv2/core.hpp>
@@ -16,23 +17,25 @@
 class SmileProcessStrategy
 {
 public:
-	SmileProcessStrategy(SmileObserver *observer)
-	{
-		this->observer = observer;
-		this->saver = SmileSaver::GetInstance();
-	}
+	SmileProcessStrategy(SmileObserver *observer);
+
+	virtual ~SmileProcessStrategy();
 
 	virtual void ProcessSmile(std::shared_ptr<cv::Mat> img, double intensity) = 0;
 
-	virtual ~SmileProcessStrategy()
-	{}
 
 protected:
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> ResizeImageSequence(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imgs);
+
 	SmileObserver *observer;
 	SmileSaver *saver;
 
 	const double SMILE_INTENSITY_THRESHOLD = 0.5;
-	int imageSequenceLength;
+	int IMAGE_SEQUENCE_LENGTH;
+	const int IMAGE_WIDTH;
+	const int IMAGE_HEIGHT;
+	const int SAVE_IMAGE_WIDTH;
+	const int SAVE_IMAGE_HEIGHT;
 
 private:
 

@@ -55,3 +55,23 @@ int Setting::GetCenterCol()
 {
 	return CENTER_COL;
 }
+
+int Setting::GetImageWidth()
+{
+	return IMAGE_WIDTH;
+}
+
+int Setting::GetImageHeight()
+{
+	return IMAGE_HEIGHT;
+}
+
+int Setting::GetSaveImageWidth()
+{
+	return SAVE_IMAGE_WIDTH;
+}
+
+int Setting::GetSaveIMageHeight()
+{
+	return SAVE_IMAGE_HEIGHT;
+}

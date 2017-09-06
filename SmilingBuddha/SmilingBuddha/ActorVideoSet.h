@@ -65,6 +65,9 @@ private:
 	const std::string DIRECTION_FOLDER[DIRECTION_SIZE] = { "Neu", "left_down", "down", "right_down", "left", "center", "right", "left_up", "up", "right_up", "Ran" };
 	const std::string FILE_TYPE = ".png";
 
+	const int IMAGE_WIDTH;
+	const int IMAGE_HEIGHT;
+
 	std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> directionSet;
 	// Don't use Morphing anymore.
 	//std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> morphingSet;

@@ -9,6 +9,8 @@
 #include <iostream>
 #include <chrono>
 
+#include "OnSmileEvent.h"
+#include "OnRecordedEvent.h"
 #include "RegularSmileProcessStrategy.h"
 #include "SeeEachSmileProcessStrategy.h"
 
@@ -44,8 +46,16 @@ void Director::UpdateLoop()
 
 	while (running) {
 		start = std::chrono::high_resolution_clock::now();
-		if (state)
+		if (state) {
 			state->Update();
+			eventQueueMutex.lock();
+			while (!eventQueue.empty()) {
+				std::shared_ptr<Event> e = eventQueue.front();
+				eventQueue.pop();
+				state->SignalEvent(e);
+			}
+			eventQueueMutex.unlock();
+		}
 
 		end = std::chrono::high_resolution_clock::now();
 		duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
@@ -84,18 +94,17 @@ void Director::StopInteraction()
 	smileVideoProcessor->Stop();
 }
 
-//SmileVideoProcessor * Director::GetSmileVideoProcessor()
-//{
-//	return smileVideoProcessor;
-//}
-
 void Director::OnSmile()
 {
-	state->OnSmile();
+	eventQueueMutex.lock();
+	eventQueue.push(std::make_shared<OnSmileEvent>());
+	eventQueueMutex.unlock();
 }
 
 void Director::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
-	state->OnRecorded(images);
+	eventQueueMutex.lock();
+	eventQueue.push(std::make_shared<OnRecordedEvent>(images));
+	eventQueueMutex.unlock();
 }
 

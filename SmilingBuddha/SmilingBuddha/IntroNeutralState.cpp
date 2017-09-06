@@ -24,8 +24,10 @@ void IntroNeutralState::Update()
 	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
 
 	if (delta > videoDuration) {
-		if (rand() % PROBABILITY_DENOMINATOR < ANIMATION_PROBABILITY)
+		if (rand() % PROBABILITY_DENOMINATOR < ANIMATION_PROBABILITY) {
 			director->SetInteractionState(std::make_shared<IntroSeeEachState>(director));
+			return;
+		}
 		else {
 			// Restart NeutralState.
 			startTime = std::chrono::high_resolution_clock::now();

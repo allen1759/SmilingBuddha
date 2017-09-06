@@ -15,7 +15,9 @@ VideoPool * VideoPool::instance = NULL;
 
 VideoPool::VideoPool() : WINDOW_COL_COUNT(Setting::GetInstance()->GetCol()),
 					     WINDOW_ROW_COUNT(Setting::GetInstance()->GetRow()),
-						 IMAGE_SEQUENCE_LENGTH(Setting::GetInstance()->GetImageSequenceLength())
+						 IMAGE_SEQUENCE_LENGTH(Setting::GetInstance()->GetImageSequenceLength()),
+						 IMAGE_WIDTH(Setting::GetInstance()->GetImageWidth()),
+						 IMAGE_HEIGHT(Setting::GetInstance()->GetImageHeight())
 {
 	LoadSlotSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
 	LoadNonSlotSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
@@ -208,9 +210,9 @@ void VideoPool::LoadAllSmileVideo(const int windowCount)
 
 std::shared_ptr<cv::Mat> VideoPool::ReadImage(const std::string path)
 {
-	cv::Mat img = cv::imread(path);
+	cv::Mat cacheMat = cv::imread(path);
 	std::shared_ptr<cv::Mat> dst = std::make_shared<cv::Mat>();
-	cv::resize(img, *dst, cv::Size(img.cols >> 1, img.rows >> 1));
+	cv::resize(cacheMat, *dst, cv::Size(IMAGE_WIDTH, IMAGE_HEIGHT));
 
 	return dst;
 }

@@ -53,6 +53,8 @@ protected:
 
 	std::chrono::high_resolution_clock::time_point startTime;
 
+	bool isRecord;
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> recordedImages;
 };
 
 

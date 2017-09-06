@@ -10,6 +10,7 @@
 #include "InteractionState.h"
 
 #include "Setting.h"
+#include "VideoPool.h"
 #include "Director.h"
 #include "VideoClip.h"
 // TODO: replace to wave transition
@@ -37,6 +38,7 @@ private:
 
 
 	// Get from Setting class.
+	// todo cosnt 
 	int rowCount;
 	int colCount;
 	int centerRow;
@@ -53,6 +55,9 @@ private:
 
 	const float WAVE_TIME = 3.0f;
 	const float SMILE_VIDEO_TIME = 6.0f;
+	const float BLENDING_TIME = 0.5f;
+
+	VideoPool *videoPool;
 
 	std::chrono::high_resolution_clock::time_point startTime;
 	std::chrono::milliseconds waveDuration;
@@ -68,8 +73,11 @@ SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shar
 	this->centerRow = setting->GetCenterRow();
 	this->centerCol = setting->GetCenterCol();
 
+	videoPool = VideoPool::GetInstance();
+
 	this->waveDuration = std::chrono::milliseconds(static_cast<int>(WAVE_TIME * 1000));
 	this->smileDuration = std::chrono::milliseconds(static_cast<int>(SMILE_VIDEO_TIME * 1000));
+	this->startTime = std::chrono::high_resolution_clock::now();
 
 	SetWaveAnimation(images);
 }
@@ -85,6 +93,7 @@ void SmileState::Update()
 
 	if (delta > waveDuration) {
 		SetSmileAnimation();
+		startTime = std::chrono::high_resolution_clock::now();
 	}
 	else if (delta > waveDuration + smileDuration) {
 		director->SetInteractionState(NULL);
@@ -118,14 +127,27 @@ void SmileState::SetSmileAnimation()
 	}
 }
 
-inline std::shared_ptr<Video> SmileState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)
+std::shared_ptr<Video> SmileState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)
 {
-	return std::shared_ptr<Video>();
+	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
+	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
+		actorVideoSet->GetDirectionVideo(direction),
+		SMILE_VIDEO_TIME, loop, reverse);
+
+	return newVideo;
 }
 
-inline void SmileState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
+void SmileState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
 {
+	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
+		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
+		newVideo,
+		BLENDING_TIME
+		);
+
+	director->GetVideoGrid()->SetChild(blendingVideo, row, col);
 }
+
 
 
 #endif // !_SMILE_STATE_H

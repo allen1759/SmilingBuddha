@@ -114,6 +114,7 @@
   <ItemGroup>
     <ClCompile Include="ActorVideoSet.cpp" />
     <ClCompile Include="BlendingTransitionVideo.cpp" />
+    <ClCompile Include="DebugHeadPoseTracker.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="InteractionState.cpp" />
     <ClCompile Include="IntroInitialState.cpp" />
@@ -127,9 +128,11 @@
     <ClCompile Include="liblinear-2.11\linear.cpp" />
     <ClCompile Include="liblinear-2.11\tron.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OnRecordedEvent.cpp" />
     <ClCompile Include="RegularSmileProcessStrategy.cpp" />
     <ClCompile Include="SeeEachSmileProcessStrategy.cpp" />
     <ClCompile Include="Setting.cpp" />
+    <ClCompile Include="SmileProcessStrategy.cpp" />
     <ClCompile Include="SmileRecognizer.cpp" />
     <ClCompile Include="SmileSaver.cpp" />
     <ClCompile Include="UserDetector.cpp" />
@@ -144,13 +147,19 @@
     <ClInclude Include="ActorVideoSet.h" />
     <ClInclude Include="AnimatedVideo.h" />
     <ClInclude Include="BlendingTransitionVideo.h" />
+    <ClInclude Include="DebugHeadPoseTracker.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
     <ClInclude Include="Director.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="FadeAnimationVideo.h" />
+    <ClInclude Include="HeadPoseTracker.h" />
     <ClInclude Include="InteractionState.h" />
     <ClInclude Include="IntroInitialState.h" />
     <ClInclude Include="IntroNeutralState.h" />
     <ClInclude Include="IntroSeeEachState.h" />
+    <ClInclude Include="OnRecordedEvent.h" />
+    <ClInclude Include="OnSmileEvent.h" />
+    <ClInclude Include="Ray.h" />
     <ClInclude Include="SmileState.h" />
     <ClInclude Include="IntroState.h" />
     <ClInclude Include="liblinear-2.11\blas\blas.h" />

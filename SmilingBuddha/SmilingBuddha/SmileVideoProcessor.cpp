@@ -12,11 +12,14 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <dlib/opencv.h>
 
+#include "Setting.h"
 
 #include <iostream>
 #include <chrono>
 
 SmileVideoProcessor::SmileVideoProcessor()
+	: IMAGE_WIDTH(Setting::GetInstance()->GetImageWidth()),
+	  IMAGE_HEIGHT(Setting::GetInstance()->GetImageHeight())
 {
 	isRunning = false;
 	processSmileVideoThread = NULL;
@@ -191,7 +194,8 @@ std::shared_ptr<cv::Mat> SmileVideoProcessor::CropSmileFrame(const cv::Mat &orig
 		y = originFrame.rows - height - 1;
 
 	std::shared_ptr<cv::Mat> smileFrame = std::make_shared<cv::Mat>();
-	cv::resize(originFrame(cv::Rect(x, y, width, height)), *smileFrame, cv::Size(SMILE_FRAME_WIDTH, SMILE_FRAME_HEIGHT));
+	cv::resize(originFrame(cv::Rect(x, y, width, height)), *smileFrame, cv::Size(IMAGE_WIDTH, IMAGE_HEIGHT));
+
 	return smileFrame;
 }
 

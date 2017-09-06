@@ -24,6 +24,8 @@ IntroState::IntroState(Director *director)
 	this->centerCol = setting->GetCenterCol();
 
 	this->startTime = std::chrono::high_resolution_clock::now();
+	this->isRecord = false;
+	this->recordedImages = NULL;
 }
 
 IntroState::~IntroState()
@@ -32,7 +34,7 @@ IntroState::~IntroState()
 
 void IntroState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
-	//director->SetInteractionState(std::make_shared<SmileState>(director, images));
+	director->SetInteractionState(std::make_shared<SmileState>(director, images));
 }
 
 std::shared_ptr<Video> IntroState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)

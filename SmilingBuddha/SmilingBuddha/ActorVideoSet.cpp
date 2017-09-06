@@ -6,7 +6,11 @@
 
 #include "ActorVideoSet.h"
 
+#include "Setting.h"
+
 ActorVideoSet::ActorVideoSet(int order)
+	: IMAGE_WIDTH(Setting::GetInstance()->GetImageWidth()),
+	  IMAGE_HEIGHT(Setting::GetInstance()->GetImageHeight())
 {
 	// Read every direction video.
 	ReadDirectionVideo(order, CENTER);
@@ -20,7 +24,6 @@ ActorVideoSet::ActorVideoSet(int order)
 	ReadDirectionVideo(order, RIGHT_DOWN);
 	ReadDirectionVideo(order, RIGHT_UP);
 	ReadDirectionVideo(order, UP);
-
 
 	// Read morphing video in every direction.
 	//ReadMorphingVideo(order);
@@ -112,7 +115,7 @@ std::shared_ptr<cv::Mat> ActorVideoSet::ReadImage(const std::string &path)
 {
 	cv::Mat cacheMat = cv::imread(path);
  	std::shared_ptr<cv::Mat> dst = std::make_shared<cv::Mat>();
-	cv::resize(cacheMat, *dst, cv::Size(cacheMat.cols >> 1, cacheMat.rows >> 1));
+	cv::resize(cacheMat, *dst, cv::Size(IMAGE_WIDTH, IMAGE_HEIGHT));
 
 	return dst;
 }

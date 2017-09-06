@@ -43,5 +43,6 @@ std::string IntroInitialState::ToString()
 
 void IntroInitialState::Update()
 {
-	this->director->SetInteractionState(std::make_shared<IntroNeutralState>(director));
+	director->SetInteractionState(std::make_shared<IntroNeutralState>(director));
+	return;
 }

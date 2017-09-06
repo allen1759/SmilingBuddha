@@ -18,6 +18,11 @@
 
 class SmileVideoProcessor
 {
+protected:
+	SmileVideoProcessor();
+
+	virtual ~SmileVideoProcessor();
+	
 public:
 	void SetSmileProcessStrategy(std::shared_ptr<SmileProcessStrategy> smileProcessStrategy);
 
@@ -26,10 +31,6 @@ public:
 	void Stop();
 
 protected:
-	SmileVideoProcessor();
-
-	virtual ~SmileVideoProcessor();
-	
 	virtual void ProcessSmileVideo() = 0;
 
 	void ProcessFrame();
@@ -53,8 +54,8 @@ protected:
 	cv::Rect detectROI;
 	cv::CascadeClassifier faceClassifier;
 	dlib::shape_predictor eyePredictor;
-	const int SMILE_FRAME_WIDTH = 260;
-	const int SMILE_FRAME_HEIGHT = 355;
+	int IMAGE_WIDTH;
+	int IMAGE_HEIGHT;
 
 	std::shared_ptr<SmileProcessStrategy> smileProcessStrategy;
 

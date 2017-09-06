@@ -11,8 +11,9 @@
 
 #include <vector>
 #include <chrono>
+#include <memory>
 
-class VideoClip : public Video
+class VideoClip : public Video, public std::enable_shared_from_this<VideoClip>
 {
 public:
 	VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence, float duration, bool loop, bool reverse);

@@ -6,6 +6,8 @@
 
 #include "InteractionState.h"
 
+#include "Director.h"
+
 InteractionState::InteractionState(Director * director)
 {
 	this->director = director;
@@ -13,6 +15,11 @@ InteractionState::InteractionState(Director * director)
 
 InteractionState::~InteractionState()
 {
+}
+
+void InteractionState::SignalEvent(std::shared_ptr<Event> e)
+{
+	e->Dispatch(shared_from_this());
 }
 
 void InteractionState::OnSmile()
