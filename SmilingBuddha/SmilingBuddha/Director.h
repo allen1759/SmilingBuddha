@@ -31,6 +31,8 @@ public:
 
 	VideoGrid *GetVideoGrid();
 
+	// ********** If this function called in state's Update(), make   **********
+	// ********** sure to 'retrun;' immediately after function call.  **********
 	void SetInteractionState(std::shared_ptr<InteractionState> state);
 
 	void SetRegularSmileProcessorStrategy();
@@ -41,7 +43,7 @@ public:
 
 	void StopInteraction();
 
-	// Inherit from SmileObserver.
+	// Implement SmileObserver's pure virtual function.
 	virtual void OnSmile() override;
 
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;

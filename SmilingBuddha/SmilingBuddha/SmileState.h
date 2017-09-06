@@ -53,7 +53,7 @@ private:
 	{ 1, -1 },{ 1, 0 },{ 1, 1 } };
 
 	const float WAVE_TIME = 3.0f;
-	const float USER_TIME = 3.0f;
+	const float USER_VIDEO_TIME = 3.0f;
 	const float ALL_SEE_TIME = 6.0f;
 	const float BLENDING_TIME = 0.5f;
 

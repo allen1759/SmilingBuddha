@@ -27,9 +27,9 @@ SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shar
 	this->isStartSeeCenter = false;
 	this->isStartSeeBack = false;
 
-	this->startSeeCenterElapsedTime = std::chrono::milliseconds(static_cast<int>(USER_TIME * 1000));
-	this->startSeeBackElapsedTime = std::chrono::milliseconds(static_cast<int>((USER_TIME + ALL_SEE_TIME / 2) * 1000));
-	this->endSeeBackElapsedTime = std::chrono::milliseconds(static_cast<int>((USER_TIME + ALL_SEE_TIME) * 1000));
+	this->startSeeCenterElapsedTime = std::chrono::milliseconds(static_cast<int>(USER_VIDEO_TIME * 1000));
+	this->startSeeBackElapsedTime = std::chrono::milliseconds(static_cast<int>((USER_VIDEO_TIME + ALL_SEE_TIME / 2) * 1000));
+	this->endSeeBackElapsedTime = std::chrono::milliseconds(static_cast<int>((USER_VIDEO_TIME + ALL_SEE_TIME) * 1000));
 	this->startTime = std::chrono::high_resolution_clock::now();
 
 	SetWaveAnimationByImageSequenced(images);
@@ -46,25 +46,16 @@ void SmileState::Update()
 
 	if (!isStartSeeCenter && delta > startSeeCenterElapsedTime) {
 		SetSeeCenterAnimation();
-		std::cout << "See center" << std::endl;
 		isStartSeeCenter = true;
 	}
 	else if (!isStartSeeBack && delta > startSeeBackElapsedTime) {
 		SetWaveAnimationByOriginVideo();
-		std::cout << "start wave animation" << std::endl;
 		isStartSeeBack = true;
 	}
 	else if (delta > endSeeBackElapsedTime) {
 		director->SetInteractionState(std::make_shared<IntroInitialState>(director));
 		return;
 	}
-
-	//if (delta > startSeeCenterElapsedTime) {
-	//	startTime = std::chrono::high_resolution_clock::now();
-	//}
-	//else if (delta > startSeeCenterElapsedTime + startSeeBackElapsedTime) {
-	//	director->SetInteractionState(NULL);
-	//}
 }
 
 std::string SmileState::ToString()
@@ -74,7 +65,7 @@ std::string SmileState::ToString()
 
 void SmileState::SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
-	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(images, USER_TIME, true, true);
+	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(images, USER_VIDEO_TIME, true, true);
 	std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
 		director->GetVideoGrid()->GetChild(CENTER_ROW, CENTER_COL),
 		newVideo, WAVE_TIME);
