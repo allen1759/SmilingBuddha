@@ -12,7 +12,7 @@
 * 8 up
 * 9 right_up
 
-## Folder mapping between old index and new index (D:\\Direction\\)
+## Folder mapping between old index and new index. (D:\\Direction\\)
 * 1 0
 * 2 1
 * 3 2
