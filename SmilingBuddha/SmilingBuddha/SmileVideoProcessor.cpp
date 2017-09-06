@@ -14,8 +14,8 @@
 
 #include "Setting.h"
 
-#include <iostream>
-#include <chrono>
+//#include <iostream>
+//#include <chrono>
 
 SmileVideoProcessor::SmileVideoProcessor()
 	: IMAGE_WIDTH(Setting::GetInstance()->GetImageWidth()),
@@ -74,7 +74,7 @@ void SmileVideoProcessor::Stop()
 void SmileVideoProcessor::ProcessFrame()
 {
 	while (isRunning) {
-		std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+		//std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
 		std::shared_ptr<cv::Mat> frame = ReadFrame();
 		if (frame == NULL)
@@ -85,9 +85,9 @@ void SmileVideoProcessor::ProcessFrame()
 		if (smileProcessStrategy)
 			smileProcessStrategy->ProcessSmile(smileFrame, lastIntensity);
 
-		std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
-		std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-		std::cout << duration.count() << std::endl;
+		//std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+		//std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+		//std::cout << duration.count() << std::endl;
 	}
 }
 

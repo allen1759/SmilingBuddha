@@ -7,6 +7,7 @@
 #include "IntroSeeEachState.h"
 
 #include "Director.h"
+#include "SmileState.h"
 
 IntroSeeEachState::IntroSeeEachState(Director *director)
 	:IntroState(director)
@@ -26,12 +27,20 @@ void IntroSeeEachState::Update()
 	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
 
 	if (delta > animationDuration) {
-		std::shared_ptr<Video> newVideo = GetActorDirectionVideo(lastFromRow, lastFromCol, ActorVideoSet::NEUTRAL, true, true);
-		SetBlendingVideo(lastFromRow, lastFromCol, newVideo);
-		newVideo = GetActorDirectionVideo(lastAtRow, lastAtCol, ActorVideoSet::NEUTRAL, true, true);
-		SetBlendingVideo(lastAtRow, lastAtCol, newVideo);
+		if (switchToSmileState) {
+			director->SetInteractionState(std::make_shared<SmileState>(director, userImages));
+			return;
+		}
+		else {
+			// Return to NeutralState.
+			std::shared_ptr<Video> newVideo = GetActorDirectionVideo(lastFromRow, lastFromCol, ActorVideoSet::NEUTRAL, true, true);
+			SetBlendingVideo(lastFromRow, lastFromCol, newVideo);
+			newVideo = GetActorDirectionVideo(lastAtRow, lastAtCol, ActorVideoSet::NEUTRAL, true, true);
+			SetBlendingVideo(lastAtRow, lastAtCol, newVideo);
 
-		director->SetInteractionState(std::make_shared<IntroNeutralState>(director));
+			director->SetInteractionState(std::make_shared<IntroNeutralState>(director));
+			return;
+		}
 	}
 }
 
@@ -43,8 +52,8 @@ std::string IntroSeeEachState::ToString()
 void IntroSeeEachState::SetSmileAnimation()
 {
 	int animationIndex = rand() % SQUARE_SIZE;
-	int row = centerRow + DIRECTION[animationIndex][1];
-	int col = centerCol + DIRECTION[animationIndex][0];
+	int row = CENTER_ROW + DIRECTION[animationIndex][1];
+	int col = CENTER_COL + DIRECTION[animationIndex][0];
 
 	int anotherRow, anotherCol, relativeDirection;
 	int randIndex = rand() % (SQUARE_SIZE - 1);
@@ -53,8 +62,8 @@ void IntroSeeEachState::SetSmileAnimation()
 		anotherRow = row + NEAR_BY_DIRECTION[relativeDirection][1];
 		anotherCol = col + NEAR_BY_DIRECTION[relativeDirection][0];
 
-		if (std::abs(anotherRow - centerRow) <= 1 &&
-			std::abs(anotherCol - centerCol) <= 1)
+		if (std::abs(anotherRow - CENTER_ROW) <= 1 &&
+			std::abs(anotherCol - CENTER_COL) <= 1)
 			break;
 	}
 

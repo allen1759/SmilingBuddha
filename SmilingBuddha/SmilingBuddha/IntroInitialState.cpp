@@ -24,11 +24,11 @@ IntroInitialState::~IntroInitialState()
 void IntroInitialState::InitializeVideoGrid()
 {
 	for (int i = 0; i < SQUARE_SIZE; ++i) {
-		int row = centerRow + DIRECTION[i][1];
-		int col = centerCol + DIRECTION[i][0];
-		if (col < 0 || col >= colCount)
+		int row = CENTER_ROW + DIRECTION[i][1];
+		int col = CENTER_COL + DIRECTION[i][0];
+		if (col < 0 || col >= COL_COUNT)
 			continue;
-		if (row < 0 || row >= rowCount)
+		if (row < 0 || row >= ROW_COUNT)
 			continue;
 
 		std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);

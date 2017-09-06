@@ -135,6 +135,7 @@
     <ClCompile Include="SmileProcessStrategy.cpp" />
     <ClCompile Include="SmileRecognizer.cpp" />
     <ClCompile Include="SmileSaver.cpp" />
+    <ClCompile Include="SmileState.cpp" />
     <ClCompile Include="UserDetector.cpp" />
     <ClCompile Include="SmileVideoProcessor.cpp" />
     <ClCompile Include="VideoClip.cpp" />

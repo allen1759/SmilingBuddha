@@ -25,7 +25,6 @@ protected:
 public:
 	virtual ~InteractionState();
 
-	// Must create new state in Update().
 	virtual void Update() = 0;
 
 	virtual std::string ToString() = 0;

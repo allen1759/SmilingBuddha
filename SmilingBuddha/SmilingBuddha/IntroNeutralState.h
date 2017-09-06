@@ -9,8 +9,6 @@
 
 #include "IntroState.h"
 
-#include <cstdlib>
-
 #include "IntroSeeEachState.h"
 
 class IntroNeutralState : public IntroState
@@ -18,7 +16,7 @@ class IntroNeutralState : public IntroState
 public:
 	IntroNeutralState(Director *director);
 
-	~IntroNeutralState();
+	virtual ~IntroNeutralState();
 
 	virtual void Update() override;
 

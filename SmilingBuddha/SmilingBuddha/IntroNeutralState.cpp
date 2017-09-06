@@ -6,7 +6,10 @@
 
 #include "IntroNeutralState.h"
 
+#include <cstdlib>
+
 #include "Director.h"
+#include "SmileState.h"
 
 IntroNeutralState::IntroNeutralState(Director *director)
 	:IntroState(director)
@@ -24,7 +27,11 @@ void IntroNeutralState::Update()
 	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
 
 	if (delta > videoDuration) {
-		if (rand() % PROBABILITY_DENOMINATOR < ANIMATION_PROBABILITY) {
+		if (switchToSmileState) {
+			director->SetInteractionState(std::make_shared<SmileState>(director, userImages));
+			return;
+		}
+		else if (rand() % PROBABILITY_DENOMINATOR < ANIMATION_PROBABILITY) {
 			director->SetInteractionState(std::make_shared<IntroSeeEachState>(director));
 			return;
 		}

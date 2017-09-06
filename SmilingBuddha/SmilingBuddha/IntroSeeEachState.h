@@ -16,7 +16,7 @@ class IntroSeeEachState : public IntroState
 public:
 	IntroSeeEachState(Director *director);
 
-	~IntroSeeEachState();
+	virtual ~IntroSeeEachState();
 
 	virtual void Update() override;
 
@@ -25,9 +25,6 @@ public:
 private:
 	void SetSmileAnimation();
 
-
-	// With 80% probability to create SeeEach animation.
-	const int ANIMATION_PROBABILITY = 8;
 
 	int lastFromRow, lastFromCol;
 	int lastAtRow, lastAtCol;

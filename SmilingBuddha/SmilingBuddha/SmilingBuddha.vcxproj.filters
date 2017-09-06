@@ -153,6 +153,9 @@
     <ClCompile Include="DebugHeadPoseTracker.cpp">
       <Filter>原始程式檔\Controller\head_pose_tracker</Filter>
     </ClCompile>
+    <ClCompile Include="SmileState.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">

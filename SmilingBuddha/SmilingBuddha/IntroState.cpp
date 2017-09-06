@@ -11,21 +11,18 @@
 #include "VideoClip.h"
 #include "BlendingTransitionVideo.h"
 
-#include "SmileState.h"
-
 IntroState::IntroState(Director *director)
-	:InteractionState(director)
+	: InteractionState(director),
+	  ROW_COUNT(Setting::GetInstance()->GetRow()),
+	  COL_COUNT(Setting::GetInstance()->GetCol()),
+	  CENTER_ROW(Setting::GetInstance()->GetCenterRow()),
+	  CENTER_COL(Setting::GetInstance()->GetCenterCol())
 {
 	this->videoPool = VideoPool::GetInstance();
-	Setting *setting = Setting::GetInstance();
-	this->rowCount = setting->GetRow();
-	this->colCount = setting->GetCol();
-	this->centerRow = setting->GetCenterRow();
-	this->centerCol = setting->GetCenterCol();
 
 	this->startTime = std::chrono::high_resolution_clock::now();
-	this->isRecord = false;
-	this->recordedImages = NULL;
+
+	this->switchToSmileState = false;
 }
 
 IntroState::~IntroState()
@@ -34,7 +31,8 @@ IntroState::~IntroState()
 
 void IntroState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
-	director->SetInteractionState(std::make_shared<SmileState>(director, images));
+	userImages = images;
+	switchToSmileState = true;
 }
 
 std::shared_ptr<Video> IntroState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)

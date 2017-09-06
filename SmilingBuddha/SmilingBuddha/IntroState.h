@@ -31,11 +31,10 @@ protected:
 
 
 	// Get from Setting class.
-	VideoPool *videoPool;
-	int rowCount;
-	int colCount;
-	int centerRow;
-	int centerCol;
+	const int ROW_COUNT;
+	const int COL_COUNT;
+	const int CENTER_ROW;
+	const int CENTER_COL;
 
 	// Initialize only 9 grids around center.
 	const int SQUARE_SIZE = 9;
@@ -47,14 +46,15 @@ protected:
 	{ 1, -1 },{ 1, 0 },{ 1, 1 } };
 
 	const float INTRO_STATE_TIME = 20.0f;
-
 	const float VIDEO_TIME = 6.0f;
 	const float BLENDING_TIME = 0.5f;
 
+	VideoPool *videoPool;
+
 	std::chrono::high_resolution_clock::time_point startTime;
 
-	bool isRecord;
-	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> recordedImages;
+	bool switchToSmileState;
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> userImages;
 };
 
 

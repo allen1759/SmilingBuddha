@@ -23,8 +23,10 @@ void InteractionState::SignalEvent(std::shared_ptr<Event> e)
 }
 
 void InteractionState::OnSmile()
-{}
+{
+}
 
 void InteractionState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
-{}
+{
+}
 

@@ -10,6 +10,8 @@
 #include "Director.h"
 #include "IntroInitialState.h"
 
+
+#include "vld.h" 
 int main()
 {
 	VideoPool::GetInstance();
