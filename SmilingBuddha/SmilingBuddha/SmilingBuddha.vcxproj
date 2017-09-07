@@ -136,6 +136,7 @@
     <ClCompile Include="SmileRecognizer.cpp" />
     <ClCompile Include="SmileSaver.cpp" />
     <ClCompile Include="SmileState.cpp" />
+    <ClCompile Include="TransitionState.cpp" />
     <ClCompile Include="UserDetector.cpp" />
     <ClCompile Include="SmileVideoProcessor.cpp" />
     <ClCompile Include="VideoClip.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="SmileRecognizer.h" />
     <ClInclude Include="SmileSaver.h" />
     <ClInclude Include="TransitionalVideo.h" />
+    <ClInclude Include="TransitionState.h" />
     <ClInclude Include="UserDetector.h" />
     <ClInclude Include="UserObserver.h" />
     <ClInclude Include="SmileVideoProcessor.h" />

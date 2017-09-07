@@ -30,7 +30,9 @@ private:
 
 	void SetWaveAnimationByOriginVideo();
 
-	void SetSeeCenterAnimation();
+	void SetSeeCenterVideo();
+
+	void SetNeutralVideo();
 
 	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
 

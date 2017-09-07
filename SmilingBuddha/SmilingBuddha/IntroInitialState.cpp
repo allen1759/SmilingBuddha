@@ -6,6 +6,7 @@
 
 #include "IntroInitialState.h"
 
+#include "Setting.h"
 #include "Director.h"
 #include "IntroNeutralState.h"
 
@@ -23,16 +24,27 @@ IntroInitialState::~IntroInitialState()
 
 void IntroInitialState::InitializeVideoGrid()
 {
-	for (int i = 0; i < SQUARE_SIZE; ++i) {
-		int row = CENTER_ROW + DIRECTION[i][1];
-		int col = CENTER_COL + DIRECTION[i][0];
-		if (col < 0 || col >= COL_COUNT)
-			continue;
-		if (row < 0 || row >= ROW_COUNT)
-			continue;
+	//for (int i = 0; i < SQUARE_SIZE; ++i) {
+	//	int row = CENTER_ROW + DIRECTION[i][1];
+	//	int col = CENTER_COL + DIRECTION[i][0];
+	//	if (col < 0 || col >= COL_COUNT)
+	//		continue;
+	//	if (row < 0 || row >= ROW_COUNT)
+	//		continue;
 
-		std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
-		director->GetVideoGrid()->SetChild(newVideo, row, col);
+	//	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
+	//	director->GetVideoGrid()->SetChild(newVideo, row, col);
+	//}
+
+	for (int row = 0; row < ROW_COUNT; ++row) {
+		for (int col = 0; col < COL_COUNT; ++col) {
+			if (Setting::GetInstance()->IsInIntroStateGrid(row, col)) {
+				std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
+				director->GetVideoGrid()->SetChild(newVideo, row, col);
+			}
+			else
+				director->GetVideoGrid()->SetChild(NULL, row, col);
+		}
 	}
 }
 

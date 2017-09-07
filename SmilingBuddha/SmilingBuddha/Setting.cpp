@@ -6,7 +6,7 @@
 
 #include "Setting.h"
 
-#include <iostream>
+#include <algorithm>
 
 Setting *Setting::instance = NULL;
 
@@ -74,4 +74,20 @@ int Setting::GetSaveImageWidth()
 int Setting::GetSaveIMageHeight()
 {
 	return SAVE_IMAGE_HEIGHT;
+}
+
+int Setting::CalculateDistanceToCenter(int row, int col)
+{
+	int dist = 0;
+	dist = std::max(dist, std::abs(row - CENTER_ROW));
+	dist = std::max(dist, std::abs(col - CENTER_COL));
+
+	return dist;
+}
+
+bool Setting::IsInIntroStateGrid(int row, int col)
+{
+	const int MAX_DISTANCE_TO_CENTER = INTRO_STATE_GRID_WIDTH / 2;
+
+	return CalculateDistanceToCenter(row, col) <= MAX_DISTANCE_TO_CENTER;
 }

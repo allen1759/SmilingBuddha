@@ -34,6 +34,10 @@ public:
 	int GetSaveIMageHeight();
 
 
+	int CalculateDistanceToCenter(int row, int col);
+	bool IsInIntroStateGrid(int row, int col);
+
+
 private:
 	static Setting *instance;
 
@@ -47,6 +51,7 @@ private:
 							5, 33, 15, 8, 14, 36, 30, 29, 21};
 	static const int CENTER_ROW = 2;
 	static const int CENTER_COL = 4;
+	static const int INTRO_STATE_GRID_WIDTH = 3;
 
 	static const int IMAGE_WIDTH = 130;
 	static const int IMAGE_HEIGHT = 177;
