@@ -32,6 +32,8 @@ SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shar
 	this->endSeeBackElapsedTime = std::chrono::milliseconds(static_cast<int>((USER_VIDEO_TIME + ALL_SEE_TIME) * 1000));
 	this->startTime = std::chrono::high_resolution_clock::now();
 
+	director->SetRegularSmileProcessorStrategy();
+
 	SetWaveAnimationByImageSequenced(images);
 }
 
@@ -86,24 +88,32 @@ void SmileState::SetWaveAnimationByOriginVideo()
 
 void SmileState::SetSeeCenterVideo()
 {
-	for (int i = 0; i < SQUARE_SIZE - 1; ++i) {
-		int row = CENTER_ROW + NEAR_BY_DIRECTION[i][1];
-		int col = CENTER_COL + NEAR_BY_DIRECTION[i][0];
-		int lookDirection = ActorVideoSet::GetDirectionIndex(row, col, CENTER_ROW, CENTER_COL);
+	for (int row = 0; row < ROW_COUNT; ++row) {
+		for (int col = 0; col < COL_COUNT; ++col) {
+			// Ignore outside grid.
+			if (Setting::GetInstance()->CalculateDistanceToCenter(row, col) > Setting::GetInstance()->GetMaxDistanceToCenter())
+				continue;
+			// Ignore center grid.
+			if (row == CENTER_ROW && col == CENTER_COL)
+				continue;
 
-		std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, lookDirection, false, true);
-		SetBlendingVideo(row, col, newVideo);
+			int lookDirection = ActorVideoSet::GetDirectionIndex(row, col, CENTER_ROW, CENTER_COL);
+			std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, lookDirection, false, true);
+			SetBlendingVideo(row, col, newVideo);
+		}
 	}
 }
 
 void SmileState::SetNeutralVideo()
 {
-	for (int i = 0; i < SQUARE_SIZE - 1; ++i) {
-		int row = CENTER_ROW + NEAR_BY_DIRECTION[i][1];
-		int col = CENTER_COL + NEAR_BY_DIRECTION[i][0];
+	for (int row = 0; row < ROW_COUNT; ++row) {
+		for (int col = 0; col < COL_COUNT; ++col) {
+			if (!Setting::GetInstance()->IsInIntroStateGrid(row, col))
+				continue;
 
-		std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
-		SetBlendingVideo(row, col, newVideo);
+			std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
+			SetBlendingVideo(row, col, newVideo);
+		}
 	}
 }
 

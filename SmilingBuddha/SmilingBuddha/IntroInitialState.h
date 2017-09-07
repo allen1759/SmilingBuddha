@@ -23,7 +23,8 @@ public:
 private:
 	void InitializeVideoGrid();
 
-	std::chrono::milliseconds videoDuration;
+	const int ROW_COUNT;
+	const int COL_COUNT;
 };
 
 #endif // !_INTRO_INITIAL_STATE_H

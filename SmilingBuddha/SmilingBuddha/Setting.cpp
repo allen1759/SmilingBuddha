@@ -6,6 +6,7 @@
 
 #include "Setting.h"
 
+#include <cstdlib>
 #include <algorithm>
 
 Setting *Setting::instance = NULL;
@@ -56,6 +57,16 @@ int Setting::GetCenterCol()
 	return CENTER_COL;
 }
 
+int Setting::GetIntroStateGridWidth()
+{
+	return INTRO_STATE_GRID_WIDTH;
+}
+
+int Setting::GetMaxDistanceToCenter()
+{
+	return MAX_DISTANCE_TO_CENTER;
+}
+
 int Setting::GetImageWidth()
 {
 	return IMAGE_WIDTH;
@@ -87,7 +98,37 @@ int Setting::CalculateDistanceToCenter(int row, int col)
 
 bool Setting::IsInIntroStateGrid(int row, int col)
 {
-	const int MAX_DISTANCE_TO_CENTER = INTRO_STATE_GRID_WIDTH / 2;
-
 	return CalculateDistanceToCenter(row, col) <= MAX_DISTANCE_TO_CENTER;
+}
+
+void Setting::GetPairRowColInIntroStateGrid(int & row, int & col, int & nearbyRow, int & nearbyCol)
+{
+	GetRandomRowColInIntroStateGrid(row, col);
+	GetNearbyRowColInIntroStateGrid(row, col, nearbyRow, nearbyCol);
+}
+
+void Setting::GetRandomRowColInIntroStateGrid(int & row, int & col)
+{
+	int index = rand() % SQUARE_SIZE;
+	row = CENTER_ROW + DIRECTION[index][1];
+	col = CENTER_COL + DIRECTION[index][0];
+}
+
+void Setting::GetNearbyRowColInIntroStateGrid(int row, int col, int & nearbyRow, int & nearbyCol)
+{
+	if (!IsInIntroStateGrid(row, col))
+		return;
+
+	int startIndex = rand() % (SQUARE_SIZE - 1);
+	for (int i = 0; i < (SQUARE_SIZE - 1); ++i) {
+		int index = (startIndex + i) % (SQUARE_SIZE - 1);
+		int anotherRow = row + NEAR_BY_DIRECTION[index][1];
+		int anotherCol = col + NEAR_BY_DIRECTION[index][0];
+
+		if (Setting::GetInstance()->IsInIntroStateGrid(anotherRow, anotherCol)) {
+			nearbyRow = anotherRow;
+			nearbyCol = anotherCol;
+			return;
+		}
+	}
 }

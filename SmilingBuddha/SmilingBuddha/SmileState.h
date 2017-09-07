@@ -45,15 +45,6 @@ private:
 	const int CENTER_ROW;
 	const int CENTER_COL;
 
-	// Initialize only 9 grids around center.
-	const int SQUARE_SIZE = 9;
-	int DIRECTION[9][2] = { { -1, -1 },{ -1, 0 },{ -1, 1 },
-	{ 0, -1 },{ 0, 0 },{ 0, 1 },
-	{ 1, -1 },{ 1, 0 },{ 1, 1 } };
-	int NEAR_BY_DIRECTION[8][2] = { { -1, -1 },{ -1, 0 },{ -1, 1 },
-	{ 0, -1 },{ 0, 1 },
-	{ 1, -1 },{ 1, 0 },{ 1, 1 } };
-
 	const float WAVE_TIME = 3.0f;
 	const float USER_VIDEO_TIME = 3.0f;
 	const float ALL_SEE_TIME = 6.0f;

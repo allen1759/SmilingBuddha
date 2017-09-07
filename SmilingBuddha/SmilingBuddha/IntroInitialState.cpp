@@ -11,11 +11,14 @@
 #include "IntroNeutralState.h"
 
 IntroInitialState::IntroInitialState(Director *director)
-	:IntroState(director)
+	: IntroState(director),
+	  ROW_COUNT(Setting::GetInstance()->GetRow()),
+	  COL_COUNT(Setting::GetInstance()->GetCol())
 {
-	InitializeVideoGrid();
 	director->SetSeeEachSmileProcessorStrategy(INTRO_STATE_TIME);
 	director->StartInteraction();
+
+	InitializeVideoGrid();
 }
 
 IntroInitialState::~IntroInitialState()
@@ -24,18 +27,6 @@ IntroInitialState::~IntroInitialState()
 
 void IntroInitialState::InitializeVideoGrid()
 {
-	//for (int i = 0; i < SQUARE_SIZE; ++i) {
-	//	int row = CENTER_ROW + DIRECTION[i][1];
-	//	int col = CENTER_COL + DIRECTION[i][0];
-	//	if (col < 0 || col >= COL_COUNT)
-	//		continue;
-	//	if (row < 0 || row >= ROW_COUNT)
-	//		continue;
-
-	//	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
-	//	director->GetVideoGrid()->SetChild(newVideo, row, col);
-	//}
-
 	for (int row = 0; row < ROW_COUNT; ++row) {
 		for (int col = 0; col < COL_COUNT; ++col) {
 			if (Setting::GetInstance()->IsInIntroStateGrid(row, col)) {

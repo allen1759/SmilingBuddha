@@ -40,10 +40,10 @@ private:
 
 	VideoPool *videoPool;
 
+	int currentDistance;
+
 	std::chrono::high_resolution_clock::time_point startTime;
 	std::chrono::milliseconds nextAppearElapsedTime;
-
-	int currentDistance;
 };
 
 #endif // !_TRANSITION_STATE_H

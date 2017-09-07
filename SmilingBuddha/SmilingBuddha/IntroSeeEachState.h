@@ -9,8 +9,6 @@
 
 #include "IntroState.h"
 
-#include "IntroNeutralState.h"
-
 class IntroSeeEachState : public IntroState
 {
 public:
@@ -23,13 +21,16 @@ public:
 	virtual std::string ToString() override;
 
 private:
-	void SetSmileAnimation();
+	void SetSeeEachVideo();
 
+
+	const int CENTER_ROW;
+	const int CENTER_COL;
 
 	int lastFromRow, lastFromCol;
 	int lastAtRow, lastAtCol;
 
-	std::chrono::milliseconds animationDuration;
+	std::chrono::milliseconds endingElapsedTime;
 };
 
 #endif // !_INTRO_SEE_EACH_STATE_H

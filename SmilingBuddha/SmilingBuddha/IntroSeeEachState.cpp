@@ -6,15 +6,19 @@
 
 #include "IntroSeeEachState.h"
 
+#include "Setting.h"
 #include "Director.h"
+#include "IntroNeutralState.h"
 #include "SmileState.h"
 
 IntroSeeEachState::IntroSeeEachState(Director *director)
-	:IntroState(director)
+	: IntroState(director),
+	  CENTER_ROW(Setting::GetInstance()->GetCenterRow()),
+	  CENTER_COL(Setting::GetInstance()->GetCenterCol())
 {
-	this->animationDuration = std::chrono::milliseconds(static_cast<int>(VIDEO_TIME * 1000));
+	this->endingElapsedTime = std::chrono::milliseconds(static_cast<int>(IntroState::VIDEO_TIME * 2 * 1000));
 
-	SetSmileAnimation();
+	SetSeeEachVideo();
 }
 
 IntroSeeEachState::~IntroSeeEachState()
@@ -24,20 +28,21 @@ IntroSeeEachState::~IntroSeeEachState()
 void IntroSeeEachState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
+	std::chrono::milliseconds elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - IntroState::startTime);
 
-	if (delta > animationDuration) {
-		if (switchToSmileState) {
+	if (elapsedTime > endingElapsedTime) {
+		if (IntroState::switchToSmileState) {
 			director->SetInteractionState(std::make_shared<SmileState>(director, userImages));
 			return;
 		}
 		else {
-			// Return to NeutralState.
+			// Set 2 VideoGrid to neutral video.
 			std::shared_ptr<Video> newVideo = GetActorDirectionVideo(lastFromRow, lastFromCol, ActorVideoSet::NEUTRAL, true, true);
 			SetBlendingVideo(lastFromRow, lastFromCol, newVideo);
 			newVideo = GetActorDirectionVideo(lastAtRow, lastAtCol, ActorVideoSet::NEUTRAL, true, true);
 			SetBlendingVideo(lastAtRow, lastAtCol, newVideo);
 
+			// Return to NeutralState.
 			director->SetInteractionState(std::make_shared<IntroNeutralState>(director));
 			return;
 		}
@@ -49,23 +54,11 @@ std::string IntroSeeEachState::ToString()
 	return "IntroSeeEachState";
 }
 
-void IntroSeeEachState::SetSmileAnimation()
+void IntroSeeEachState::SetSeeEachVideo()
 {
-	int animationIndex = rand() % SQUARE_SIZE;
-	int row = CENTER_ROW + DIRECTION[animationIndex][1];
-	int col = CENTER_COL + DIRECTION[animationIndex][0];
+	int row, col, anotherRow, anotherCol;
+	Setting::GetInstance()->GetPairRowColInIntroStateGrid(row, col, anotherRow, anotherCol);
 
-	int anotherRow, anotherCol, relativeDirection;
-	int randIndex = rand() % (SQUARE_SIZE - 1);
-	for (int i = 0; i < (SQUARE_SIZE - 1); ++i) {
-		relativeDirection = (randIndex + i) % (SQUARE_SIZE - 1);
-		anotherRow = row + NEAR_BY_DIRECTION[relativeDirection][1];
-		anotherCol = col + NEAR_BY_DIRECTION[relativeDirection][0];
-
-		if (std::abs(anotherRow - CENTER_ROW) <= 1 &&
-			std::abs(anotherCol - CENTER_COL) <= 1)
-			break;
-	}
 
 	// Find out the looking direction and inverse looking direction.
 	int lookDirection = ActorVideoSet::GetDirectionIndex(row, col, anotherRow, anotherCol);

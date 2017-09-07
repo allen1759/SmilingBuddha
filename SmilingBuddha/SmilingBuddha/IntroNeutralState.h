@@ -9,8 +9,6 @@
 
 #include "IntroState.h"
 
-#include "IntroSeeEachState.h"
-
 class IntroNeutralState : public IntroState
 {
 public:
@@ -24,11 +22,7 @@ public:
 
 private:
 
-	// Probability to create SeeEach animation. 10 means 100%.
-	const int PROBABILITY_DENOMINATOR = 10;
-	const int ANIMATION_PROBABILITY = 8;
-
-	std::chrono::milliseconds videoDuration;
+	std::chrono::milliseconds endingElapsedTime;
 };
 
 

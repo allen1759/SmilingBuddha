@@ -6,15 +6,14 @@
 
 #include "IntroNeutralState.h"
 
-#include <cstdlib>
-
 #include "Director.h"
+#include "IntroSeeEachState.h"
 #include "SmileState.h"
 
 IntroNeutralState::IntroNeutralState(Director *director)
-	:IntroState(director)
+	: IntroState(director)
 {
-	this->videoDuration = std::chrono::milliseconds(static_cast<int>(VIDEO_TIME * 1000));
+	this->endingElapsedTime = std::chrono::milliseconds(static_cast<int>(IntroState::VIDEO_TIME * 2 * 1000));
 }
 
 IntroNeutralState::~IntroNeutralState()
@@ -24,20 +23,16 @@ IntroNeutralState::~IntroNeutralState()
 void IntroNeutralState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
+	std::chrono::milliseconds elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - IntroState::startTime);
 
-	if (delta > videoDuration) {
-		if (switchToSmileState) {
+	if (elapsedTime > endingElapsedTime) {
+		if (IntroState::switchToSmileState) {
 			director->SetInteractionState(std::make_shared<SmileState>(director, userImages));
 			return;
 		}
-		else if (rand() % PROBABILITY_DENOMINATOR < ANIMATION_PROBABILITY) {
+		else {
 			director->SetInteractionState(std::make_shared<IntroSeeEachState>(director));
 			return;
-		}
-		else {
-			// Restart NeutralState.
-			startTime = std::chrono::high_resolution_clock::now();
 		}
 	}
 }

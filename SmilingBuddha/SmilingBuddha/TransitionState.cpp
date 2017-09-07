@@ -22,10 +22,10 @@ TransitionState::TransitionState(Director *director)
 {
 	this->videoPool = VideoPool::GetInstance();
 
+	this->currentDistance = MAX_DISTANCE_TO_CENTER;
+
 	this->startTime = std::chrono::high_resolution_clock::now();
 	this->nextAppearElapsedTime = std::chrono::milliseconds(static_cast<int>(DELAY_TIME * 1000));
-
-	this->currentDistance = MAX_DISTANCE_TO_CENTER;
 }
 
 TransitionState::~TransitionState()

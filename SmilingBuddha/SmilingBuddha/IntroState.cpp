@@ -12,17 +12,14 @@
 #include "BlendingTransitionVideo.h"
 
 IntroState::IntroState(Director *director)
-	: InteractionState(director),
-	  ROW_COUNT(Setting::GetInstance()->GetRow()),
-	  COL_COUNT(Setting::GetInstance()->GetCol()),
-	  CENTER_ROW(Setting::GetInstance()->GetCenterRow()),
-	  CENTER_COL(Setting::GetInstance()->GetCenterCol())
+	: InteractionState(director)
 {
 	this->videoPool = VideoPool::GetInstance();
 
-	this->startTime = std::chrono::high_resolution_clock::now();
-
 	this->switchToSmileState = false;
+	this->userImages = NULL;
+
+	this->startTime = std::chrono::high_resolution_clock::now();
 }
 
 IntroState::~IntroState()
@@ -50,8 +47,7 @@ void IntroState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVi
 	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
 		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
 		newVideo,
-		BLENDING_TIME
-		);
+		BLENDING_TIME);
 
 	director->GetVideoGrid()->SetChild(blendingVideo, row, col);
 }
