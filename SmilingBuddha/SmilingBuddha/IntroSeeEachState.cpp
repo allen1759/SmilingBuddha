@@ -10,13 +10,14 @@
 #include "Director.h"
 #include "IntroNeutralState.h"
 #include "SmileState.h"
+#include "BlendingTransitionVideo.h"
 
 IntroSeeEachState::IntroSeeEachState(Director *director)
 	: IntroState(director),
 	  CENTER_ROW(Setting::GetInstance()->GetCenterRow()),
 	  CENTER_COL(Setting::GetInstance()->GetCenterCol())
 {
-	this->endingElapsedTime = std::chrono::milliseconds(static_cast<int>(IntroState::VIDEO_TIME * 2 * 1000));
+	this->endingElapsedTime = IntroState::ACTOR_VIDEO_TIME * 2;
 
 	SetSeeEachVideo();
 }
@@ -28,7 +29,7 @@ IntroSeeEachState::~IntroSeeEachState()
 void IntroSeeEachState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	std::chrono::milliseconds elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - IntroState::startTime);
+	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - IntroState::startTime).count();
 
 	if (elapsedTime > endingElapsedTime) {
 		if (IntroState::switchToSmileState) {
@@ -78,3 +79,13 @@ void IntroSeeEachState::SetSeeEachVideo()
 	lastAtCol = anotherCol;
 }
 
+void IntroSeeEachState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
+{
+
+	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
+		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
+		newVideo,
+		BLENDING_TIME);
+
+	director->GetVideoGrid()->SetChild(blendingVideo, row, col);
+}

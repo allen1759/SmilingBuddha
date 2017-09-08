@@ -13,7 +13,7 @@
 IntroNeutralState::IntroNeutralState(Director *director)
 	: IntroState(director)
 {
-	this->endingElapsedTime = std::chrono::milliseconds(static_cast<int>(IntroState::VIDEO_TIME * 2 * 1000));
+	this->endingElapsedTime = IntroState::ACTOR_VIDEO_TIME * 2;
 }
 
 IntroNeutralState::~IntroNeutralState()
@@ -23,7 +23,7 @@ IntroNeutralState::~IntroNeutralState()
 void IntroNeutralState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	std::chrono::milliseconds elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - IntroState::startTime);
+	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - IntroState::startTime).count();
 
 	if (elapsedTime > endingElapsedTime) {
 		if (IntroState::switchToSmileState) {

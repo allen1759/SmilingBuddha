@@ -24,15 +24,11 @@ public:
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;
 
 protected:
-
 	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
-
-	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
 
 
 	const float INTRO_STATE_TIME = 20.0f;
-	const float VIDEO_TIME = 3.0f;
-	const float BLENDING_TIME = 0.5f;
+	const float ACTOR_VIDEO_TIME = 3.0f;
 
 	VideoPool *videoPool;
 
@@ -41,6 +37,5 @@ protected:
 
 	std::chrono::high_resolution_clock::time_point startTime;
 };
-
 
 #endif // !_INTRO_STATE_H

@@ -22,7 +22,7 @@ public:
 
 private:
 
-	std::chrono::milliseconds endingElapsedTime;
+	float endingElapsedTime;
 };
 
 

@@ -9,7 +9,6 @@
 #include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
-#include "BlendingTransitionVideo.h"
 
 IntroState::IntroState(Director *director)
 	: InteractionState(director)
@@ -34,21 +33,12 @@ void IntroState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>
 
 std::shared_ptr<Video> IntroState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)
 {
+	float videoTime = reverse ? 2 * ACTOR_VIDEO_TIME : ACTOR_VIDEO_TIME;
+
 	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
 		actorVideoSet->GetDirectionVideo(direction),
-		VIDEO_TIME, loop, reverse);
+		videoTime, loop, reverse);
 
 	return newVideo;
 }
-
-void IntroState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
-{
-	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
-		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
-		newVideo,
-		BLENDING_TIME);
-
-	director->GetVideoGrid()->SetChild(blendingVideo, row, col);
-}
-
