@@ -147,6 +147,9 @@
     <ClCompile Include="EndingState.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
+    <ClCompile Include="EndingFadeState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">
@@ -280,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="EndingState.h">
       <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingFadeState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

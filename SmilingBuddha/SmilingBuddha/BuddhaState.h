@@ -29,11 +29,9 @@ private:
 
 
 	const float BUDDHA_STATE_TIME = 18.0f;
-	const float APEAR_TIME = 3.0f;
-	const float APEAR_TIME_FOR_EACH;
+	// TODO: change to videoFrame
 	const float BUDDHA_VIDEO_TIME = 10.0f;
 	const float WAVE_TIME = 3.0f;
-	const float BLENDING_TIME = 0.5f;
 
 	std::shared_ptr<Video> buddhaVideo;
 	int currentDistance;

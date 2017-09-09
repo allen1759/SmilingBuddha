@@ -10,20 +10,15 @@
 #include "Director.h"
 #include "VideoClip.h"
 #include "BlendingTransitionVideo.h"
-
-
-
-#include "IntroInitialState.h"
+#include "EndingFadeState.h"
 
 BuddhaState::BuddhaState(Director *director)
-	: EndingState(director),
-	  APEAR_TIME_FOR_EACH(APEAR_TIME / Setting::GetInstance()->GetMaxDistanceToCenter())
+	: EndingState(director)
 {
 	this->buddhaVideo = std::make_shared<VideoClip>(EndingState::videoPool->GetNextBuddhaVideo(), BUDDHA_VIDEO_TIME, false, false);
 	this->currentDistance = 0;
 
 	this->nextAppearElapsedTime = 0.0f;
-	
 }
 
 BuddhaState::~BuddhaState()
@@ -36,7 +31,7 @@ void BuddhaState::Update()
 	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
 
 	if (elapsedTime > BUDDHA_STATE_TIME) {
-		director->SetInteractionState(std::make_shared<IntroInitialState>(director));
+		director->SetInteractionState(std::make_shared<EndingFadeState>(director));
 		return;
 	}
 	else if (elapsedTime > nextAppearElapsedTime) {
@@ -61,7 +56,7 @@ void BuddhaState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newV
 	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
 		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
 		newVideo,
-		BLENDING_TIME);
+		WAVE_TIME);
 
 	director->GetVideoGrid()->SetChild(blendingVideo, row, col);
 }

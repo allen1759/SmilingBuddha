@@ -61,7 +61,7 @@ void Director::UpdateLoop()
 
 		end = std::chrono::high_resolution_clock::now();
 		duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-		//std::cout << "UPDATE LOOP: " << duration.count() << std::endl;
+		std::cout << "UPDATE LOOP: " << duration.count() << std::endl;
 	}
 }
 

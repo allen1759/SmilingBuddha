@@ -38,6 +38,9 @@ protected:
 	const int COL_CENTER;
 	const int MAX_DISTANCE_TO_CENTER;
 
+	const float APEAR_TIME = 3.0f;
+	const float APEAR_TIME_FOR_EACH;
+
 	int maxManhattanDistanceToCenter;
 
 	std::chrono::high_resolution_clock::time_point startTime;
