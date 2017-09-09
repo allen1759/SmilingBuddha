@@ -31,6 +31,10 @@ public:
 
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetSmileVideoList(int row, int col);
 
+	std::shared_ptr<cv::Mat> GetBuddhaAnimationImage();
+
+	std::shared_ptr<cv::Mat> GetNextBuddhaImage();
+
 private:
 	/**
 	* Load slot smile video from file. The filesystem hierarchy show as followe:
@@ -69,6 +73,11 @@ private:
 	*/
 	void LoadAllSmileVideo(const int windowCount);
 
+	/**
+	* Load buddha animation image and buddhas from /resource/buddhas/ folder.
+	*/
+	void LoadBuddhasImages();
+
 	// Read image from file and resize.
 	std::shared_ptr<cv::Mat> ReadImage(const std::string path);
 
@@ -82,7 +91,8 @@ private:
 	const int ACTOR_COUNT = 38;
 	const std::string SMILE_VIDEO_PATH = "D:\\smileVideo";
 	const std::string SLOT_PATH = "D:\\smileVideo\\slot";
-	const std::string FILE_TYPE = ".jpg";
+	const std::string SLOT_FILE_TYPE = ".jpg";
+	const std::string FILE_TYPE = ".png";
 
 	const int IMAGE_WIDTH;
 	const int IMAGE_HEIGHT;
@@ -95,6 +105,10 @@ private:
 	std::list<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> nonslotSmileVideoList;
 	// All videos.
 	std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> smileVideoList;
+
+	std::shared_ptr<cv::Mat> buddhaAnimationImage;
+	int buddhaImageListIndex;
+	std::vector<std::shared_ptr<cv::Mat>> buddhaImageList;
 };
 
 

@@ -6,6 +6,8 @@
 
 #include "VideoPool.h"
 
+#include <cstdlib>
+
 #include <boost/filesystem.hpp>
 #include <boost/date_time.hpp>
 
@@ -37,6 +39,8 @@ VideoPool::VideoPool() : WINDOW_COL_COUNT(Setting::GetInstance()->GetCol()),
 			actorVideoSets.push_back(std::make_shared<ActorVideoSet>(index));
 		}
 	}
+
+	LoadBuddhasImages();
 }
 
 VideoPool::~VideoPool()
@@ -69,6 +73,17 @@ std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetSmileVideoL
 	return smileVideoList[row * WINDOW_COL_COUNT + col];
 }
 
+std::shared_ptr<cv::Mat> VideoPool::GetBuddhaAnimationImage()
+{
+	return buddhaAnimationImage;
+}
+
+std::shared_ptr<cv::Mat> VideoPool::GetNextBuddhaImage()
+{
+	buddhaImageListIndex = (buddhaImageListIndex + 1) % buddhaImageList.size();
+	return buddhaImageList.at(buddhaImageListIndex);
+}
+
 void VideoPool::LoadSlotSmileVideo(const int windowCount)
 {
 	boost::filesystem::path p(SLOT_PATH);
@@ -98,7 +113,7 @@ std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::LoadOneSlotVid
 	// Iterate all files in path.
 	for (boost::filesystem::directory_iterator it(p); it != boost::filesystem::directory_iterator(); ++it) {
 		// Check the target is match to the FILE_TYPE.
-		if (it->path().extension().string() == FILE_TYPE)
+		if (it->path().extension().string() == SLOT_FILE_TYPE)
 			imgs->push_back(ReadImage(it->path().string()));
 	}
 
@@ -131,7 +146,7 @@ void VideoPool::LoadNonSlotSmileVideo(const int windowCount)
 		// Iterate all files in path.
 		for (boost::filesystem::directory_iterator it(p); it != boost::filesystem::directory_iterator(); ++it) {
 			// Check the target is match to the FILE_TYPE.
-			if (it->path().extension().string() == FILE_TYPE)
+			if (it->path().extension().string() == SLOT_FILE_TYPE)
 				imgs->push_back(ReadImage(it->path().string()));
 		}
 
@@ -179,7 +194,7 @@ std::shared_ptr<std::list<std::string>> VideoPool::GetLastSmileVideoPath(int day
 			// Iterate all files in path.
 			for (boost::filesystem::directory_iterator it(path); it != boost::filesystem::directory_iterator(); ++it) {
 				// Check the target is match to the FILE_TYPE.
-				if (it->path().extension().string() == FILE_TYPE)
+				if (it->path().extension().string() == SLOT_FILE_TYPE)
 					fileCount++;
 			}
 			// Check the length equal to IMGAGE_SEQUENCE_LENGTH.
@@ -206,6 +221,24 @@ void VideoPool::LoadAllSmileVideo(const int windowCount)
 		else
 			smileVideoList.push_back(slotSmileVideoSet[i]);
 	}
+}
+
+void VideoPool::LoadBuddhasImages()
+{
+	buddhaAnimationImage = (ReadImage("resources\\buddha_animation_image" + FILE_TYPE));
+
+	boost::filesystem::path p("resources\\buddhas\\");
+
+	// Iterate all files in path.
+	for (boost::filesystem::directory_iterator it(p); it != boost::filesystem::directory_iterator(); ++it) {
+		// Check the target is match to the FILE_TYPE.
+		if (it->path().extension().string() == FILE_TYPE)
+			buddhaImageList.push_back(ReadImage(it->path().string()));
+	}
+	if (!buddhaImageList.empty())
+		buddhaImageListIndex = rand() % buddhaImageList.size();
+	else
+		std::cerr << "Buddha images not found. " << std::endl;
 }
 
 std::shared_ptr<cv::Mat> VideoPool::ReadImage(const std::string path)
