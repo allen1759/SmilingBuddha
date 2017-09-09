@@ -138,6 +138,9 @@
     <ClCompile Include="TransitionState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="BroadcastState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">
@@ -261,6 +264,9 @@
       <Filter>Controller\Video</Filter>
     </ClInclude>
     <ClInclude Include="TransitionState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastState.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>

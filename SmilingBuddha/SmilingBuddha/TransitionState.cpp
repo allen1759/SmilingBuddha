@@ -13,19 +13,20 @@
 // replace by wave animation
 #include "BlendingTransitionVideo.h"
 #include "IntroInitialState.h"
+#include "BroadcastState.h"
 
 TransitionState::TransitionState(Director *director)
 	: InteractionState(director),
 	  ROW_COUNT(Setting::GetInstance()->GetRow()),
 	  COL_COUNT(Setting::GetInstance()->GetCol()),
-	  MAX_DISTANCE_TO_CENTER(std::max(ROW_COUNT, COL_COUNT) / 2)
+	  MAX_DISTANCE_TO_CENTER(Setting::GetInstance()->GetMaxDistanceToCenter())
 {
 	this->videoPool = VideoPool::GetInstance();
 
 	this->currentDistance = MAX_DISTANCE_TO_CENTER;
 
+	this->nextAppearElapsedTime = DELAY_TIME;
 	this->startTime = std::chrono::high_resolution_clock::now();
-	this->nextAppearElapsedTime = std::chrono::milliseconds(static_cast<int>(DELAY_TIME * 1000));
 }
 
 TransitionState::~TransitionState()
@@ -35,11 +36,11 @@ TransitionState::~TransitionState()
 void TransitionState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
+	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
 
-	if (delta > nextAppearElapsedTime) {
+	if (elapsedTime > nextAppearElapsedTime) {
 		if (currentDistance == 0) {
-			director->SetInteractionState(std::make_shared<IntroInitialState>(director));
+			director->SetInteractionState(std::make_shared<BroadcastState>(director));
 			return;
 		}
 
@@ -52,7 +53,7 @@ void TransitionState::Update()
 		}
 
 		currentDistance--;
-		nextAppearElapsedTime += std::chrono::milliseconds(static_cast<int>((DELAY_TIME) * 1000));
+		nextAppearElapsedTime += DELAY_TIME;
 	}
 }
 
@@ -66,16 +67,16 @@ void TransitionState::AppearVideo(int row, int col)
 	if (Setting::GetInstance()->IsInIntroStateGrid(row, col))
 		return;
 
-	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, VIDEO_TIME, true, true);
+	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
 	director->GetVideoGrid()->SetChild(newVideo, row, col);
 }
 
-std::shared_ptr<Video> TransitionState::GetActorDirectionVideo(int row, int col, int direction, float time, bool loop, bool reverse)
+std::shared_ptr<Video> TransitionState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)
 {
 	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
 		actorVideoSet->GetDirectionVideo(direction),
-		time, loop, reverse);
+		ACTOR_VIDEO_TIME, loop, reverse);
 
 	return newVideo;
 }

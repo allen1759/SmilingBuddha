@@ -19,6 +19,7 @@ public:
 
 	int GetRow();
 	int GetCol();
+	int GetWindowCount();
 
 	int GetImageSequenceLength();
 
@@ -27,6 +28,7 @@ public:
 	int GetCenterRow();
 	int GetCenterCol();
 	int GetIntroStateGridWidth();
+	int GetMaxDistanceToCenterInGrid();
 	int GetMaxDistanceToCenter();
 
 	int GetImageWidth();
@@ -48,7 +50,6 @@ private:
 
 
 
-
 	static Setting *instance;
 
 	static const int WINDOW_ROW_COUNT = 4;
@@ -63,7 +64,6 @@ private:
 	static const int CENTER_ROW = 2;
 	static const int CENTER_COL = 4;
 	static const int INTRO_STATE_GRID_WIDTH = 3;
-	static const int MAX_DISTANCE_TO_CENTER = INTRO_STATE_GRID_WIDTH / 2;
 
 	static const int SQUARE_SIZE = 9;
 	const int DIRECTION[9][2] = { { -1, -1 },{ -1, 0 },{ -1, 1 },
@@ -72,7 +72,6 @@ private:
 	const int NEAR_BY_DIRECTION[8][2] = { { -1, -1 },{ -1, 0 },{ -1, 1 },
 										{ 0, -1 },{ 0, 1 },
 										{ 1, -1 },{ 1, 0 },{ 1, 1 } };
-
 
 	static const int IMAGE_WIDTH = 130;
 	static const int IMAGE_HEIGHT = 177;

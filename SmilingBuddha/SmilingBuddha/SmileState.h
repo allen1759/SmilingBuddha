@@ -34,7 +34,7 @@ private:
 
 	void SetNeutralVideo();
 
-	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
+	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int directione, bool loop, bool reverse);
 
 	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
 
@@ -45,9 +45,9 @@ private:
 	const int CENTER_ROW;
 	const int CENTER_COL;
 
-	const float WAVE_TIME = 3.0f;
 	const float USER_VIDEO_TIME = 3.0f;
-	const float ALL_SEE_TIME = 6.0f;
+	const float ACTOR_VIDEO_TIME = 3.0f;
+	const float WAVE_TIME = 3.0f;
 	const float BLENDING_TIME = 0.5f;
 
 	VideoPool *videoPool;
@@ -55,10 +55,10 @@ private:
 	bool isStartSeeCenter;
 	bool isStartSeeBack;
 
+	float startSeeCenterElapsedTime;
+	float startSeeBackElapsedTime;
+	float endSeeBackElapsedTime;
 	std::chrono::high_resolution_clock::time_point startTime;
-	std::chrono::milliseconds startSeeCenterElapsedTime;
-	std::chrono::milliseconds startSeeBackElapsedTime;
-	std::chrono::milliseconds endSeeBackElapsedTime;
 };
 
 #endif // !_SMILE_STATE_H

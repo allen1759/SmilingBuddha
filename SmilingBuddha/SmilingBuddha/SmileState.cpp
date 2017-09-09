@@ -27,9 +27,9 @@ SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shar
 	this->isStartSeeCenter = false;
 	this->isStartSeeBack = false;
 
-	this->startSeeCenterElapsedTime = std::chrono::milliseconds(static_cast<int>(USER_VIDEO_TIME * 1000));
-	this->startSeeBackElapsedTime = std::chrono::milliseconds(static_cast<int>((USER_VIDEO_TIME + ALL_SEE_TIME / 2) * 1000));
-	this->endSeeBackElapsedTime = std::chrono::milliseconds(static_cast<int>((USER_VIDEO_TIME + ALL_SEE_TIME) * 1000));
+	this->startSeeCenterElapsedTime = USER_VIDEO_TIME;
+	this->startSeeBackElapsedTime = USER_VIDEO_TIME + ACTOR_VIDEO_TIME;
+	this->endSeeBackElapsedTime = USER_VIDEO_TIME + ACTOR_VIDEO_TIME * 2;
 	this->startTime = std::chrono::high_resolution_clock::now();
 
 	director->SetRegularSmileProcessorStrategy();
@@ -44,17 +44,17 @@ SmileState::~SmileState()
 void SmileState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
+	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
 
-	if (!isStartSeeCenter && delta > startSeeCenterElapsedTime) {
+	if (!isStartSeeCenter && elapsedTime > startSeeCenterElapsedTime) {
 		SetSeeCenterVideo();
 		isStartSeeCenter = true;
 	}
-	else if (!isStartSeeBack && delta > startSeeBackElapsedTime) {
+	else if (!isStartSeeBack && elapsedTime > startSeeBackElapsedTime) {
 		SetWaveAnimationByOriginVideo();
 		isStartSeeBack = true;
 	}
-	else if (delta > endSeeBackElapsedTime) {
+	else if (elapsedTime > endSeeBackElapsedTime) {
 		SetNeutralVideo();
 		director->SetInteractionState(std::make_shared<TransitionState>(director));
 		return;
@@ -68,6 +68,7 @@ std::string SmileState::ToString()
 
 void SmileState::SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
+	// TODO: replace blending with wave.
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(images, USER_VIDEO_TIME, true, true);
 	std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
 		director->GetVideoGrid()->GetChild(CENTER_ROW, CENTER_COL),
@@ -78,6 +79,7 @@ void SmileState::SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<st
 
 void SmileState::SetWaveAnimationByOriginVideo()
 {
+	// TODO: replace blending with wave.
 	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(CENTER_ROW, CENTER_COL, ActorVideoSet::NEUTRAL, true, true);
 	std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
 		director->GetVideoGrid()->GetChild(CENTER_ROW, CENTER_COL),
@@ -91,7 +93,7 @@ void SmileState::SetSeeCenterVideo()
 	for (int row = 0; row < ROW_COUNT; ++row) {
 		for (int col = 0; col < COL_COUNT; ++col) {
 			// Ignore outside grid.
-			if (Setting::GetInstance()->CalculateDistanceToCenter(row, col) > Setting::GetInstance()->GetMaxDistanceToCenter())
+			if (Setting::GetInstance()->CalculateDistanceToCenter(row, col) > Setting::GetInstance()->GetMaxDistanceToCenterInGrid())
 				continue;
 			// Ignore center grid.
 			if (row == CENTER_ROW && col == CENTER_COL)
@@ -122,7 +124,7 @@ std::shared_ptr<Video> SmileState::GetActorDirectionVideo(int row, int col, int 
 	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
 		actorVideoSet->GetDirectionVideo(direction),
-		ALL_SEE_TIME, loop, reverse);
+		ACTOR_VIDEO_TIME, loop, reverse);
 
 	return newVideo;
 }

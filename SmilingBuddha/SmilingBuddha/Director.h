@@ -9,6 +9,7 @@
 
 #include "SmileObserver.h"
 
+#include <vector>
 #include <queue>
 #include <mutex>
 #include <thread>
@@ -43,13 +44,19 @@ public:
 
 	void StopInteraction();
 
+	std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> GetUserImageSequenceRecords();
+
 	// Implement SmileObserver's pure virtual function.
 	virtual void OnSmile() override;
 
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;
 
 private:
+	// should clear user video record when they leave.
+	void ClearUserImageSequenceRecords();
+
 	VideoGrid *videoGrid;
+	std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> userImageSequenceRecords;
 
 	// Controllers
 	SmileVideoProcessor *smileVideoProcessor;

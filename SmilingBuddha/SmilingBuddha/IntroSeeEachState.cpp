@@ -81,7 +81,6 @@ void IntroSeeEachState::SetSeeEachVideo()
 
 void IntroSeeEachState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
 {
-
 	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
 		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
 		newVideo,

@@ -33,12 +33,10 @@ void IntroState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>
 
 std::shared_ptr<Video> IntroState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)
 {
-	float videoTime = reverse ? 2 * ACTOR_VIDEO_TIME : ACTOR_VIDEO_TIME;
-
 	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(
 		actorVideoSet->GetDirectionVideo(direction),
-		videoTime, loop, reverse);
+		ACTOR_VIDEO_TIME, loop, reverse);
 
 	return newVideo;
 }

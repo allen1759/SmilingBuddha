@@ -19,8 +19,10 @@
 
 Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor)
 {
-	videoGrid = new VideoGrid();
+	this->videoGrid = new VideoGrid();
 	//videoRenderer->SetVideo(videoGrid);
+
+	this->userImageSequenceRecords = std::make_shared<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>>();
 
 	this->smileVideoProcessor = smileVideoProcessor;
 
@@ -94,6 +96,11 @@ void Director::StopInteraction()
 	smileVideoProcessor->Stop();
 }
 
+std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> Director::GetUserImageSequenceRecords()
+{
+	return userImageSequenceRecords;
+}
+
 void Director::OnSmile()
 {
 	eventQueueMutex.lock();
@@ -106,5 +113,11 @@ void Director::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>
 	eventQueueMutex.lock();
 	eventQueue.push(std::make_shared<OnRecordedEvent>(images));
 	eventQueueMutex.unlock();
+
+	userImageSequenceRecords->push_back(images);
 }
 
+void Director::ClearUserImageSequenceRecords()
+{
+	userImageSequenceRecords->clear();
+}

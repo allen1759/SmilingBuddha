@@ -37,6 +37,11 @@ int Setting::GetCol()
 	return WINDOW_COL_COUNT;
 }
 
+int Setting::GetWindowCount()
+{
+	return WINDOW_COL_COUNT * WINDOW_ROW_COUNT;
+}
+
 int Setting::GetImageSequenceLength()
 {
 	return IMAGE_SEQUENCE_LENGTH;
@@ -62,9 +67,18 @@ int Setting::GetIntroStateGridWidth()
 	return INTRO_STATE_GRID_WIDTH;
 }
 
+int Setting::GetMaxDistanceToCenterInGrid()
+{
+	return INTRO_STATE_GRID_WIDTH / 2;
+}
+
 int Setting::GetMaxDistanceToCenter()
 {
-	return MAX_DISTANCE_TO_CENTER;
+	int ret = 0;
+	ret = std::max(CENTER_ROW, std::max(WINDOW_ROW_COUNT - CENTER_ROW - 1, ret));
+	ret = std::max(CENTER_COL, std::max(WINDOW_COL_COUNT - CENTER_COL - 1, ret));
+
+	return ret;
 }
 
 int Setting::GetImageWidth()
@@ -98,7 +112,7 @@ int Setting::CalculateDistanceToCenter(int row, int col)
 
 bool Setting::IsInIntroStateGrid(int row, int col)
 {
-	return CalculateDistanceToCenter(row, col) <= MAX_DISTANCE_TO_CENTER;
+	return CalculateDistanceToCenter(row, col) <= GetMaxDistanceToCenterInGrid();
 }
 
 void Setting::GetPairRowColInIntroStateGrid(int & row, int & col, int & nearbyRow, int & nearbyCol)

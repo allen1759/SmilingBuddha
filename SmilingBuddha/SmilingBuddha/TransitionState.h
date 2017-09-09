@@ -28,7 +28,7 @@ public:
 private:
 	void AppearVideo(int row, int col);
 
-	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, float time, bool loop, bool reverse);
+	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
 	
 
 	const int ROW_COUNT;
@@ -36,14 +36,14 @@ private:
 	const int MAX_DISTANCE_TO_CENTER;
 
 	const float DELAY_TIME = 2.0f;
-	const float VIDEO_TIME = 6.0f;
+	const float ACTOR_VIDEO_TIME = 3.0f;
 
 	VideoPool *videoPool;
 
 	int currentDistance;
 
+	float nextAppearElapsedTime;
 	std::chrono::high_resolution_clock::time_point startTime;
-	std::chrono::milliseconds nextAppearElapsedTime;
 };
 
 #endif // !_TRANSITION_STATE_H
