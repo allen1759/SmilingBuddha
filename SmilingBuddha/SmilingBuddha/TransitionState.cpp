@@ -25,7 +25,8 @@ TransitionState::TransitionState(Director *director)
 
 	this->currentDistance = MAX_DISTANCE_TO_CENTER;
 
-	this->nextAppearElapsedTime = DELAY_TIME;
+	this->currentDelayTime = INITIAL_DELAY_TIME;
+	this->nextAppearElapsedTime = currentDelayTime;
 	this->startTime = std::chrono::high_resolution_clock::now();
 }
 
@@ -53,7 +54,8 @@ void TransitionState::Update()
 		}
 
 		currentDistance--;
-		nextAppearElapsedTime += DELAY_TIME;
+		nextAppearElapsedTime += currentDelayTime;
+		currentDelayTime /= 2.0f;
 	}
 }
 
