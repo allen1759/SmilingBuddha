@@ -25,8 +25,8 @@ private:
 
 	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
 
-	const int CENTER_ROW;
-	const int CENTER_COL;
+	const int ROW_CENTER;
+	const int COL_CENTER;
 
 	const float BLENDING_TIME = 0.5f;
 

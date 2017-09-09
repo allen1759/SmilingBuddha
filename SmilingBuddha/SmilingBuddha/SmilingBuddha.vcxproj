@@ -115,6 +115,7 @@
     <ClCompile Include="ActorVideoSet.cpp" />
     <ClCompile Include="BlendingTransitionVideo.cpp" />
     <ClCompile Include="BroadcastState.cpp" />
+    <ClCompile Include="BuddhaState.cpp" />
     <ClCompile Include="DebugHeadPoseTracker.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="InteractionState.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="AnimatedVideo.h" />
     <ClInclude Include="BlendingTransitionVideo.h" />
     <ClInclude Include="BroadcastState.h" />
+    <ClInclude Include="BuddhaState.h" />
     <ClInclude Include="DebugHeadPoseTracker.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
     <ClInclude Include="Director.h" />

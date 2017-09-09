@@ -18,8 +18,8 @@ SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shar
 	: InteractionState(director),
 	  ROW_COUNT(Setting::GetInstance()->GetRow()),
 	  COL_COUNT(Setting::GetInstance()->GetCol()),
-	  CENTER_ROW(Setting::GetInstance()->GetCenterRow()),
-	  CENTER_COL(Setting::GetInstance()->GetCenterCol())
+	  ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
+	  COL_CENTER(Setting::GetInstance()->GetCenterCol())
 
 {
 	videoPool = VideoPool::GetInstance();
@@ -71,21 +71,21 @@ void SmileState::SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<st
 	// TODO: replace blending with wave.
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(images, USER_VIDEO_TIME, true, true);
 	std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
-		director->GetVideoGrid()->GetChild(CENTER_ROW, CENTER_COL),
+		director->GetVideoGrid()->GetChild(ROW_CENTER, COL_CENTER),
 		newVideo, WAVE_TIME);
 
-	director->GetVideoGrid()->SetChild(waveVideo, CENTER_ROW, CENTER_COL);
+	director->GetVideoGrid()->SetChild(waveVideo, ROW_CENTER, COL_CENTER);
 }
 
 void SmileState::SetWaveAnimationByOriginVideo()
 {
 	// TODO: replace blending with wave.
-	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(CENTER_ROW, CENTER_COL, ActorVideoSet::NEUTRAL, true, true);
+	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(ROW_CENTER, COL_CENTER, ActorVideoSet::NEUTRAL, true, true);
 	std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
-		director->GetVideoGrid()->GetChild(CENTER_ROW, CENTER_COL),
+		director->GetVideoGrid()->GetChild(ROW_CENTER, COL_CENTER),
 		newVideo, WAVE_TIME);
 
-	director->GetVideoGrid()->SetChild(waveVideo, CENTER_ROW, CENTER_COL);
+	director->GetVideoGrid()->SetChild(waveVideo, ROW_CENTER, COL_CENTER);
 }
 
 void SmileState::SetSeeCenterVideo()
@@ -96,10 +96,10 @@ void SmileState::SetSeeCenterVideo()
 			if (Setting::GetInstance()->CalculateDistanceToCenter(row, col) > Setting::GetInstance()->GetMaxDistanceToCenterInGrid())
 				continue;
 			// Ignore center grid.
-			if (row == CENTER_ROW && col == CENTER_COL)
+			if (row == ROW_CENTER && col == COL_CENTER)
 				continue;
 
-			int lookDirection = ActorVideoSet::GetDirectionIndex(row, col, CENTER_ROW, CENTER_COL);
+			int lookDirection = ActorVideoSet::GetDirectionIndex(row, col, ROW_CENTER, COL_CENTER);
 			std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, lookDirection, false, true);
 			SetBlendingVideo(row, col, newVideo);
 		}

@@ -15,10 +15,12 @@ class OnSmileEvent : public Event
 {
 public:
 	OnSmileEvent()
-	{}
+	{
+	}
 
 	~OnSmileEvent()
-	{}
+	{
+	}
 
 	virtual void Dispatch(std::shared_ptr<InteractionState> state) override
 	{

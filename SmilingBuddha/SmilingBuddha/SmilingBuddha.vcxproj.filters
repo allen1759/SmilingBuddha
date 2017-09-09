@@ -141,6 +141,9 @@
     <ClCompile Include="BroadcastState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="BuddhaState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">
@@ -267,6 +270,9 @@
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="BroadcastState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="BuddhaState.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>

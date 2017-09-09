@@ -39,7 +39,7 @@ void TransitionState::Update()
 	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
 
 	if (elapsedTime > nextAppearElapsedTime) {
-		if (currentDistance == 0) {
+		if (currentDistance == Setting::GetInstance()->GetMaxDistanceToCenterInGrid()) {
 			director->SetInteractionState(std::make_shared<BroadcastState>(director));
 			return;
 		}

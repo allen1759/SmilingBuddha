@@ -11,6 +11,7 @@
 #include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
+#include "BuddhaState.h"
 
 
 #include "BlendingTransitionVideo.h"
@@ -42,7 +43,7 @@ void BroadcastState::Update()
 	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
 
 	if (elapsedTime > BROADCAST_STATE_TIME) {
-		director->SetInteractionState(std::make_shared<IntroInitialState>(director));
+		director->SetInteractionState(std::make_shared<BuddhaState>(director));
 		return;
 	}
 	else if (elapsedTime > nextAppearElapsedTime) {

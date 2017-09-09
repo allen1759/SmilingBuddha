@@ -14,8 +14,8 @@
 
 IntroSeeEachState::IntroSeeEachState(Director *director)
 	: IntroState(director),
-	  CENTER_ROW(Setting::GetInstance()->GetCenterRow()),
-	  CENTER_COL(Setting::GetInstance()->GetCenterCol())
+	  ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
+	  COL_CENTER(Setting::GetInstance()->GetCenterCol())
 {
 	this->endingElapsedTime = IntroState::ACTOR_VIDEO_TIME * 2;
 

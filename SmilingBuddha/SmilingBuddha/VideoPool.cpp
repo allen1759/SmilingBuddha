@@ -73,15 +73,15 @@ std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetSmileVideoL
 	return smileVideoList[row * WINDOW_COL_COUNT + col];
 }
 
-std::shared_ptr<cv::Mat> VideoPool::GetBuddhaAnimationImage()
+std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetBuddhaAnimationVideo()
 {
-	return buddhaAnimationImage;
+	return buddhaAnimationVideo;
 }
 
-std::shared_ptr<cv::Mat> VideoPool::GetNextBuddhaImage()
+std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetNextBuddhaVideo()
 {
-	buddhaImageListIndex = (buddhaImageListIndex + 1) % buddhaImageList.size();
-	return buddhaImageList.at(buddhaImageListIndex);
+	buddhaImageListIndex = (buddhaImageListIndex + 1) % buddhaVideoList.size();
+	return buddhaVideoList.at(buddhaImageListIndex);
 }
 
 void VideoPool::LoadSlotSmileVideo(const int windowCount)
@@ -225,18 +225,22 @@ void VideoPool::LoadAllSmileVideo(const int windowCount)
 
 void VideoPool::LoadBuddhasImages()
 {
-	buddhaAnimationImage = (ReadImage("resources\\buddha_animation_image" + FILE_TYPE));
+	buddhaAnimationVideo = std::make_shared<std::vector<std::shared_ptr<cv::Mat>>>();
+	buddhaAnimationVideo->push_back(ReadImage("resources\\buddha_animation_image" + FILE_TYPE));
 
 	boost::filesystem::path p("resources\\buddhas\\");
 
 	// Iterate all files in path.
 	for (boost::filesystem::directory_iterator it(p); it != boost::filesystem::directory_iterator(); ++it) {
 		// Check the target is match to the FILE_TYPE.
-		if (it->path().extension().string() == FILE_TYPE)
-			buddhaImageList.push_back(ReadImage(it->path().string()));
+		if (it->path().extension().string() == FILE_TYPE) {
+			std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence = std::make_shared<std::vector<std::shared_ptr<cv::Mat>>>();
+			imageSequence->push_back(ReadImage(it->path().string()));
+			buddhaVideoList.push_back(imageSequence);
+		}
 	}
-	if (!buddhaImageList.empty())
-		buddhaImageListIndex = rand() % buddhaImageList.size();
+	if (!buddhaVideoList.empty())
+		buddhaImageListIndex = rand() % buddhaVideoList.size();
 	else
 		std::cerr << "Buddha images not found. " << std::endl;
 }

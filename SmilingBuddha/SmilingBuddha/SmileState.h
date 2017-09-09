@@ -42,8 +42,8 @@ private:
 	// Get from Setting class.
 	const int ROW_COUNT;
 	const int COL_COUNT;
-	const int CENTER_ROW;
-	const int CENTER_COL;
+	const int ROW_CENTER;
+	const int COL_CENTER;
 
 	const float USER_VIDEO_TIME = 3.0f;
 	const float ACTOR_VIDEO_TIME = 3.0f;

@@ -31,9 +31,9 @@ public:
 
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetSmileVideoList(int row, int col);
 
-	std::shared_ptr<cv::Mat> GetBuddhaAnimationImage();
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetBuddhaAnimationVideo();
 
-	std::shared_ptr<cv::Mat> GetNextBuddhaImage();
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetNextBuddhaVideo();
 
 private:
 	/**
@@ -106,9 +106,9 @@ private:
 	// All videos.
 	std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> smileVideoList;
 
-	std::shared_ptr<cv::Mat> buddhaAnimationImage;
+	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> buddhaAnimationVideo;
 	int buddhaImageListIndex;
-	std::vector<std::shared_ptr<cv::Mat>> buddhaImageList;
+	std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> buddhaVideoList;
 };
 
 
