@@ -40,6 +40,9 @@
     <Filter Include="Controller\Video">
       <UniqueIdentifier>{d336c3a5-d756-4355-ae79-83770bf0bfef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State\ending_state">
+      <UniqueIdentifier>{f0e627bd-385f-4c6c-befc-72d5eb8b21f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -141,14 +144,14 @@
     <ClCompile Include="BroadcastState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="BuddhaState.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="EndingState.cpp">
-      <Filter>原始程式檔</Filter>
+    <ClCompile Include="EndingBuddhaState.cpp">
+      <Filter>State\ending_state</Filter>
     </ClCompile>
     <ClCompile Include="EndingFadeState.cpp">
-      <Filter>State</Filter>
+      <Filter>State\ending_state</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingState.cpp">
+      <Filter>State\ending_state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,14 +281,14 @@
     <ClInclude Include="BroadcastState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="BuddhaState.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="EndingState.h">
-      <Filter>標頭檔</Filter>
+    <ClInclude Include="EndingBuddhaState.h">
+      <Filter>State\ending_state</Filter>
     </ClInclude>
     <ClInclude Include="EndingFadeState.h">
-      <Filter>State</Filter>
+      <Filter>State\ending_state</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingState.h">
+      <Filter>State\ending_state</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

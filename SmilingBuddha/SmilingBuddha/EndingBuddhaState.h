@@ -4,19 +4,19 @@
 *
 */
 
-#ifndef _BUDDHA_STATE_H
-#define _BUDDHA_STATE_H
+#ifndef _ENDING_BUDDHA_STATE_H
+#define _ENDING_BUDDHA_STATE_H
 
 #include "EndingState.h"
 
 #include "Video.h"
 
-class BuddhaState : public EndingState
+class EndingBuddhaState : public EndingState
 {
 public:
-	BuddhaState(Director *director);
+	EndingBuddhaState(Director *director);
 
-	virtual ~BuddhaState();
+	virtual ~EndingBuddhaState();
 
 	virtual void Update() override;
 
@@ -24,8 +24,6 @@ public:
 
 private:
 	virtual void SetTransition(int row, int col);
-
-	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
 
 
 	const float BUDDHA_STATE_TIME = 18.0f;
@@ -39,4 +37,4 @@ private:
 	float nextAppearElapsedTime;
 };
 
-#endif // !_BUDDHA_STATE_H
+#endif // !_ENDING_BUDDHA_STATE_H

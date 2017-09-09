@@ -4,7 +4,7 @@
 *
 */
 
-#include "BuddhaState.h"
+#include "EndingBuddhaState.h"
 
 #include "Setting.h"
 #include "Director.h"
@@ -12,7 +12,7 @@
 #include "BlendingTransitionVideo.h"
 #include "EndingFadeState.h"
 
-BuddhaState::BuddhaState(Director *director)
+EndingBuddhaState::EndingBuddhaState(Director *director)
 	: EndingState(director)
 {
 	this->buddhaVideo = std::make_shared<VideoClip>(EndingState::videoPool->GetNextBuddhaVideo(), BUDDHA_VIDEO_TIME, false, false);
@@ -21,11 +21,11 @@ BuddhaState::BuddhaState(Director *director)
 	this->nextAppearElapsedTime = 0.0f;
 }
 
-BuddhaState::~BuddhaState()
+EndingBuddhaState::~EndingBuddhaState()
 {
 }
 
-void BuddhaState::Update()
+void EndingBuddhaState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
 	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
@@ -41,21 +41,16 @@ void BuddhaState::Update()
 	}
 }
 
-std::string BuddhaState::ToString()
+std::string EndingBuddhaState::ToString()
 {
-	return "BuddhaState";
+	return "EndingBuddhaState";
 }
 
-void BuddhaState::SetTransition(int row, int col)
-{
-	SetBlendingVideo(row, col, buddhaVideo);
-}
-
-void BuddhaState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
+void EndingBuddhaState::SetTransition(int row, int col)
 {
 	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
 		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
-		newVideo,
+		buddhaVideo,
 		WAVE_TIME);
 
 	director->GetVideoGrid()->SetChild(blendingVideo, row, col);

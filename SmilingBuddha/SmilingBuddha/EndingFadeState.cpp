@@ -9,7 +9,8 @@
 #include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
-#include "BlendingTransitionVideo.h"
+#include "FadeAnimationVideo.h"
+
 
 
 #include "IntroInitialState.h"
@@ -26,7 +27,6 @@ EndingFadeState::EndingFadeState(Director *director)
 	endingFadeVideo = std::make_shared<VideoClip>(whiteVideo, FADE_VIDEO_TIME, false, false);
 
 	this->currentDistance = 0;
-
 	this->nextAppearElapsedTime = 0.0f;
 }
 
@@ -57,15 +57,10 @@ std::string EndingFadeState::ToString()
 
 void EndingFadeState::SetTransition(int row, int col)
 {
-	SetBlendingVideo(row, col, endingFadeVideo);
-}
-
-void EndingFadeState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
-{
-	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
+	// Set white Fade Animation Video.
+	std::shared_ptr<Video> fadeVideo = std::make_shared<FadeAnimationVideo>(
 		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
-		newVideo,
-		BLENDING_TIME);
+		FADE_ANIMATION_TIME, 255, 255, 255);
 
-	director->GetVideoGrid()->SetChild(blendingVideo, row, col);
+	director->GetVideoGrid()->SetChild(fadeVideo, row, col);
 }
