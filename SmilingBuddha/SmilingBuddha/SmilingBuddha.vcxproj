@@ -118,6 +118,7 @@
     <ClCompile Include="BuddhaState.cpp" />
     <ClCompile Include="DebugHeadPoseTracker.cpp" />
     <ClCompile Include="Director.cpp" />
+    <ClCompile Include="EndingState.cpp" />
     <ClCompile Include="InteractionState.cpp" />
     <ClCompile Include="IntroInitialState.cpp" />
     <ClCompile Include="IntroNeutralState.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="DebugHeadPoseTracker.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
     <ClInclude Include="Director.h" />
+    <ClInclude Include="EndingState.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="FadeAnimationVideo.h" />
     <ClInclude Include="HeadPoseTracker.h" />

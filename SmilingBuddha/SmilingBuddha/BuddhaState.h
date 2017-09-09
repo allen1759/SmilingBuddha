@@ -7,14 +7,11 @@
 #ifndef _BUDDHA_STATE_H
 #define _BUDDHA_STATE_H
 
-#include "InteractionState.h"
+#include "EndingState.h"
 
-#include <chrono>
-
-#include "VideoPool.h"
 #include "Video.h"
 
-class BuddhaState : public InteractionState
+class BuddhaState : public EndingState
 {
 public:
 	BuddhaState(Director *director);
@@ -26,18 +23,10 @@ public:
 	virtual std::string ToString() override;
 
 private:
-	int GetMaxManhattanDistanceToCenter();
-
-	int CalculateDistanceToCenter(int row, int col);
+	virtual void SetTransition(int row, int col);
 
 	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
 
-
-	const int ROW_COUNT;
-	const int COL_COUNT;
-	const int ROW_CENTER;
-	const int COL_CENTER;
-	const int MAX_DISTANCE_TO_CENTER;
 
 	const float BUDDHA_STATE_TIME = 18.0f;
 	const float APEAR_TIME = 3.0f;
@@ -46,14 +35,10 @@ private:
 	const float WAVE_TIME = 3.0f;
 	const float BLENDING_TIME = 0.5f;
 
-	VideoPool *videoPool;
 	std::shared_ptr<Video> buddhaVideo;
-	int maxManhattanDistanceToCenter;
-
 	int currentDistance;
 
 	float nextAppearElapsedTime;
-	std::chrono::high_resolution_clock::time_point startTime;
 };
 
 #endif // !_BUDDHA_STATE_H

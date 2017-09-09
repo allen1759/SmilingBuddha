@@ -144,6 +144,9 @@
     <ClCompile Include="BuddhaState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="EndingState.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="BuddhaState.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingState.h">
+      <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
