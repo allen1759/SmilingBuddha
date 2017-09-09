@@ -21,7 +21,7 @@ public:
 		this->video = video->GetVideo();
 		this->nextVideo = nextVideo->GetVideo();
 
-		this->duration = std::chrono::milliseconds(static_cast<int>(duration * 1000));
+		this->duration = duration;
 		this->startTime = std::chrono::high_resolution_clock::now();
 	}
 	
@@ -40,7 +40,7 @@ protected:
 	std::shared_ptr<Video> video;
 	std::shared_ptr<Video> nextVideo;
 
-	std::chrono::milliseconds duration;
+	float duration;
 	std::chrono::high_resolution_clock::time_point startTime;
 };
 

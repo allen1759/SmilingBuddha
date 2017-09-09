@@ -7,15 +7,22 @@
 #include "VideoClip.h"
 
 #include <iostream>
+#include <cmath>
 
-VideoClip::VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence, float duration, bool loop, bool reverse)
+VideoClip::VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence, float videoTime, bool loop, bool reverse)
 {
-	this->imageSequence = imageSequence;
-	this->duration = std::chrono::milliseconds(static_cast<int>(duration * 1000));
-	this->startTime = std::chrono::high_resolution_clock::now();
-
+	this->imageSequence = imageSequence;	
 	this->loop = loop;
 	this->reverse = reverse;
+	end = false;
+
+	framePerSecond = static_cast<float>(imageSequence->size()) / videoTime;
+	secondsPerFrame = 1.0f / framePerSecond;
+	currentFrameIndex = 0;
+	currentFrameNumber = 0.0f;
+
+	elapsedTime = 0;
+	lastTime = std::chrono::high_resolution_clock::now();
 }
 
 VideoClip::~VideoClip()
@@ -24,30 +31,46 @@ VideoClip::~VideoClip()
 
 std::shared_ptr<cv::Mat> VideoClip::GetFrame()
 {
-	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	double delta = static_cast<double>(std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count());
+	if (end)
+		return imageSequence->at(currentFrameIndex);
 
-	if (!reverse) {
-		int index = static_cast<int>(static_cast<double>(delta) / duration.count() * imageSequence->size());
-		if (loop)
-			index %= imageSequence->size();
-		if (index < imageSequence->size())
-			return imageSequence->at(index);
-		else 
-			return imageSequence->back();
+	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
+	float deltaTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - lastTime).count();
+
+	if (deltaTime < secondsPerFrame)
+		return imageSequence->at(currentFrameIndex);
+
+	lastTime = currentTime;
+	currentFrameNumber += deltaTime * framePerSecond;
+
+	if (reverse) {
+		if (currentFrameNumber >= imageSequence->size() * 2 - 1) {
+			if (loop)
+				currentFrameNumber = std::fmod(currentFrameNumber, imageSequence->size() * 2 - 1);
+			else {
+				end = true;
+				currentFrameNumber = imageSequence->size() * 2 - 1;
+			}
+		}
+
+		if (currentFrameNumber < imageSequence->size())
+			currentFrameIndex = static_cast<int>(currentFrameNumber);
+		else
+			currentFrameIndex = imageSequence->size() * 2 - 1 - static_cast<int>(currentFrameNumber);
 	}
 	else {
-		int index = static_cast<int>(static_cast<double>(delta) / duration.count() * imageSequence->size() * 2);
-		if (loop)
-			index %= (imageSequence->size() * 2);
-		if (index < imageSequence->size())
-			return imageSequence->at(index);
-		else if (index < imageSequence->size() * 2)
-			return imageSequence->at(2 * imageSequence->size() - index - 1);
-		else
-			return imageSequence->front();
+		if (currentFrameNumber >= imageSequence->size() - 1) {
+			if (loop)
+				currentFrameNumber = std::fmod(currentFrameNumber, imageSequence->size());
+			else {
+				end = true;
+				currentFrameNumber = imageSequence->size() - 1;
+			}
+		}
+		currentFrameIndex = static_cast<int>(currentFrameNumber);
 	}
-	
+
+	return imageSequence->at(currentFrameIndex);
 }
 
 std::shared_ptr<Video> VideoClip::GetVideo()

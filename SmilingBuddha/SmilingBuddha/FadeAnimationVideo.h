@@ -16,24 +16,34 @@
 class FadeAnimationVideo : public AnimatedVideo
 {
 public:
-	FadeAnimationVideo(std::shared_ptr<Video> video, float duration, unsigned char R, unsigned char G, unsigned char B);
+	FadeAnimationVideo(std::shared_ptr<Video> video, float duration, unsigned char r, unsigned char g, unsigned char b);
 	
 	virtual ~FadeAnimationVideo() override;
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
 private:
-	unsigned char R;
-	unsigned char G;
-	unsigned char B;
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+
+	bool end;
+
+	std::shared_ptr<cv::Mat> fadedFrame;
+	std::shared_ptr<cv::Mat> currentFrame;
 };
 
 FadeAnimationVideo::FadeAnimationVideo(std::shared_ptr<Video> video, float duration, unsigned char R, unsigned char G, unsigned char B)
 	: AnimatedVideo(video, duration)
 {
-	this->R = R;
-	this->G = G;
-	this->B = B;
+	this->r = r;
+	this->g = g;
+	this->b = b;
+
+	fadedFrame = std::make_shared<cv::Mat>(video->GetFrame()->size(), CV_8UC3, cv::Scalar(b, g, r));
+	currentFrame = std::make_shared<cv::Mat>();
+
+	end = false;
 }
 
 FadeAnimationVideo::~FadeAnimationVideo()
@@ -42,22 +52,23 @@ FadeAnimationVideo::~FadeAnimationVideo()
 
 std::shared_ptr<cv::Mat> FadeAnimationVideo::GetFrame()
 {
-	std::shared_ptr<cv::Mat> src1 = video->GetFrame();
-	std::shared_ptr<cv::Mat> src2 = std::make_shared<cv::Mat>(cv::Mat(src1->rows, src1->cols, CV_8UC3, cv::Scalar(B, G, R)));
-	std::shared_ptr<cv::Mat> dst;
+	if (end)
+		return fadedFrame;
 
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	double delta = static_cast<double>(std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count());
+	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
 
-	if (delta > duration.count())
-		dst = src2;
-	else {
-		dst = std::make_shared<cv::Mat>();
-		double weight = delta / static_cast<double>(duration.count());
-		cv::addWeighted(*src1, 1 - weight, *src2, weight, 0.0, *dst);
+	if (elapsedTime >= duration) {
+		elapsedTime = duration;
+		end = true;
 	}
 
-	return dst;
+	std::shared_ptr<cv::Mat> sourceframe = video->GetFrame();
+
+	float weight = elapsedTime / duration;
+	cv::addWeighted(*sourceframe, 1.0f - weight, *fadedFrame, weight, 0.0, *currentFrame);
+
+	return currentFrame;
 }
 
 #endif // !_FADE_ANIMATION_H

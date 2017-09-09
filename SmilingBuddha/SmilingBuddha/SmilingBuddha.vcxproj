@@ -70,7 +70,10 @@
     <Import Project="SmileBuddhaRelease.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Intel\OpenCL\sdk\include;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Include;C:\glm-0.9.8.5;C:\glfw-3.2.1\include;C:\glew-2.1.0\include;C:\dlib-19.4;C:\opencv\build\include;C:\boost_1_64_0;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>C:\Intel\OpenCL\sdk\lib\x64;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Lib\x64;C:\glfw-3.2.1\lib-vc2015;C:\glew-2.1.0\lib\Release\x64;C:\dlib-19.4\build;C:\boost_1_64_0\lib64-msvc-14.0;C:\opencv\build\x64\vc14\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -116,6 +119,7 @@
     <ClCompile Include="BlendingTransitionVideo.cpp" />
     <ClCompile Include="DebugHeadPoseTracker.cpp" />
     <ClCompile Include="Director.cpp" />
+    <ClCompile Include="VideoFrame.cpp" />
     <ClCompile Include="InteractionState.cpp" />
     <ClCompile Include="IntroInitialState.cpp" />
     <ClCompile Include="IntroNeutralState.cpp" />
@@ -153,6 +157,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="FadeAnimationVideo.h" />
     <ClInclude Include="HeadPoseTracker.h" />
+    <ClInclude Include="VideoFrame.h" />
     <ClInclude Include="InteractionState.h" />
     <ClInclude Include="IntroInitialState.h" />
     <ClInclude Include="IntroNeutralState.h" />

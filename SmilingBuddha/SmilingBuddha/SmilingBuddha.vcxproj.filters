@@ -153,6 +153,9 @@
     <ClCompile Include="DebugHeadPoseTracker.cpp">
       <Filter>原始程式檔\Controller\head_pose_tracker</Filter>
     </ClCompile>
+    <ClCompile Include="VideoFrame.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="DebugHeadPoseTracker.h">
       <Filter>標頭檔\Controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoFrame.h">
+      <Filter>標頭檔\Video</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
