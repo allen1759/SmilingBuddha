@@ -19,10 +19,10 @@ VideoClip::VideoClip(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imag
 	framePerSecond = static_cast<float>(imageSequence->size()) / videoTime;
 	secondsPerFrame = 1.0f / framePerSecond;
 	currentFrameIndex = 0;
+	currentFrameNumber = 0.0f;
 
 	elapsedTime = 0;
-	startTime = std::chrono::high_resolution_clock::now();
-	lastTime = startTime;
+	lastTime = std::chrono::high_resolution_clock::now();
 }
 
 VideoClip::~VideoClip()
@@ -41,32 +41,36 @@ std::shared_ptr<cv::Mat> VideoClip::GetFrame()
 		return imageSequence->at(currentFrameIndex);
 
 	lastTime = currentTime;
-	elapsedTime += deltaTime;
+	currentFrameNumber += deltaTime * framePerSecond;
 
-	int frameCount = static_cast<int>(elapsedTime * framePerSecond);
-
-	if (reverse)
-		currentFrameIndex = std::abs(static_cast<int>((frameCount + (imageSequence->size() - 1)) % (2 * (imageSequence->size() - 1)) - (imageSequence->size() - 1)));
-	else 
-		currentFrameIndex = frameCount % imageSequence->size();
-
-	if (!loop) {
-		if (reverse) {
-			if (frameCount >= 2 * (imageSequence->size() - 1)) {
-				currentFrameIndex = 0;
+	if (reverse) {
+		if (currentFrameNumber >= imageSequence->size() * 2 - 1) {
+			if (loop)
+				currentFrameNumber = std::fmod(currentFrameNumber, imageSequence->size() * 2 - 1);
+			else {
 				end = true;
+				currentFrameNumber = imageSequence->size() * 2 - 1;
 			}
 		}
-		else {
-			if (frameCount >= imageSequence->size() - 1) {
-				currentFrameIndex = imageSequence->size() - 1;
-				end = true;
-			}
-		}
+
+		if (currentFrameNumber < imageSequence->size())
+			currentFrameIndex = static_cast<int>(currentFrameNumber);
+		else
+			currentFrameIndex = imageSequence->size() * 2 - 1 - static_cast<int>(currentFrameNumber);
 	}
+	else {
+		if (currentFrameNumber >= imageSequence->size() - 1) {
+			if (loop)
+				currentFrameNumber = std::fmod(currentFrameNumber, imageSequence->size());
+			else {
+				end = true;
+				currentFrameNumber = imageSequence->size() - 1;
+			}
+		}
+		currentFrameIndex = static_cast<int>(currentFrameNumber);
+	}
+
 	return imageSequence->at(currentFrameIndex);
-	
-	
 }
 
 std::shared_ptr<Video> VideoClip::GetVideo()

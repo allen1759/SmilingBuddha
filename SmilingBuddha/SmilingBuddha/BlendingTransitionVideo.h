@@ -19,9 +19,9 @@ public:
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
 private:
+	std::shared_ptr<cv::Mat> currentFrame;
 
-	std::shared_ptr<cv::Mat> firstFrame;
-	std::shared_ptr<cv::Mat> lastFrame;
+	bool end;
 };
 
 

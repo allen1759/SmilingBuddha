@@ -16,14 +16,26 @@ class Video
 {
 protected:
 	Video()
-	{}
-	virtual ~Video()
-	{}
+	{
+	}
 
 public:
+	virtual ~Video()
+	{
+	}
+
 	virtual std::shared_ptr<cv::Mat> GetFrame() = 0;
 
 	virtual std::shared_ptr<Video> GetVideo() = 0;
+
+	virtual std::shared_ptr<Video> GetChild(int row, int col)
+	{
+		return NULL;
+	}
+
+	virtual void SetChild(std::shared_ptr<Video> video, int row, int col)
+	{
+	}
 };
 
 

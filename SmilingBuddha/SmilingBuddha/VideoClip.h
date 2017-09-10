@@ -27,8 +27,8 @@ public:
 private:
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imageSequence;
 	int currentFrameIndex;
+	float currentFrameNumber;
 
-	std::chrono::high_resolution_clock::time_point startTime;
 	std::chrono::high_resolution_clock::time_point lastTime;
 	float elapsedTime;
 

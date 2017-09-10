@@ -11,9 +11,9 @@
 
 #include <vector>
 #include <memory>
-
-
 #include <mutex>
+
+#include <opencv2\core\core.hpp>
 
 class VideoGrid : public Video, public std::enable_shared_from_this<VideoGrid>
 {
@@ -26,12 +26,16 @@ public:
 
 	virtual std::shared_ptr<Video> GetVideo() override;
 
-	std::shared_ptr<Video> GetChild(int row, int col);
+	virtual std::shared_ptr<Video> GetChild(int row, int col) override;
 
-	void SetChild(std::shared_ptr<Video> video, int row, int col);
+	virtual void SetChild(std::shared_ptr<Video> video, int row, int col) override;
 
 private:
+	void DrawSingleGrid(int row, int col);
+
+	std::shared_ptr<cv::Mat> frame;
 	std::vector<std::shared_ptr<Video>> videoGrid;
+	std::vector<cv::Point> layout;
 	std::mutex videoGridMutex;
 
 	int rowCount;

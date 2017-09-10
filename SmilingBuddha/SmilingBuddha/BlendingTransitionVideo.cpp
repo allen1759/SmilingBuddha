@@ -9,8 +9,9 @@
 BlendingTransitionVideo::BlendingTransitionVideo(std::shared_ptr<Video> video, std::shared_ptr<Video> nextVideo, float duration)
 	: TransitionalVideo(video, nextVideo, duration)
 {
-	firstFrame = video->GetFrame();
-	lastFrame = nextVideo->GetFrame();
+	currentFrame = std::make_shared<cv::Mat>();
+
+	end = false;
 }
 
 BlendingTransitionVideo::~BlendingTransitionVideo()
@@ -19,21 +20,23 @@ BlendingTransitionVideo::~BlendingTransitionVideo()
 
 std::shared_ptr<cv::Mat> BlendingTransitionVideo::GetFrame()
 {
-	std::shared_ptr<cv::Mat> dst;
-
+	if (end)
+		return nextVideo->GetFrame();
+	
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
-	double delta = static_cast<double>(std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count());
-
-	if (delta > duration.count()) {
-		dst = nextVideo->GetFrame();
-	}
-	else {
-		dst = std::make_shared<cv::Mat>();
-		lastFrame = nextVideo->GetFrame();
-		double weight = delta / static_cast<double>(duration.count());
-		cv::addWeighted(*firstFrame, 1 - weight, *lastFrame, weight, 0.0, *dst);
+	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
+	
+	if (elapsedTime >= duration) {
+		elapsedTime = duration;
+		end = true;
 	}
 
-	return dst;
+	std::shared_ptr<cv::Mat> fromFrame = video->GetFrame();
+	std::shared_ptr<cv::Mat> toFrame = nextVideo->GetFrame();
+
+	float weight = elapsedTime / duration;
+	cv::addWeighted(*fromFrame, 1.0f - weight, *toFrame, weight, 0.0, *currentFrame);
+
+	return currentFrame;
 }
 
