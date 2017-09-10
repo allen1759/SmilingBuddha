@@ -37,11 +37,11 @@
     <Filter Include="Event">
       <UniqueIdentifier>{d67fe009-109e-4901-8ca5-0328320645a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controller\Video">
-      <UniqueIdentifier>{d336c3a5-d756-4355-ae79-83770bf0bfef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="State\ending_state">
       <UniqueIdentifier>{f0e627bd-385f-4c6c-befc-72d5eb8b21f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Video">
+      <UniqueIdentifier>{d336c3a5-d756-4355-ae79-83770bf0bfef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,10 +79,10 @@
       <Filter>原始程式檔</Filter>
     </ClCompile>
     <ClCompile Include="VideoClip.cpp">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClCompile>
     <ClCompile Include="VideoGrid.cpp">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClCompile>
     <ClCompile Include="VideoPool.cpp">
       <Filter>原始程式檔</Filter>
@@ -124,7 +124,7 @@
       <Filter>State</Filter>
     </ClCompile>
     <ClCompile Include="BlendingTransitionVideo.cpp">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClCompile>
     <ClCompile Include="SmileProcessStrategy.cpp">
       <Filter>Controller\smile_processor</Filter>
@@ -255,25 +255,25 @@
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedVideo.h">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="BlendingTransitionVideo.h">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="FadeAnimationVideo.h">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="TransitionalVideo.h">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="Video.h">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="VideoClip.h">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="VideoGrid.h">
-      <Filter>Controller\Video</Filter>
+      <Filter>Video</Filter>
     </ClInclude>
     <ClInclude Include="TransitionState.h">
       <Filter>State</Filter>

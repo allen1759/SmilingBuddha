@@ -38,6 +38,3 @@ private:
 
 
 #endif // !_ENDING_FADE_STATE_H
-
-#include "EndingState.h"
-
