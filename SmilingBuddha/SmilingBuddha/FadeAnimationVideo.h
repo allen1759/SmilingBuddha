@@ -33,7 +33,7 @@ private:
 	std::shared_ptr<cv::Mat> currentFrame;
 };
 
-FadeAnimationVideo::FadeAnimationVideo(std::shared_ptr<Video> video, float duration, unsigned char R, unsigned char G, unsigned char B)
+FadeAnimationVideo::FadeAnimationVideo(std::shared_ptr<Video> video, float duration, unsigned char r, unsigned char g, unsigned char b)
 	: AnimatedVideo(video, duration)
 {
 	this->r = r;
