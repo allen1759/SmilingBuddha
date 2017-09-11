@@ -11,6 +11,7 @@
 #include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
+#include "WaveTransitionalVideo.h"
 #include "EndingBuddhaState.h"
 
 
@@ -67,8 +68,7 @@ std::string BroadcastState::ToString()
 
 void BroadcastState::SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
 {
-	// TODO: replace by wave
-	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
+	std::shared_ptr<Video> blendingVideo = std::make_shared<WaveTransitionalVideo>(
 		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
 		newVideo,
 		WAVE_TIME);

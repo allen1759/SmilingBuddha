@@ -18,19 +18,7 @@
 class GazeWanderState : public GazeState
 {
 public:
-	GazeWanderState(Director *director, std::chrono::high_resolution_clock::time_point startTime)
-		: GazeState(director, startTime),
-		  ROW_COUNT(Setting::GetInstance()->GetRow()),
-		  COL_COUNT(Setting::GetInstance()->GetCol()),
-		  ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
-		  COL_CENTER(Setting::GetInstance()->GetCenterCol()),
-		  PROJECTION_WIDTH(Setting::GetInstance()->GetProjectionWidth()),
-		  PROJECTION_HEIGHT(Setting::GetInstance()->GetProjectionHeight())
-	{
-		this->lastGazeRow = ROW_CENTER;
-		this->lastGazeCol = COL_CENTER;
-		this->lastSelectTime = std::chrono::high_resolution_clock::now();
-	}
+	GazeWanderState(Director *director, std::chrono::high_resolution_clock::time_point startTime);
 
 	virtual ~GazeWanderState()
 	{

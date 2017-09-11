@@ -27,7 +27,7 @@ protected:
 	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
 
 
-	const float GAZE_STATE_TIME = 2000.0f;
+	const float GAZE_STATE_TIME = 20.0f;
 	const float ACTOR_VIDEO_TIME = 3.0f;
 
 	VideoPool *videoPool;

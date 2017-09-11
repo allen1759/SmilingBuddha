@@ -15,8 +15,8 @@
 #include "Director.h"
 #include "BroadcastState.h"
 #include "VideoClip.h"
-//replace with wave
 #include "BlendingTransitionVideo.h"
+#include "WaveTransitionalVideo.h"
 
 class GazeLockState : public GazeState
 {
@@ -86,7 +86,7 @@ private:
 	
 	void SetWaveVideo(int row, int col, std::shared_ptr<Video> newVideo)
 	{
-		std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
+		std::shared_ptr<Video> waveVideo = std::make_shared<WaveTransitionalVideo>(
 			director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
 			newVideo,
 			APPEAR_TIME);

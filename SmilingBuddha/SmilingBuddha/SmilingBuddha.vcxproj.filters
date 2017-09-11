@@ -168,6 +168,15 @@
     <ClCompile Include="GazeLockState.cpp">
       <Filter>state\gaze_state</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveTransitionalVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeAnimationVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">
@@ -319,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="Kinect1HeadPoseTracker.h">
       <Filter>controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeBackgroundAnimatedVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveTransitionalVideo.h">
+      <Filter>video</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

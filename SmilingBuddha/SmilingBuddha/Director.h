@@ -56,7 +56,7 @@ public:
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;
 
 private:
-	// should clear user video record when they leave.
+	// TODO: should clear user video record when they leave.
 	void ClearUserImageSequenceRecords();
 
 	VideoGrid *videoGrid;

@@ -11,10 +11,6 @@
 #include "VideoClip.h"
 #include "GazeInitialState.h"
 
-// replace by wave animation
-#include "BlendingTransitionVideo.h"
-#include "IntroInitialState.h"
-
 TransitionState::TransitionState(Director *director)
 	: InteractionState(director),
 	  ROW_COUNT(Setting::GetInstance()->GetRow()),

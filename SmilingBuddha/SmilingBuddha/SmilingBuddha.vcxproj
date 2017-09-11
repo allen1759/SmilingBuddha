@@ -118,11 +118,13 @@
     <ClCompile Include="ActorVideoSet.cpp" />
     <ClCompile Include="BlendingTransitionVideo.cpp" />
     <ClCompile Include="BroadcastState.cpp" />
+    <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp" />
     <ClCompile Include="EndingBuddhaState.cpp" />
     <ClCompile Include="DebugHeadPoseTracker.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="EndingFadeState.cpp" />
     <ClCompile Include="EndingState.cpp" />
+    <ClCompile Include="FadeAnimationVideo.cpp" />
     <ClCompile Include="GazeLockState.cpp" />
     <ClCompile Include="GazeState.cpp" />
     <ClCompile Include="GazeWanderState.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="VideoGrid.cpp" />
     <ClCompile Include="VideoPool.cpp" />
     <ClCompile Include="VideoRenderer.cpp" />
+    <ClCompile Include="WaveTransitionalVideo.cpp" />
     <ClCompile Include="WebcamSmileVideoProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +164,7 @@
     <ClInclude Include="AnimatedVideo.h" />
     <ClInclude Include="BlendingTransitionVideo.h" />
     <ClInclude Include="BroadcastState.h" />
+    <ClInclude Include="ChangeBackgroundAnimatedVideo.h" />
     <ClInclude Include="EndingBuddhaState.h" />
     <ClInclude Include="DebugHeadPoseTracker.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
@@ -206,6 +210,7 @@
     <ClInclude Include="VideoGrid.h" />
     <ClInclude Include="VideoPool.h" />
     <ClInclude Include="VideoRenderer.h" />
+    <ClInclude Include="WaveTransitionalVideo.h" />
     <ClInclude Include="WebcamSmileVideoProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

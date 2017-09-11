@@ -10,6 +10,7 @@
 #include "Director.h"
 #include "VideoClip.h"
 #include "BlendingTransitionVideo.h"
+#include "WaveTransitionalVideo.h"
 
 
 #include "TransitionState.h"
@@ -68,9 +69,8 @@ std::string SmileState::ToString()
 
 void SmileState::SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
-	// TODO: replace blending with wave.
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(images, USER_VIDEO_TIME, true, true);
-	std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
+	std::shared_ptr<Video> waveVideo = std::make_shared<WaveTransitionalVideo>(
 		director->GetVideoGrid()->GetChild(ROW_CENTER, COL_CENTER),
 		newVideo, WAVE_TIME);
 
@@ -79,9 +79,8 @@ void SmileState::SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<st
 
 void SmileState::SetWaveAnimationByOriginVideo()
 {
-	// TODO: replace blending with wave.
 	std::shared_ptr<Video> newVideo = GetActorDirectionVideo(ROW_CENTER, COL_CENTER, ActorVideoSet::NEUTRAL, true, true);
-	std::shared_ptr<Video> waveVideo = std::make_shared<BlendingTransitionVideo>(
+	std::shared_ptr<Video> waveVideo = std::make_shared<WaveTransitionalVideo>(
 		director->GetVideoGrid()->GetChild(ROW_CENTER, COL_CENTER),
 		newVideo, WAVE_TIME);
 
