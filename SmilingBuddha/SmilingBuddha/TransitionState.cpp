@@ -9,11 +9,11 @@
 #include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
+#include "GazeInitialState.h"
 
 // replace by wave animation
 #include "BlendingTransitionVideo.h"
 #include "IntroInitialState.h"
-#include "BroadcastState.h"
 
 TransitionState::TransitionState(Director *director)
 	: InteractionState(director),
@@ -41,7 +41,7 @@ void TransitionState::Update()
 
 	if (elapsedTime > nextAppearElapsedTime) {
 		if (currentDistance == Setting::GetInstance()->GetMaxDistanceToCenterInGrid()) {
-			director->SetInteractionState(std::make_shared<BroadcastState>(director));
+			director->SetInteractionState(std::make_shared<GazeInitialState>(director));
 			return;
 		}
 

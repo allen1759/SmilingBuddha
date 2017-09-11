@@ -37,6 +37,24 @@ public:
 	int GetSaveImageWidth();
 	int GetSaveIMageHeight();
 
+	int GetScreenWidth()
+	{
+		return SCREEN_WIDTH;
+	}
+	int GetScreenHeight()
+	{
+		return SCREEN_HEIGHT;
+	}
+
+	float GetProjectionWidth()
+	{
+		return PROJECTION_WIDTH;
+	}
+	float GetProjectionHeight()
+	{
+		return PROJECTION_HEIGHT;
+	}
+
 	int CalculateDistanceToCenter(int row, int col);
 	bool IsInIntroStateGrid(int row, int col);
 
@@ -77,6 +95,12 @@ private:
 	static const int IMAGE_HEIGHT = 177;
 	static const int SAVE_IMAGE_WIDTH = 260;
 	static const int SAVE_IMAGE_HEIGHT = 355;
+
+	static const int SCREEN_WIDTH = 1920;
+	static const int SCREEN_HEIGHT = 1080;
+
+	const float PROJECTION_WIDTH = 1.92f;
+	const float PROJECTION_HEIGHT = 1.08f;
 };
 
 

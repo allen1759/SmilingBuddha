@@ -17,7 +17,7 @@
 // for test
 #include "IntroInitialState.h"
 
-Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor)
+Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker)
 {
 	this->videoGrid = new VideoGrid();
 	//videoRenderer->SetVideo(videoGrid);
@@ -25,6 +25,7 @@ Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideo
 	this->userImageSequenceRecords = std::make_shared<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>>();
 
 	this->smileVideoProcessor = smileVideoProcessor;
+	this->headPoseTracker = headPoseTracker;
 
 	// Create first state.
 	std::shared_ptr<InteractionState> state = std::make_shared<IntroInitialState>(this);
@@ -61,7 +62,7 @@ void Director::UpdateLoop()
 
 		end = std::chrono::high_resolution_clock::now();
 		duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-		std::cout << "UPDATE LOOP: " << duration.count() << std::endl;
+		//std::cout << "UPDATE LOOP: " << duration.count() << std::endl;
 	}
 }
 
@@ -89,16 +90,23 @@ void Director::SetSeeEachSmileProcessorStrategy(float waitTime)
 void Director::StartInteraction()
 {
 	smileVideoProcessor->Start();
+	headPoseTracker->StartTracking();
 }
 
 void Director::StopInteraction()
 {
 	smileVideoProcessor->Stop();
+	headPoseTracker->StopTracking();
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> Director::GetUserImageSequenceRecords()
 {
 	return userImageSequenceRecords;
+}
+
+Ray Director::GetHeadPose()
+{
+	return headPoseTracker->GetHeadPose();
 }
 
 void Director::OnSmile()

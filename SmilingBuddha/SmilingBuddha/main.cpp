@@ -1,26 +1,27 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <fstream>
 #include <chrono>
+
+#include "VideoPool.h"
+#include "VideoRenderer.h"
+#include "Director.h"
 
 #include "WebcamSmileVideoProcessor.h"
 #include "DebugSmileVideoProcessor.h"
-#include "VideoRenderer.h"
-#include "Director.h"
-#include "IntroInitialState.h"
+#include "DebugHeadPoseTracker.h"
 
+#include "vld.h"
 
-#include "vld.h" 
 int main()
 {
 	VideoPool::GetInstance();
 
 	//SmileVideoProcessor *smileVideoProcessor = WebcamSmileVideoProcessor::GetInstance();
 	SmileVideoProcessor *smileVideoProcessor = DebugSmileVideoProcessor::GetInstance();
+	HeadPoseTracker *headPoseTracker = new DebugHeadPoseTracker();
+
 	//VideoRenderer *videoRenderer = VideoRenderer::GetInstance();
 
-	Director *director = new Director(NULL, smileVideoProcessor);
+	Director *director = new Director(NULL, smileVideoProcessor, headPoseTracker);
 	//Director *director = new Director(videoRenderer, smileVideoProcessor);
 
 

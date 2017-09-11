@@ -18,13 +18,15 @@
 #include "VideoGrid.h"
 #include "Event.h"
 #include "InteractionState.h"
+// Controllers
 #include "SmileVideoProcessor.h"
+#include "HeadPoseTracker.h"
 
 class Director : public SmileObserver
 {
 public:
 	//TODO: Add controller
-	Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor);
+	Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker);
 
 	~Director();
 
@@ -46,6 +48,8 @@ public:
 
 	std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> GetUserImageSequenceRecords();
 
+	Ray GetHeadPose();
+
 	// Implement SmileObserver's pure virtual function.
 	virtual void OnSmile() override;
 
@@ -60,6 +64,7 @@ private:
 
 	// Controllers
 	SmileVideoProcessor *smileVideoProcessor;
+	HeadPoseTracker *headPoseTracker;
 
 	bool running;
 	std::thread updateThread;
