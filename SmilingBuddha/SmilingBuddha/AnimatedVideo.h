@@ -30,7 +30,11 @@ public:
 
 	virtual std::shared_ptr<cv::Mat> GetFrame() = 0;
 
-	virtual std::shared_ptr<Video> GetVideo() override;
+	virtual std::shared_ptr<Video> GetVideo() override
+	{
+		return video;
+	}
+
 
 protected:
 
@@ -39,10 +43,5 @@ protected:
 	float duration;
 	std::chrono::high_resolution_clock::time_point startTime;
 };
-
-std::shared_ptr<Video> AnimatedVideo::GetVideo()
-{
-	return video;
-}
 
 #endif // !_ANIMATED_VIDEO_H
