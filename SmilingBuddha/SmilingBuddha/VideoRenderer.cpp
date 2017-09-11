@@ -9,6 +9,8 @@
 #include <iostream>
 #include <chrono>
 
+#include "Setting.h"
+
 VideoRenderer *VideoRenderer::instance = NULL;
 
 VideoRenderer * VideoRenderer::GetInstance()
@@ -20,6 +22,8 @@ VideoRenderer * VideoRenderer::GetInstance()
 }
 
 VideoRenderer::VideoRenderer()
+	: RESOLUTION_WIDTH(Setting::GetInstance()->GetResolutionWidth()),
+	  RESOLUTION_HEIGHT(Setting::GetInstance()->GetResolutionHeight())
 {
 	glfwInit();
 	window = glfwCreateWindow(RESOLUTION_WIDTH, RESOLUTION_HEIGHT, "OpenGL", NULL, NULL);

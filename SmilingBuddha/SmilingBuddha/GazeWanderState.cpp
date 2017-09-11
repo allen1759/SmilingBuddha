@@ -26,6 +26,7 @@ void GazeWanderState::Update()
 
 	int gazeRow, gazeCol;
 	HeadPost2RowCol(director->GetHeadPose(), gazeRow, gazeCol);
+
 	if ((gazeRow != lastGazeRow || gazeCol != lastGazeCol) && 
 		gazeRow >= 0 && gazeRow < ROW_COUNT && gazeCol >= 0 && gazeCol < COL_COUNT) {
 		lastSelectTime = currentTime;

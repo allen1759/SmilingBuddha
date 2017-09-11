@@ -37,13 +37,13 @@ public:
 	int GetSaveImageWidth();
 	int GetSaveIMageHeight();
 
-	int GetScreenWidth()
+	int GetResolutionWidth()
 	{
-		return SCREEN_WIDTH;
+		return RESOLUTION_WIDTH;
 	}
-	int GetScreenHeight()
+	int GetResolutionHeight()
 	{
-		return SCREEN_HEIGHT;
+		return RESOLUTION_HEIGHT;
 	}
 
 	float GetProjectionWidth()
@@ -96,8 +96,8 @@ private:
 	static const int SAVE_IMAGE_WIDTH = 260;
 	static const int SAVE_IMAGE_HEIGHT = 355;
 
-	static const int SCREEN_WIDTH = 1920;
-	static const int SCREEN_HEIGHT = 1080;
+	static const int RESOLUTION_WIDTH = 1920;
+	static const int RESOLUTION_HEIGHT = 1080;
 
 	const float PROJECTION_WIDTH = 1.92f;
 	const float PROJECTION_HEIGHT = 1.08f;

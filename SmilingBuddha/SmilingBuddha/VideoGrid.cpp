@@ -18,9 +18,9 @@ VideoGrid::VideoGrid()
 
 	videoGrid.resize(rowCount * colCount);
 	layout.resize(rowCount * colCount);
-	//TODO: read from setting.
-	float gridSizeX = 1920.0f / static_cast<float>(colCount);
-	float gridSizeY = 1080.0f / static_cast<float>(rowCount);
+
+	float gridSizeX = Setting::GetInstance()->GetResolutionWidth() / static_cast<float>(colCount);
+	float gridSizeY = Setting::GetInstance()->GetResolutionHeight() / static_cast<float>(rowCount);
 	for (int i = 0; i < rowCount; ++i) {
 		for (int j = 0; j < colCount; ++j)
 			layout[i * colCount + j] = cv::Point(static_cast<int>(gridSizeX * static_cast<float>(j)), static_cast<int>(gridSizeY * static_cast<float>(i)));

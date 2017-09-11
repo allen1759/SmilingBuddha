@@ -84,6 +84,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)$(ProjectName)\3rdparty\portaudio_v190600\bin\portaudio_x64d.dll" "$(TargetDir)portaudio_x64.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -120,11 +123,15 @@
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="EndingFadeState.cpp" />
     <ClCompile Include="EndingState.cpp" />
+    <ClCompile Include="GazeLockState.cpp" />
+    <ClCompile Include="GazeState.cpp" />
+    <ClCompile Include="GazeWanderState.cpp" />
     <ClCompile Include="InteractionState.cpp" />
     <ClCompile Include="IntroInitialState.cpp" />
     <ClCompile Include="IntroNeutralState.cpp" />
     <ClCompile Include="IntroSeeEachState.cpp" />
     <ClCompile Include="IntroState.cpp" />
+    <ClCompile Include="Kinect1HeadPoseTracker.cpp" />
     <ClCompile Include="liblinear-2.11\blas\daxpy.c" />
     <ClCompile Include="liblinear-2.11\blas\ddot.c" />
     <ClCompile Include="liblinear-2.11\blas\dnrm2.c" />
@@ -162,11 +169,16 @@
     <ClInclude Include="EndingState.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="FadeAnimationVideo.h" />
+    <ClInclude Include="GazeInitialState.h" />
+    <ClInclude Include="GazeLockState.h" />
+    <ClInclude Include="GazeState.h" />
+    <ClInclude Include="GazeWanderState.h" />
     <ClInclude Include="HeadPoseTracker.h" />
     <ClInclude Include="InteractionState.h" />
     <ClInclude Include="IntroInitialState.h" />
     <ClInclude Include="IntroNeutralState.h" />
     <ClInclude Include="IntroSeeEachState.h" />
+    <ClInclude Include="Kinect1HeadPoseTracker.h" />
     <ClInclude Include="OnRecordedEvent.h" />
     <ClInclude Include="OnSmileEvent.h" />
     <ClInclude Include="Ray.h" />

@@ -30,9 +30,8 @@ public:
 private:
 	static VideoRenderer *instance;
 
-	// TODO : read file to set resolution.
-	const int RESOLUTION_WIDTH = 1920;
-	const int RESOLUTION_HEIGHT = 1080;
+	const int RESOLUTION_WIDTH;
+	const int RESOLUTION_HEIGHT;
 	GLFWwindow *window;
 
 	GLuint vertexBufferHandle;

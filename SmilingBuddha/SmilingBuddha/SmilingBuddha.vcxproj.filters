@@ -16,31 +16,34 @@
     <Filter Include="liblinear">
       <UniqueIdentifier>{820edd41-7f56-4a2b-976e-367653c531f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controller">
-      <UniqueIdentifier>{951340c3-60df-45d4-9862-fb89245ffa47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controller\head_pose_tracker">
-      <UniqueIdentifier>{37914243-b05c-44b7-9db9-cdc305ae227b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controller\user_detector">
-      <UniqueIdentifier>{81a65853-b47c-45b2-b2a9-15730c06a5f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controller\smile_processor">
-      <UniqueIdentifier>{c29065ed-ab95-4a9e-982d-e2d1b81390c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="State">
+    <Filter Include="state">
       <UniqueIdentifier>{f9e5aa6f-e107-40dc-abb3-0ecb01430473}</UniqueIdentifier>
     </Filter>
-    <Filter Include="State\intro_state">
+    <Filter Include="state\intro_state">
       <UniqueIdentifier>{244a485a-2653-4131-99cb-a7ac4dfe6f0d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Event">
-      <UniqueIdentifier>{d67fe009-109e-4901-8ca5-0328320645a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="State\ending_state">
+    <Filter Include="state\ending_state">
       <UniqueIdentifier>{f0e627bd-385f-4c6c-befc-72d5eb8b21f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Video">
+    <Filter Include="state\gaze_state">
+      <UniqueIdentifier>{2aabbcfc-9b60-45a5-9373-02a479d731f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller">
+      <UniqueIdentifier>{951340c3-60df-45d4-9862-fb89245ffa47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller\head_pose_tracker">
+      <UniqueIdentifier>{37914243-b05c-44b7-9db9-cdc305ae227b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller\user_detector">
+      <UniqueIdentifier>{81a65853-b47c-45b2-b2a9-15730c06a5f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller\smile_processor">
+      <UniqueIdentifier>{c29065ed-ab95-4a9e-982d-e2d1b81390c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="event">
+      <UniqueIdentifier>{d67fe009-109e-4901-8ca5-0328320645a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="video">
       <UniqueIdentifier>{d336c3a5-d756-4355-ae79-83770bf0bfef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -79,79 +82,91 @@
       <Filter>原始程式檔</Filter>
     </ClCompile>
     <ClCompile Include="VideoClip.cpp">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClCompile>
     <ClCompile Include="VideoGrid.cpp">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClCompile>
     <ClCompile Include="VideoPool.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
     <ClCompile Include="SmileVideoProcessor.cpp">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClCompile>
     <ClCompile Include="RegularSmileProcessStrategy.cpp">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClCompile>
     <ClCompile Include="SeeEachSmileProcessStrategy.cpp">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClCompile>
     <ClCompile Include="SmileRecognizer.cpp">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClCompile>
     <ClCompile Include="SmileSaver.cpp">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClCompile>
     <ClCompile Include="UserDetector.cpp">
-      <Filter>Controller\user_detector</Filter>
+      <Filter>controller\user_detector</Filter>
     </ClCompile>
     <ClCompile Include="WebcamSmileVideoProcessor.cpp">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClCompile>
     <ClCompile Include="IntroInitialState.cpp">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClCompile>
     <ClCompile Include="IntroNeutralState.cpp">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClCompile>
     <ClCompile Include="IntroSeeEachState.cpp">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClCompile>
     <ClCompile Include="IntroState.cpp">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClCompile>
     <ClCompile Include="InteractionState.cpp">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClCompile>
     <ClCompile Include="BlendingTransitionVideo.cpp">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClCompile>
     <ClCompile Include="SmileProcessStrategy.cpp">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClCompile>
     <ClCompile Include="DebugHeadPoseTracker.cpp">
-      <Filter>Controller\head_pose_tracker</Filter>
+      <Filter>controller\head_pose_tracker</Filter>
     </ClCompile>
     <ClCompile Include="SmileState.cpp">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClCompile>
     <ClCompile Include="OnRecordedEvent.cpp">
-      <Filter>Event</Filter>
+      <Filter>event</Filter>
     </ClCompile>
     <ClCompile Include="TransitionState.cpp">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClCompile>
     <ClCompile Include="BroadcastState.cpp">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClCompile>
     <ClCompile Include="EndingBuddhaState.cpp">
-      <Filter>State\ending_state</Filter>
+      <Filter>state\ending_state</Filter>
     </ClCompile>
     <ClCompile Include="EndingFadeState.cpp">
-      <Filter>State\ending_state</Filter>
+      <Filter>state\ending_state</Filter>
     </ClCompile>
     <ClCompile Include="EndingState.cpp">
-      <Filter>State\ending_state</Filter>
+      <Filter>state\ending_state</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeState.cpp">
+      <Filter>state\gaze_state</Filter>
+    </ClCompile>
+    <ClCompile Include="Kinect1HeadPoseTracker.cpp">
+      <Filter>controller\head_pose_tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeWanderState.cpp">
+      <Filter>state\gaze_state</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeLockState.cpp">
+      <Filter>state\gaze_state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,109 +201,124 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
-      <Filter>Event</Filter>
+      <Filter>event</Filter>
     </ClInclude>
     <ClInclude Include="OnRecordedEvent.h">
-      <Filter>Event</Filter>
+      <Filter>event</Filter>
     </ClInclude>
     <ClInclude Include="OnSmileEvent.h">
-      <Filter>Event</Filter>
+      <Filter>event</Filter>
     </ClInclude>
     <ClInclude Include="Ray.h">
-      <Filter>Controller\head_pose_tracker</Filter>
+      <Filter>controller\head_pose_tracker</Filter>
     </ClInclude>
     <ClInclude Include="DebugHeadPoseTracker.h">
-      <Filter>Controller\head_pose_tracker</Filter>
+      <Filter>controller\head_pose_tracker</Filter>
     </ClInclude>
     <ClInclude Include="HeadPoseTracker.h">
-      <Filter>Controller\head_pose_tracker</Filter>
+      <Filter>controller\head_pose_tracker</Filter>
     </ClInclude>
     <ClInclude Include="DebugSmileVideoProcessor.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="RegularSmileProcessStrategy.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="SeeEachSmileProcessStrategy.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="SmileObserver.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="SmileProcessStrategy.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="SmileRecognizer.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="SmileSaver.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="SmileVideoProcessor.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="WebcamSmileVideoProcessor.h">
-      <Filter>Controller\smile_processor</Filter>
+      <Filter>controller\smile_processor</Filter>
     </ClInclude>
     <ClInclude Include="UserDetector.h">
-      <Filter>Controller\user_detector</Filter>
+      <Filter>controller\user_detector</Filter>
     </ClInclude>
     <ClInclude Include="UserObserver.h">
-      <Filter>Controller\user_detector</Filter>
+      <Filter>controller\user_detector</Filter>
     </ClInclude>
     <ClInclude Include="IntroInitialState.h">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClInclude>
     <ClInclude Include="IntroNeutralState.h">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClInclude>
     <ClInclude Include="IntroSeeEachState.h">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClInclude>
     <ClInclude Include="IntroState.h">
-      <Filter>State\intro_state</Filter>
+      <Filter>state\intro_state</Filter>
     </ClInclude>
     <ClInclude Include="InteractionState.h">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClInclude>
     <ClInclude Include="SmileState.h">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedVideo.h">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="BlendingTransitionVideo.h">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="FadeAnimationVideo.h">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="TransitionalVideo.h">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="Video.h">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="VideoClip.h">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="VideoGrid.h">
-      <Filter>Video</Filter>
+      <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="TransitionState.h">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClInclude>
     <ClInclude Include="BroadcastState.h">
-      <Filter>State</Filter>
+      <Filter>state</Filter>
     </ClInclude>
     <ClInclude Include="EndingBuddhaState.h">
-      <Filter>State\ending_state</Filter>
+      <Filter>state\ending_state</Filter>
     </ClInclude>
     <ClInclude Include="EndingFadeState.h">
-      <Filter>State\ending_state</Filter>
+      <Filter>state\ending_state</Filter>
     </ClInclude>
     <ClInclude Include="EndingState.h">
-      <Filter>State\ending_state</Filter>
+      <Filter>state\ending_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeInitialState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeWanderState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeLockState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="Kinect1HeadPoseTracker.h">
+      <Filter>controller\head_pose_tracker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

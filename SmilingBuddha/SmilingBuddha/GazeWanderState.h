@@ -49,20 +49,22 @@ private:
 		glm::vec3 origin = headPose.GetOrigin();
 		glm::vec3 direction = headPose.GetDirection();
 
-		if (direction.z == 0) {
-			//check
-		}
+		// Check boundary case.
+		if (direction.z == 0)
+			direction.z = 1e-9;
+
 		float multiply = -origin.z / direction.z;
 		glm::vec3 intersection = origin + direction * multiply;
 
 		float rowMeter = -intersection.y + PROJECTION_HEIGHT / 2;
 		float colMeter = intersection.x + PROJECTION_WIDTH / 2;
 		std::cout << "Meter row: " << rowMeter << " col: " << colMeter << std::endl;
-		if (rowMeter >= 0 && rowMeter < PROJECTION_HEIGHT && colMeter >= 0 && colMeter < PROJECTION_WIDTH) {
-			row = rowMeter / PROJECTION_HEIGHT * ROW_COUNT;
-			col = colMeter / PROJECTION_WIDTH * COL_COUNT;
-			//std::cout << "Look At row: " << row << " col: " << col << std::endl;
-		}
+
+		row = rowMeter / PROJECTION_HEIGHT * ROW_COUNT;
+		col = colMeter / PROJECTION_WIDTH * COL_COUNT;
+
+		row = std::max(0, std::min(ROW_COUNT - 1, row));
+		col = std::max(0, std::min(COL_COUNT - 1, col));
 	}
 
 	const int ROW_COUNT;
