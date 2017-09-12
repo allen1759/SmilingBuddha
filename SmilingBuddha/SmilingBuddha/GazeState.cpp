@@ -9,14 +9,15 @@
 #include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
+#include "ChangeBackgroundAnimatedVideo.h"
 #include "BroadcastState.h"
 
 GazeState::GazeState(Director *director, std::chrono::high_resolution_clock::time_point startTime)
 	: InteractionState(director),
 	  ROW_COUNT(Setting::GetInstance()->GetRow()),
 	  COL_COUNT(Setting::GetInstance()->GetCol()),
-	ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
-	COL_CENTER(Setting::GetInstance()->GetCenterCol()),
+	  ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
+	  COL_CENTER(Setting::GetInstance()->GetCenterCol()),
 	  PROJECTION_WIDTH(Setting::GetInstance()->GetProjectionWidth()),
 	  PROJECTION_HEIGHT(Setting::GetInstance()->GetProjectionHeight())
 {
@@ -24,6 +25,10 @@ GazeState::GazeState(Director *director, std::chrono::high_resolution_clock::tim
 
 	this->switchToBroadcastState = false;
 	this->userImages = NULL;
+
+	// Gaze grid start at center.
+	this->lastGazeRow = ROW_CENTER;
+	this->lastGazeCol = COL_CENTER;
 
 	this->elapsedTime = 0.0f;
 	this->startTime = startTime;
@@ -71,6 +76,29 @@ void GazeState::HeadPost2RowCol(Ray headPose, int & row, int & col)
 	row = rowMeter / PROJECTION_HEIGHT * ROW_COUNT;
 	col = colMeter / PROJECTION_WIDTH * COL_COUNT;
 
+	// Check boundary.
 	row = std::max(0, std::min(ROW_COUNT - 1, row));
 	col = std::max(0, std::min(COL_COUNT - 1, col));
+}
+
+void GazeState::MoveChangeBackgroundAnimationToOtherGrid(int row, int col)
+{
+	// If the grid has not been set, create a new one for it.
+	if (director->GetVideoGrid()->GetChild(row, col) == NULL) {
+		std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
+		director->GetVideoGrid()->SetChild(newVideo, row, col);
+	}
+
+	// Reset last gaze grid.
+	director->GetVideoGrid()->SetChild(
+		director->GetVideoGrid()->GetChild(lastGazeRow, lastGazeCol)->GetVideo(),
+		lastGazeRow, lastGazeCol);
+	// Set new animation at current gaze grid.
+	director->GetVideoGrid()->SetChild(
+		std::make_shared<ChangeBackgroundAnimatedVideo>(
+			director->GetVideoGrid()->GetChild(row, col), CHANGE_BACKGROUND_TIME),
+		row, col);
+
+	lastGazeRow = row;
+	lastGazeCol = col;
 }

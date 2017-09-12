@@ -11,66 +11,29 @@
 
 
 //cpp
-#include "Setting.h"
 #include "Director.h"
-#include "BroadcastState.h"
-#include "VideoClip.h"
 #include "BlendingTransitionVideo.h"
-#include "WaveTransitionalVideo.h"
 
 class GazeLockState : public GazeState
 {
 public:
-	GazeLockState(Director *director, std::chrono::high_resolution_clock::time_point startTime, int gazeRow, int gazeCol)
-		: GazeState(director, startTime)
-	{
-		this->isStartSeeGaze = false;
-		this->isStartSeeBack = false;
+	GazeLockState(Director *director, std::chrono::high_resolution_clock::time_point startTime, int gazeRow, int gazeCol);
 
-		this->gazeRow = gazeRow;
-		this->gazeCol = gazeCol;
-		this->lockStartTime = std::chrono::high_resolution_clock::now();
-
-		SetWaveVideo(gazeRow, gazeCol, std::make_shared<VideoClip>(director->GetUserImageSequenceRecords()->back(), USER_VIDEO_TIME, true, true));
-	}
-
-	virtual ~GazeLockState()
-	{
-	}
+	virtual ~GazeLockState();
 
 	virtual void Update() override;
 
-	virtual std::string ToString() override
-	{
-		return "GazeLockState";
-	}
+	virtual std::string ToString() override;
 
 private:
-	void SetAllSeeGazeVideo()
-	{
-		for (int row = 0; row < ROW_COUNT; ++row) {
-			for (int col = 0; col < COL_COUNT; ++col) {
-				if (row == gazeRow && col == gazeCol)
-					continue;
-				int direction = ActorVideoSet::GetDirectionIndex(row, col, gazeRow, gazeCol);
-				std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, direction, true, true);
-				SetBlendingVideo(row, col, newVideo);
-			}
-		}
-	}
+	// Set wave animation with given video.
+	void SetWaveVideo(int row, int col, std::shared_ptr<Video> newVideo);
 
-	void SetNeutralVideo()
-	{
-		for (int row = 0; row < ROW_COUNT; ++row) {
-			for (int col = 0; col < COL_COUNT; ++col) {
-				if (row == gazeRow && col == gazeCol)
-					continue;
+	// Set actors to look at gaze grid.
+	void SetAllSeeGazeVideo();
 
-				std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
-				SetBlendingVideo(row, col, newVideo);
-			}
-		}
-	}
+	// Reset all actors except gaze grid to NeutralVideo.
+	void SetNeutralVideo();
 
 	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo)
 	{
@@ -81,30 +44,17 @@ private:
 
 		director->GetVideoGrid()->SetChild(blendingVideo, row, col);
 	}
-	
-	void SetWaveVideo(int row, int col, std::shared_ptr<Video> newVideo)
-	{
-		std::shared_ptr<Video> waveVideo = std::make_shared<WaveTransitionalVideo>(
-			director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
-			newVideo,
-			APPEAR_TIME);
-
-		director->GetVideoGrid()->SetChild(waveVideo, row, col);
-	}
-
 
 
 	const float USER_VIDEO_TIME = 3.0;
-	const float APPEAR_TIME = 3.0f;
-	const float SEE_GAZE_VIDEO_TIME = 3.0f;
+	const float WAVE_TIME = 3.0f;
 	const float BLENDING_TIME = 0.5f;
-
 
 	bool isStartSeeGaze;
 	bool isStartSeeBack;
-	float startSeeGazeElapsedTime = USER_VIDEO_TIME;
-	float startSeeBackElapsedTime = USER_VIDEO_TIME + SEE_GAZE_VIDEO_TIME;
-	float endSeeBackElapsedTime = USER_VIDEO_TIME + SEE_GAZE_VIDEO_TIME * 2;
+	float startSeeGazeElapsedTime;
+	float startSeeBackElapsedTime;
+	float endSeeBackElapsedTime;
 
 	int gazeRow;
 	int gazeCol;

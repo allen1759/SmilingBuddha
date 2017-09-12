@@ -141,9 +141,6 @@
     <ClCompile Include="OnRecordedEvent.cpp">
       <Filter>event</Filter>
     </ClCompile>
-    <ClCompile Include="TransitionState.cpp">
-      <Filter>state</Filter>
-    </ClCompile>
     <ClCompile Include="BroadcastState.cpp">
       <Filter>state</Filter>
     </ClCompile>
@@ -176,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="FadeAnimationVideo.cpp">
       <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeInitialState.cpp">
+      <Filter>state\gaze_state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,9 +298,6 @@
     </ClInclude>
     <ClInclude Include="VideoGrid.h">
       <Filter>video</Filter>
-    </ClInclude>
-    <ClInclude Include="TransitionState.h">
-      <Filter>state</Filter>
     </ClInclude>
     <ClInclude Include="BroadcastState.h">
       <Filter>state</Filter>

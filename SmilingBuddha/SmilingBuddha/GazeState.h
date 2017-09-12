@@ -27,7 +27,17 @@ public:
 protected:
 	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
 
+	/**
+	* Calculate the row/col of gaze grid from head pose, ensure that row/col are in legal range.
+	*
+	* @param headPose  head pose of user.
+	* @param row  the correspond row number, pass by reference.
+	* @param col  the correspond column number, pass by reference.
+	*
+	*/
 	void HeadPost2RowCol(Ray headPose, int &row, int &col);
+
+	void MoveChangeBackgroundAnimationToOtherGrid(int row, int col);
 
 
 	const int ROW_COUNT;
@@ -37,15 +47,17 @@ protected:
 	const float PROJECTION_WIDTH;
 	const float PROJECTION_HEIGHT;
 
-
-
 	const float GAZE_STATE_TIME = 20.0f;
 	const float ACTOR_VIDEO_TIME = 3.0f;
+	const float CHANGE_BACKGROUND_TIME = 3.0f;
 
 	VideoPool *videoPool;
 
 	bool switchToBroadcastState;
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> userImages;
+
+	int lastGazeRow;
+	int lastGazeCol;
 
 	float elapsedTime;
 	std::chrono::high_resolution_clock::time_point startTime;

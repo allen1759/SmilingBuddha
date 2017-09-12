@@ -77,7 +77,7 @@ std::shared_ptr<cv::Mat> DebugSmileVideoProcessor::ReadFrame()
 	char ch;
 	if (kbhit()) {
 		ch = getch();
-		if (ch == 's' || ch == 'S')
+		if (ch == 'x' || ch == 'X')
 			ChangeSmile();
 	}
 

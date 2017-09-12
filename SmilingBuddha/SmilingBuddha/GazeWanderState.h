@@ -22,15 +22,8 @@ public:
 
 private:
 
-
-
-
-
-
 	const float MAX_STARING_TIME = 3.0f;
 
-	int lastGazeRow;
-	int lastGazeCol;
 	std::chrono::high_resolution_clock::time_point lastSelectTime;
 };
 
