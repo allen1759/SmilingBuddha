@@ -22,9 +22,7 @@ class GazeLockState : public GazeState
 {
 public:
 	GazeLockState(Director *director, std::chrono::high_resolution_clock::time_point startTime, int gazeRow, int gazeCol)
-		: GazeState(director, startTime),
-		  ROW_COUNT(Setting::GetInstance()->GetRow()),
-		  COL_COUNT(Setting::GetInstance()->GetCol())
+		: GazeState(director, startTime)
 	{
 		this->isStartSeeGaze = false;
 		this->isStartSeeBack = false;
@@ -95,8 +93,6 @@ private:
 	}
 
 
-	const int ROW_COUNT;
-	const int COL_COUNT;
 
 	const float USER_VIDEO_TIME = 3.0;
 	const float APPEAR_TIME = 3.0f;

@@ -6,12 +6,19 @@
 
 #include "GazeState.h"
 
+#include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
 #include "BroadcastState.h"
 
 GazeState::GazeState(Director *director, std::chrono::high_resolution_clock::time_point startTime)
-	: InteractionState(director)
+	: InteractionState(director),
+	  ROW_COUNT(Setting::GetInstance()->GetRow()),
+	  COL_COUNT(Setting::GetInstance()->GetCol()),
+	ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
+	COL_CENTER(Setting::GetInstance()->GetCenterCol()),
+	  PROJECTION_WIDTH(Setting::GetInstance()->GetProjectionWidth()),
+	  PROJECTION_HEIGHT(Setting::GetInstance()->GetProjectionHeight())
 {
 	this->videoPool = VideoPool::GetInstance();
 
@@ -43,4 +50,27 @@ std::shared_ptr<Video> GazeState::GetActorDirectionVideo(int row, int col, int d
 		ACTOR_VIDEO_TIME, loop, reverse);
 
 	return newVideo;
+}
+
+void GazeState::HeadPost2RowCol(Ray headPose, int & row, int & col)
+{
+	glm::vec3 origin = headPose.GetOrigin();
+	glm::vec3 direction = headPose.GetDirection();
+
+	// Check boundary case.
+	if (direction.z == 0)
+		direction.z = 1e-9;
+
+	float multiply = -origin.z / direction.z;
+	glm::vec3 intersection = origin + direction * multiply;
+
+	float rowMeter = -intersection.y + PROJECTION_HEIGHT / 2;
+	float colMeter = intersection.x + PROJECTION_WIDTH / 2;
+	std::cout << "Meter row: " << rowMeter << " col: " << colMeter << std::endl;
+
+	row = rowMeter / PROJECTION_HEIGHT * ROW_COUNT;
+	col = colMeter / PROJECTION_WIDTH * COL_COUNT;
+
+	row = std::max(0, std::min(ROW_COUNT - 1, row));
+	col = std::max(0, std::min(COL_COUNT - 1, col));
 }

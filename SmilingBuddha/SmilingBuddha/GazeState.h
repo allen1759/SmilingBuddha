@@ -11,6 +11,7 @@
 
 #include <chrono>
 
+#include "Ray.h"
 #include "VideoPool.h"
 #include "Video.h"
 
@@ -25,6 +26,17 @@ public:
 
 protected:
 	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
+
+	void HeadPost2RowCol(Ray headPose, int &row, int &col);
+
+
+	const int ROW_COUNT;
+	const int COL_COUNT;
+	const int ROW_CENTER;
+	const int COL_CENTER;
+	const float PROJECTION_WIDTH;
+	const float PROJECTION_HEIGHT;
+
 
 
 	const float GAZE_STATE_TIME = 20.0f;

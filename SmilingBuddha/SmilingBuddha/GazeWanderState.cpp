@@ -6,17 +6,14 @@
 
 #include "GazeWanderState.h"
 
-#include "GazeLockState.h"
+#include "Setting.h"
 #include "ChangeBackgroundAnimatedVideo.h"
+#include "GazeLockState.h"
+#include "BroadcastState.h"
 
 GazeWanderState::GazeWanderState(Director * director, std::chrono::high_resolution_clock::time_point startTime)
-	: GazeState(director, startTime),
-	ROW_COUNT(Setting::GetInstance()->GetRow()),
-	COL_COUNT(Setting::GetInstance()->GetCol()),
-	ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
-	COL_CENTER(Setting::GetInstance()->GetCenterCol()),
-	PROJECTION_WIDTH(Setting::GetInstance()->GetProjectionWidth()),
-	PROJECTION_HEIGHT(Setting::GetInstance()->GetProjectionHeight())
+	: GazeState(director, startTime)
+
 {
 	this->lastGazeRow = ROW_CENTER;
 	this->lastGazeCol = COL_CENTER;
@@ -26,6 +23,10 @@ GazeWanderState::GazeWanderState(Director * director, std::chrono::high_resoluti
 		std::make_shared<ChangeBackgroundAnimatedVideo>(
 			director->GetVideoGrid()->GetChild(lastGazeRow, lastGazeCol), MAX_STARING_TIME),
 		lastGazeRow, lastGazeCol);
+}
+
+GazeWanderState::~GazeWanderState()
+{
 }
 
 void GazeWanderState::Update()
@@ -48,13 +49,13 @@ void GazeWanderState::Update()
 	}
 
 	int gazeRow, gazeCol;
-	HeadPost2RowCol(director->GetHeadPose(), gazeRow, gazeCol);
+	GazeState::HeadPost2RowCol(director->GetHeadPose(), gazeRow, gazeCol);
 
 	if ((gazeRow != lastGazeRow || gazeCol != lastGazeCol) && 
 		gazeRow >= 0 && gazeRow < ROW_COUNT && gazeCol >= 0 && gazeCol < COL_COUNT) {
 
 		director->GetVideoGrid()->SetChild(
-			director->GetVideoGrid()->GetChild(lastGazeRow, lastGazeRow)->GetVideo(),
+			director->GetVideoGrid()->GetChild(lastGazeRow, lastGazeCol)->GetVideo(),
 			lastGazeRow, lastGazeCol);
 		director->GetVideoGrid()->SetChild(
 			std::make_shared<ChangeBackgroundAnimatedVideo>(
@@ -65,4 +66,9 @@ void GazeWanderState::Update()
 		lastGazeRow = gazeRow;
 		lastGazeCol = gazeCol;
 	}
+}
+
+std::string GazeWanderState::ToString()
+{
+	return "GazeWanderState";
 }

@@ -13,7 +13,8 @@
 #include "WaveTransitionalVideo.h"
 
 
-#include "TransitionState.h"
+//#include "TransitionState.h"
+#include "GazeInitialState.h"
 
 SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 	: InteractionState(director),
@@ -57,7 +58,8 @@ void SmileState::Update()
 	}
 	else if (elapsedTime > endSeeBackElapsedTime) {
 		SetNeutralVideo();
-		director->SetInteractionState(std::make_shared<TransitionState>(director));
+		//director->SetInteractionState(std::make_shared<TransitionState>(director));
+		director->SetInteractionState(std::make_shared<GazeInitialState>(director));
 		return;
 	}
 }
