@@ -54,18 +54,18 @@ int Setting::GetActorIndex(int row, int col)
 
 int Setting::GetCenterRow()
 {
-	return CENTER_ROW;
+	return ROW_CENTER;
 }
 
 int Setting::GetCenterCol()
 {
-	return CENTER_COL;
+	return COL_CENTER;
 }
 
-int Setting::GetIntroStateGridWidth()
-{
-	return INTRO_STATE_GRID_WIDTH;
-}
+//int Setting::GetIntroStateGridWidth()
+//{
+//	return INTRO_STATE_GRID_WIDTH;
+//}
 
 int Setting::GetMaxDistanceToCenterInGrid()
 {
@@ -75,8 +75,8 @@ int Setting::GetMaxDistanceToCenterInGrid()
 int Setting::GetMaxDistanceToCenter()
 {
 	int ret = 0;
-	ret = std::max(CENTER_ROW, std::max(WINDOW_ROW_COUNT - CENTER_ROW - 1, ret));
-	ret = std::max(CENTER_COL, std::max(WINDOW_COL_COUNT - CENTER_COL - 1, ret));
+	ret = std::max(ROW_CENTER, std::max(WINDOW_ROW_COUNT - ROW_CENTER - 1, ret));
+	ret = std::max(COL_CENTER, std::max(WINDOW_COL_COUNT - COL_CENTER - 1, ret));
 
 	return ret;
 }
@@ -101,13 +101,38 @@ int Setting::GetSaveIMageHeight()
 	return SAVE_IMAGE_HEIGHT;
 }
 
+int Setting::GetResolutionWidth()
+{
+	return RESOLUTION_WIDTH;
+}
+
+int Setting::GetResolutionHeight()
+{
+	return RESOLUTION_HEIGHT;
+}
+
+float Setting::GetProjectionWidth()
+{
+	return PROJECTION_WIDTH;
+}
+
+float Setting::GetProjectionHeight()
+{
+	return PROJECTION_HEIGHT;
+}
+
 int Setting::CalculateDistanceToCenter(int row, int col)
 {
 	int dist = 0;
-	dist = std::max(dist, std::abs(row - CENTER_ROW));
-	dist = std::max(dist, std::abs(col - CENTER_COL));
+	dist = std::max(dist, std::abs(row - ROW_CENTER));
+	dist = std::max(dist, std::abs(col - COL_CENTER));
 
 	return dist;
+}
+
+int Setting::CalculateManhattenDistanceToCenter(int row, int col)
+{
+	return std::abs(row - ROW_CENTER) + std::abs(col - COL_CENTER);
 }
 
 bool Setting::IsInIntroStateGrid(int row, int col)
@@ -117,6 +142,7 @@ bool Setting::IsInIntroStateGrid(int row, int col)
 
 void Setting::GetPairRowColInIntroStateGrid(int & row, int & col, int & nearbyRow, int & nearbyCol)
 {
+	// TODO: merge.
 	GetRandomRowColInIntroStateGrid(row, col);
 	GetNearbyRowColInIntroStateGrid(row, col, nearbyRow, nearbyCol);
 }
@@ -124,8 +150,8 @@ void Setting::GetPairRowColInIntroStateGrid(int & row, int & col, int & nearbyRo
 void Setting::GetRandomRowColInIntroStateGrid(int & row, int & col)
 {
 	int index = rand() % SQUARE_SIZE;
-	row = CENTER_ROW + DIRECTION[index][1];
-	col = CENTER_COL + DIRECTION[index][0];
+	row = ROW_CENTER + DIRECTION[index][1];
+	col = COL_CENTER + DIRECTION[index][0];
 }
 
 void Setting::GetNearbyRowColInIntroStateGrid(int row, int col, int & nearbyRow, int & nearbyCol)

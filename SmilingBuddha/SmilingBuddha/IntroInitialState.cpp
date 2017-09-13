@@ -29,10 +29,12 @@ void IntroInitialState::InitializeVideoGrid()
 {
 	for (int row = 0; row < ROW_COUNT; ++row) {
 		for (int col = 0; col < COL_COUNT; ++col) {
+			// In IntroStateGrid.
 			if (Setting::GetInstance()->IsInIntroStateGrid(row, col)) {
 				std::shared_ptr<Video> newVideo = GetActorDirectionVideo(row, col, ActorVideoSet::NEUTRAL, true, true);
 				director->GetVideoGrid()->SetChild(newVideo, row, col);
 			}
+			// Not in IntroStateGrid.
 			else
 				director->GetVideoGrid()->SetChild(NULL, row, col);
 		}

@@ -27,7 +27,7 @@ public:
 
 	int GetCenterRow();
 	int GetCenterCol();
-	int GetIntroStateGridWidth();
+	//int GetIntroStateGridWidth();
 	int GetMaxDistanceToCenterInGrid();
 	int GetMaxDistanceToCenter();
 
@@ -37,25 +37,14 @@ public:
 	int GetSaveImageWidth();
 	int GetSaveIMageHeight();
 
-	int GetResolutionWidth()
-	{
-		return RESOLUTION_WIDTH;
-	}
-	int GetResolutionHeight()
-	{
-		return RESOLUTION_HEIGHT;
-	}
+	int GetResolutionWidth();
+	int GetResolutionHeight();
 
-	float GetProjectionWidth()
-	{
-		return PROJECTION_WIDTH;
-	}
-	float GetProjectionHeight()
-	{
-		return PROJECTION_HEIGHT;
-	}
+	float GetProjectionWidth();
+	float GetProjectionHeight();
 
 	int CalculateDistanceToCenter(int row, int col);
+	int CalculateManhattenDistanceToCenter(int row, int col);
 	bool IsInIntroStateGrid(int row, int col);
 
 	void GetPairRowColInIntroStateGrid(int &row, int &col, int &nearbyRow, int &nearbyCol);
@@ -79,8 +68,8 @@ private:
 							28, 19, 32, 26, 20, 7, 12, 23, 17,
 							5, 33, 15, 8, 14, 36, 30, 29, 21};
 
-	static const int CENTER_ROW = 2;
-	static const int CENTER_COL = 4;
+	static const int ROW_CENTER = 2;
+	static const int COL_CENTER = 4;
 	static const int INTRO_STATE_GRID_WIDTH = 3;
 
 	static const int SQUARE_SIZE = 9;
@@ -99,6 +88,7 @@ private:
 	static const int RESOLUTION_WIDTH = 1920;
 	static const int RESOLUTION_HEIGHT = 1080;
 
+	// TODO: read from file.
 	const float PROJECTION_WIDTH = 1.92f;
 	const float PROJECTION_HEIGHT = 1.08f;
 };

@@ -54,7 +54,6 @@ protected:
 	VideoPool *videoPool;
 
 	bool switchToBroadcastState;
-	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> userImages;
 
 	int lastGazeRow;
 	int lastGazeCol;

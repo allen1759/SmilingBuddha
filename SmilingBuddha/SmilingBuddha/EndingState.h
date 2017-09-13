@@ -25,11 +25,11 @@ protected:
 
 	virtual void SetTransition(int row, int col) = 0;
 
+private:
 	int GetMaxManhattanDistanceToCenter();
 
-	int CalculateDistanceToCenter(int row, int col);
 
-
+protected:
 	VideoPool *videoPool;
 
 	const int ROW_COUNT;

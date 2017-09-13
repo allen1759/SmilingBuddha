@@ -21,6 +21,10 @@ public:
 	virtual std::string ToString() override;
 
 private:
+	/**
+	* Set actors to Neutral video which in IntroStateGrid.
+	*
+	*/
 	void InitializeVideoGrid();
 
 	const int ROW_COUNT;

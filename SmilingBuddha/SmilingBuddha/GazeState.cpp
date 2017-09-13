@@ -24,7 +24,6 @@ GazeState::GazeState(Director *director, std::chrono::high_resolution_clock::tim
 	this->videoPool = VideoPool::GetInstance();
 
 	this->switchToBroadcastState = false;
-	this->userImages = NULL;
 
 	// Gaze grid start at center.
 	this->lastGazeRow = ROW_CENTER;

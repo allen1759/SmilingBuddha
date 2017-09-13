@@ -34,7 +34,7 @@ void EndingState::AppearAnimation(int dist)
 		for (int col = 0; col < COL_COUNT; ++col) {
 			if (dist > maxManhattanDistanceToCenter)
 				break;
-			if (dist == CalculateDistanceToCenter(row, col))
+			if (dist == Setting::GetInstance()->CalculateManhattenDistanceToCenter(row, col))
 				SetTransition(row, col);
 		}
 	}
@@ -45,14 +45,9 @@ int EndingState::GetMaxManhattanDistanceToCenter()
 	int ret = 0;
 	for (int row = 0; row < ROW_COUNT; ++row) {
 		for (int col = 0; col < COL_COUNT; ++col) {
-			ret = std::max(ret, CalculateDistanceToCenter(row, col));
+			ret = std::max(ret, Setting::GetInstance()->CalculateManhattenDistanceToCenter(row, col));
 		}
 	}
 
 	return ret;
-}
-
-int EndingState::CalculateDistanceToCenter(int row, int col)
-{
-	return std::abs(row - ROW_CENTER) + std::abs(col - COL_CENTER);
 }

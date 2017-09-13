@@ -30,6 +30,7 @@ void IntroNeutralState::Update()
 			director->SetInteractionState(std::make_shared<SmileState>(director, userImages));
 			return;
 		}
+		// If not going to switch to SmileState, change to IntroSeeEachState.
 		else {
 			director->SetInteractionState(std::make_shared<IntroSeeEachState>(director));
 			return;

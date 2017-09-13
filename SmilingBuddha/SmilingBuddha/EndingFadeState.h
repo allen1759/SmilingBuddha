@@ -27,11 +27,8 @@ private:
 
 
 	const float ENDING_FADE_STATE_TIME = 20.0f;
-	// TODO: change to videoFrame
-	const float FADE_VIDEO_TIME = 10.0f;
 	const float FADE_ANIMATION_TIME = 3.0f;
 
-	std::shared_ptr<Video> endingFadeVideo;
 	int currentDistance;
 	float nextAppearElapsedTime;
 };

@@ -21,9 +21,14 @@ public:
 	virtual std::string ToString() override;
 
 private:
+	/**
+	* Random choose two grid in IntroStateGrid. Then set see each other animation.
+	*
+	*/
 	void SetSeeEachVideo();
 
 	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
+
 
 	const int ROW_CENTER;
 	const int COL_CENTER;

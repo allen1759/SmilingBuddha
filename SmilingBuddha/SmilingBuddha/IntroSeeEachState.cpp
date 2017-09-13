@@ -37,7 +37,7 @@ void IntroSeeEachState::Update()
 			return;
 		}
 		else {
-			// Set 2 VideoGrid to neutral video.
+			// Before retern to NeutralState, reset 2 VideoGrid to neutral video.
 			std::shared_ptr<Video> newVideo = GetActorDirectionVideo(lastFromRow, lastFromCol, ActorVideoSet::NEUTRAL, true, true);
 			SetBlendingVideo(lastFromRow, lastFromCol, newVideo);
 			newVideo = GetActorDirectionVideo(lastAtRow, lastAtCol, ActorVideoSet::NEUTRAL, true, true);
@@ -59,7 +59,6 @@ void IntroSeeEachState::SetSeeEachVideo()
 {
 	int row, col, anotherRow, anotherCol;
 	Setting::GetInstance()->GetPairRowColInIntroStateGrid(row, col, anotherRow, anotherCol);
-
 
 	// Find out the looking direction and inverse looking direction.
 	int lookDirection = ActorVideoSet::GetDirectionIndex(row, col, anotherRow, anotherCol);

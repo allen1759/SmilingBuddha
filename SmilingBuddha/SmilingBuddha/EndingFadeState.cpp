@@ -18,14 +18,6 @@
 EndingFadeState::EndingFadeState(Director *director)
 	: EndingState(director)
 {
-	std::shared_ptr<cv::Mat> white = std::make_shared<cv::Mat>(
-		cv::Size(Setting::GetInstance()->GetImageWidth(), Setting::GetInstance()->GetImageHeight()),
-		CV_8UC3,
-		cv::Scalar(255, 255, 255));
-	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> whiteVideo = std::make_shared<std::vector<std::shared_ptr<cv::Mat>>>();
-	whiteVideo->push_back(white);
-	endingFadeVideo = std::make_shared<VideoClip>(whiteVideo, FADE_VIDEO_TIME, false, false);
-
 	this->currentDistance = 0;
 	this->nextAppearElapsedTime = 0.0f;
 }
