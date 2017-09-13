@@ -19,7 +19,22 @@ public:
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
 private:
+	//TODO: make constant.
+	float PI_2 = 1.57079632679489662f;
+	int DOWNSAMPLE_FACTOR = 4;
+	double DAMPING_FACTOR = 0.001f;
+	float WAVE_AMPLITUDE = 16.0f;
+
+	std::shared_ptr<cv::Mat> heightMap;
+	std::shared_ptr<cv::Mat> currentHeightMap;
+	std::shared_ptr<cv::Mat> velocityMap;
+	
 	std::shared_ptr<cv::Mat> currentFrame;
+
+	float damping;
+	
+	std::chrono::high_resolution_clock::time_point lastTime;
+	float secondsPerFrame;
 
 	bool end;
 
