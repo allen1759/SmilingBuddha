@@ -13,6 +13,7 @@
 #include "OnRecordedEvent.h"
 #include "RegularSmileProcessStrategy.h"
 #include "SeeEachSmileProcessStrategy.h"
+#include "PreludeInitialState.h"
 
 // for test
 #include "IntroInitialState.h"
@@ -28,7 +29,8 @@ Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideo
 	this->headPoseTracker = headPoseTracker;
 
 	// Create first state.
-	std::shared_ptr<InteractionState> state = std::make_shared<IntroInitialState>(this);
+	//std::shared_ptr<InteractionState> state = std::make_shared<IntroInitialState>(this);
+	std::shared_ptr<InteractionState> state = std::make_shared<PreludeInitialState>(this);
 	SetInteractionState(state);
 
 	running = true;

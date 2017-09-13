@@ -21,8 +21,8 @@ public:
 private:
 	//TODO: make constant.
 	float PI_2 = 1.57079632679489662f;
-	int DOWNSAMPLE_FACTOR = 4;
-	double DAMPING_FACTOR = 0.001f;
+	int DOWNSAMPLE_FACTOR = 3;
+	double DAMPING_FACTOR = 0.0001;
 	float WAVE_AMPLITUDE = 16.0f;
 
 	std::shared_ptr<cv::Mat> heightMap;

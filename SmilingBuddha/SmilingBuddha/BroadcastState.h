@@ -31,8 +31,8 @@ private:
 
 	const int COL_COUNT;
 	const float BROADCAST_STATE_TIME = 28.0f;
-	const float BROADCAST_TIME = 8.0f;
-	const float BROADCAST_TIME_FOR_EACH;
+	const float ALL_APPEAR_TIME = 8.0f;
+	const float APPEAR_TIME_FOR_EACH;
 	const float USER_VIDEO_TIME = 3.0f;
 	const float WAVE_TIME = 3.0f;
 

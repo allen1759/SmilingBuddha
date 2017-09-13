@@ -21,7 +21,7 @@
 BroadcastState::BroadcastState(Director *director)
 	: InteractionState(director),
 	  COL_COUNT(Setting::GetInstance()->GetCol()),
-	  BROADCAST_TIME_FOR_EACH(BROADCAST_TIME / Setting::GetInstance()->GetWindowCount())
+	  APPEAR_TIME_FOR_EACH(ALL_APPEAR_TIME / Setting::GetInstance()->GetWindowCount())
 {
 	int windowCount = Setting::GetInstance()->GetWindowCount();
 	for (int i = 0; i < windowCount; ++i)
@@ -56,7 +56,7 @@ void BroadcastState::Update()
 			SetBlendingVideo(row, col, newVideo);
 
 			currentIndex++;
-			nextAppearElapsedTime += BROADCAST_TIME_FOR_EACH;
+			nextAppearElapsedTime += APPEAR_TIME_FOR_EACH;
 		}
 	}
 }

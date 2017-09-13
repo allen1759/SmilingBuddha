@@ -46,6 +46,9 @@
     <Filter Include="video">
       <UniqueIdentifier>{d336c3a5-d756-4355-ae79-83770bf0bfef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="state\prelude_state">
+      <UniqueIdentifier>{6db64e1e-a1a8-436d-b26e-22a5390a3591}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -176,6 +179,15 @@
     </ClCompile>
     <ClCompile Include="GazeInitialState.cpp">
       <Filter>state\gaze_state</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoFrame.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="PreludeWaveState.cpp">
+      <Filter>state\prelude_state</Filter>
+    </ClCompile>
+    <ClCompile Include="PreludeBuddhaState.cpp">
+      <Filter>state\prelude_state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +342,36 @@
       <Filter>video</Filter>
     </ClInclude>
     <ClInclude Include="WaveTransitionalVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWaveState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeBuddhaState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeInitialState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2UpState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2BottomState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2LeftState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2RightState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2RandomState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoFrame.h">
       <Filter>video</Filter>
     </ClInclude>
   </ItemGroup>

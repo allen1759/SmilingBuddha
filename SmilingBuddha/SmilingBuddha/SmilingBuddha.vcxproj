@@ -143,6 +143,8 @@
     <ClCompile Include="liblinear-2.11\tron.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OnRecordedEvent.cpp" />
+    <ClCompile Include="PreludeBuddhaState.cpp" />
+    <ClCompile Include="PreludeWaveState.cpp" />
     <ClCompile Include="RegularSmileProcessStrategy.cpp" />
     <ClCompile Include="SeeEachSmileProcessStrategy.cpp" />
     <ClCompile Include="Setting.cpp" />
@@ -153,6 +155,7 @@
     <ClCompile Include="UserDetector.cpp" />
     <ClCompile Include="SmileVideoProcessor.cpp" />
     <ClCompile Include="VideoClip.cpp" />
+    <ClCompile Include="VideoFrame.cpp" />
     <ClCompile Include="VideoGrid.cpp" />
     <ClCompile Include="VideoPool.cpp" />
     <ClCompile Include="VideoRenderer.cpp" />
@@ -185,6 +188,15 @@
     <ClInclude Include="Kinect1HeadPoseTracker.h" />
     <ClInclude Include="OnRecordedEvent.h" />
     <ClInclude Include="OnSmileEvent.h" />
+    <ClInclude Include="PreludeBuddhaState.h" />
+    <ClInclude Include="PreludeInitialState.h" />
+    <ClInclude Include="PreludeState.h" />
+    <ClInclude Include="PreludeWave2BottomState.h" />
+    <ClInclude Include="PreludeWave2LeftState.h" />
+    <ClInclude Include="PreludeWave2RandomState.h" />
+    <ClInclude Include="PreludeWave2RightState.h" />
+    <ClInclude Include="PreludeWave2UpState.h" />
+    <ClInclude Include="PreludeWaveState.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SmileState.h" />
     <ClInclude Include="IntroState.h" />
@@ -206,6 +218,7 @@
     <ClInclude Include="SmileVideoProcessor.h" />
     <ClInclude Include="Video.h" />
     <ClInclude Include="VideoClip.h" />
+    <ClInclude Include="VideoFrame.h" />
     <ClInclude Include="VideoGrid.h" />
     <ClInclude Include="VideoPool.h" />
     <ClInclude Include="VideoRenderer.h" />

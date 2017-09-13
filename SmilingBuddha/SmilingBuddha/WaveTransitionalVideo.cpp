@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include <opencv2\imgproc\imgproc.hpp>
+
 WaveTransitionalVideo::WaveTransitionalVideo(std::shared_ptr<Video> video, std::shared_ptr<Video> nextVideo, float duration)
 	: TransitionalVideo(video, nextVideo, duration)
 {
@@ -11,14 +12,14 @@ WaveTransitionalVideo::WaveTransitionalVideo(std::shared_ptr<Video> video, std::
 	int heightMapHeight = frame->rows / DOWNSAMPLE_FACTOR;
 
 	int radius;
-	int totalFrameCount;
+	float totalFrameCount;
 	if (heightMapWidth > heightMapHeight) {
 		totalFrameCount = heightMapWidth << 1;
-		radius = heightMapWidth / 32;
+		radius = heightMapWidth / 16;
 	}
 	else {
 		totalFrameCount = heightMapHeight << 1;
-		radius = heightMapHeight / 32;
+		radius = heightMapHeight / 16;
 	}
 
 	damping = static_cast<float>(std::pow(DAMPING_FACTOR, 1.0 / static_cast<double>(totalFrameCount)));
@@ -43,7 +44,7 @@ WaveTransitionalVideo::WaveTransitionalVideo(std::shared_ptr<Video> video, std::
 	currentHeightMap = std::make_shared<cv::Mat>();
 	cv::resize(*heightMap, *currentHeightMap, cv::Size(frame->cols, frame->rows), cv::INTER_LINEAR);
 
-	secondsPerFrame = duration / static_cast<float>(totalFrameCount);
+	secondsPerFrame = duration / totalFrameCount;
 	end = false;
 	lastTime = startTime;
 }
