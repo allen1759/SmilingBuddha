@@ -70,7 +70,7 @@ std::shared_ptr<cv::Mat> ChangeBackgroundAnimatedVideo::GetFrame()
 	#pragma omp parallel for schedule(dynamic, 1) num_threads(4)
 	for (int i = 0; i < currentFrame->rows; ++i) {
 		for (int j = 0; j < currentFrame->cols; ++j) {
-			if (currentBlurMask->at<uchar>(i, j) != 0) {
+			if (currentBlurMask->at<uchar>(i, j) > 64) {
 				currentFrame->at<cv::Vec3b>(i, j)[0] = 255 - currentBlurMask->at<uchar>(i, j);
 				currentFrame->at<cv::Vec3b>(i, j)[1] = 255 - currentBlurMask->at<uchar>(i, j);
 				currentFrame->at<cv::Vec3b>(i, j)[2] = 255 - currentBlurMask->at<uchar>(i, j);
