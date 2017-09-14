@@ -141,9 +141,6 @@
     <ClCompile Include="SmileState.cpp">
       <Filter>state</Filter>
     </ClCompile>
-    <ClCompile Include="OnRecordedEvent.cpp">
-      <Filter>event</Filter>
-    </ClCompile>
     <ClCompile Include="BroadcastState.cpp">
       <Filter>state</Filter>
     </ClCompile>
@@ -373,6 +370,12 @@
     </ClInclude>
     <ClInclude Include="VideoFrame.h">
       <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="OnUserDetectEvent.h">
+      <Filter>event</Filter>
+    </ClInclude>
+    <ClInclude Include="OnUserLeaveEvent.h">
+      <Filter>event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

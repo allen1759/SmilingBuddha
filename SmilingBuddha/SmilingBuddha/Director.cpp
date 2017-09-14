@@ -29,8 +29,8 @@ Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideo
 	this->headPoseTracker = headPoseTracker;
 
 	// Create first state.
-	//std::shared_ptr<InteractionState> state = std::make_shared<IntroInitialState>(this);
-	std::shared_ptr<InteractionState> state = std::make_shared<PreludeInitialState>(this);
+	std::shared_ptr<InteractionState> state = std::make_shared<IntroInitialState>(this);
+	//std::shared_ptr<InteractionState> state = std::make_shared<PreludeInitialState>(this);
 	SetInteractionState(state);
 
 	running = true;

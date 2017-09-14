@@ -35,9 +35,9 @@ public:
 
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images);
 
-	//virtual void OnUserDetect();
+	virtual void OnUserDetect();
 
-	//virtual void OnUserLeave();
+	virtual void OnUserLeave();
 
 protected:
 	Director *director;

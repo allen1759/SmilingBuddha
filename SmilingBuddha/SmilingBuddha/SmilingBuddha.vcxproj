@@ -142,7 +142,6 @@
     <ClCompile Include="liblinear-2.11\linear.cpp" />
     <ClCompile Include="liblinear-2.11\tron.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="OnRecordedEvent.cpp" />
     <ClCompile Include="PreludeBuddhaState.cpp" />
     <ClCompile Include="PreludeWaveState.cpp" />
     <ClCompile Include="RegularSmileProcessStrategy.cpp" />
@@ -188,6 +187,8 @@
     <ClInclude Include="Kinect1HeadPoseTracker.h" />
     <ClInclude Include="OnRecordedEvent.h" />
     <ClInclude Include="OnSmileEvent.h" />
+    <ClInclude Include="OnUserDetectEvent.h" />
+    <ClInclude Include="OnUserLeaveEvent.h" />
     <ClInclude Include="PreludeBuddhaState.h" />
     <ClInclude Include="PreludeInitialState.h" />
     <ClInclude Include="PreludeState.h" />

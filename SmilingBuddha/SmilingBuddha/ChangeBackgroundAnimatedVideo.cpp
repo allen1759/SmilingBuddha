@@ -32,7 +32,7 @@ ChangeBackgroundAnimatedVideo::ChangeBackgroundAnimatedVideo(std::shared_ptr<Vid
 	
 	int totalStep = frame->cols < frame->rows ? frame->cols / 4 : frame->rows / 4;
 	float totalFrameCount = std::min(totalStep, static_cast<int>(duration * 30.0f));
-	int elementSize = (totalFrameCount / totalStep) * 2 + 1;
+	int elementSize = (totalStep / totalFrameCount) * 2 + 1;
 	secondsPerFrame = duration / totalFrameCount;
 
 	dilateElement = std::make_shared<cv::Mat>(elementSize, elementSize, CV_8U, 1);
@@ -80,9 +80,5 @@ std::shared_ptr<cv::Mat> ChangeBackgroundAnimatedVideo::GetFrame()
 		}
 	}
 	
-	std::shared_ptr<cv::Mat> tempmask = std::make_shared<cv::Mat>();
-
-	cv::cvtColor(*currentBlurMask, *tempmask, CV_GRAY2BGR);
-
 	return currentFrame;
 }
