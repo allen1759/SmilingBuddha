@@ -85,7 +85,8 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy /Y "$(SolutionDir)$(ProjectName)\3rdparty\portaudio_v190600\bin\portaudio_x64d.dll" "$(TargetDir)portaudio_x64.dll"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,6 +117,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActorVideoSet.cpp" />
+    <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="AudioPlayer.cpp" />
     <ClCompile Include="BlendingTransitionVideo.cpp" />
     <ClCompile Include="BroadcastState.cpp" />
     <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp" />
@@ -164,6 +167,8 @@
   <ItemGroup>
     <ClInclude Include="ActorVideoSet.h" />
     <ClInclude Include="AnimatedVideo.h" />
+    <ClInclude Include="Audio.h" />
+    <ClInclude Include="AudioPlayer.h" />
     <ClInclude Include="BlendingTransitionVideo.h" />
     <ClInclude Include="BroadcastState.h" />
     <ClInclude Include="ChangeBackgroundAnimatedVideo.h" />

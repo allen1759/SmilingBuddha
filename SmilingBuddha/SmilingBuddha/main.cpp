@@ -9,21 +9,39 @@
 #include "DebugSmileVideoProcessor.h"
 #include "DebugHeadPoseTracker.h"
 
-#include "vld.h"
+#include <portaudio.h>
+
+//#include "vld.h"
+
+#include "Audio.h"
+#include "AudioPlayer.h"
 
 int main()
 {
+
+	Audio audio("D:\\bell.wav");
+	Audio audio1("D:\\background.wav");
+
+	AudioPlayer player;
+
+
+	player.PlayAudio(std::make_shared<Audio>(audio1));
+
+
+	Sleep(1000);
+
+	player.PlayBackgroundAudio(std::make_shared<Audio>(audio));
+
+
+	Sleep(10000000);
+	/*
 	VideoPool::GetInstance();
 
-	//SmileVideoProcessor *smileVideoProcessor = WebcamSmileVideoProcessor::GetInstance();
 	SmileVideoProcessor *smileVideoProcessor = DebugSmileVideoProcessor::GetInstance();
 	HeadPoseTracker *headPoseTracker = new DebugHeadPoseTracker();
 
-	//VideoRenderer *videoRenderer = VideoRenderer::GetInstance();
-
 	Director *director = new Director(NULL, smileVideoProcessor, headPoseTracker);
-	//Director *director = new Director(videoRenderer, smileVideoProcessor);
-
+	
 
 	while (true) {
 		std::shared_ptr<cv::Mat> img = director->GetVideoGrid()->GetFrame();
@@ -32,7 +50,6 @@ int main()
 			cv::waitKey(1);
 		}
 	}
-	//videoRenderer->RenderLoop();
-
+	*/
 	return 0;
 }
