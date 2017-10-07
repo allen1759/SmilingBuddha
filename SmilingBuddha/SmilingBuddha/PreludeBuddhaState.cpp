@@ -7,12 +7,11 @@ void PreludeBuddhaState::Update()
 
 	if (elapsedTime > PRELUDE_BUDDHA_STATE_TIME) {
 		if (buddhaStateCount == MAX_BUDDHA_STATE_COUNT) {
-			// TODO: choose one wave
+			// Choose one wave randomly.
 			director->SetInteractionState(PreludeWaveState::CreateRandomWaveState(director, true));
 			return;
 		}
-		else {
+		else
 			director->SetInteractionState(std::make_shared<PreludeBuddhaState>(director, buddhaStateCount));
-		}
 	}
 }

@@ -8,9 +8,8 @@
 
 std::shared_ptr<PreludeWaveState> PreludeWaveState::CreateRandomWaveState(Director *director, bool isFirstWave)
 {
-	//int waveIndex = rand() % PRELUDE_WAVE_STATE_COUNT;
+	int waveIndex = rand() % PRELUDE_WAVE_STATE_COUNT;
 
-	int waveIndex = 4;
 	switch (waveIndex)
 	{
 	case 0:
