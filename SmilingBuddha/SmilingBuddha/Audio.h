@@ -19,6 +19,17 @@ public:
 	Audio(std::string fileName);
 	~Audio();
 
+	Audio(const Audio &rhs)
+	{
+		frameCount = rhs.frameCount;
+		channelCount = rhs.channelCount;
+
+		int len = frameCount * channelCount;
+		frames = new float[len];
+		for (int i = 0; i < len; ++i)
+			frames[i] = rhs.frames[i];
+	}
+
 	void Reset();
 
 	bool IsEnd();

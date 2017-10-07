@@ -15,6 +15,9 @@
 
 #include "Audio.h"
 
+// TODO: singleton
+
+
 class AudioPlayer {
 public:
 	AudioPlayer();
