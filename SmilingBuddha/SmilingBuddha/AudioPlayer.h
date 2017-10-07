@@ -15,13 +15,15 @@
 
 #include "Audio.h"
 
-// TODO: singleton
-
-
-class AudioPlayer {
-public:
+class AudioPlayer
+{
+private:
 	AudioPlayer();
+
+public:
 	~AudioPlayer();
+
+	static AudioPlayer *GetInstance();
 
 	void PlayAudio(std::shared_ptr<Audio> audio);
 
@@ -40,6 +42,8 @@ private:
 
 	int PlayAudio(void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags);
 
+
+	static AudioPlayer *instance;
 
 	PaStream* stream;
 	PaStreamParameters outputParameters;

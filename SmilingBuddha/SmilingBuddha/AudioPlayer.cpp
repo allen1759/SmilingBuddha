@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+AudioPlayer *AudioPlayer::instance = NULL;
+
 AudioPlayer::AudioPlayer()
 {
 	// Initilize Portaudio.
@@ -40,6 +42,14 @@ AudioPlayer::~AudioPlayer()
 	Pa_StopStream(stream);
 	Pa_CloseStream(stream);
 	Pa_Terminate();
+}
+
+AudioPlayer * AudioPlayer::GetInstance()
+{
+	if (instance == NULL)
+		instance = new AudioPlayer();
+
+	return instance;
 }
 
 void AudioPlayer::PlayAudio(std::shared_ptr<Audio> audio)
