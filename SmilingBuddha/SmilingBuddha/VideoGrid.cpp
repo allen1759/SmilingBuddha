@@ -26,7 +26,7 @@ VideoGrid::VideoGrid()
 			layout[i * colCount + j] = cv::Point(static_cast<int>(gridSizeX * static_cast<float>(j)), static_cast<int>(gridSizeY * static_cast<float>(i)));
 	}
 
-	frame = std::make_shared<cv::Mat>(1080, 1920, CV_8UC3);
+	
 }
 
 VideoGrid::~VideoGrid()
@@ -35,11 +35,17 @@ VideoGrid::~VideoGrid()
 
 std::shared_ptr<cv::Mat> VideoGrid::GetFrame()
 {
-	for (int i = 0; i < rowCount; ++i) {
-		for (int j = 0; j < colCount; ++j)
-			DrawSingleGrid(i, j);
-	}
+	std::shared_ptr<cv::Mat> frame = std::make_shared<cv::Mat>(1080, 1920, CV_8UC3);
+	for (int i = 0; i < videoGrid.size(); ++i) {
+		std::shared_ptr<cv::Mat> gridFrame;
+		videoGridMutex.lock();
+		if (videoGrid[i])
+			gridFrame = videoGrid[i]->GetFrame();
+		videoGridMutex.unlock();
 
+		if (gridFrame)
+			gridFrame->copyTo((*frame)(cv::Rect(layout[i].x, layout[i].y, gridFrame->cols, gridFrame->rows)));
+	}
 	return frame;
 }
 
@@ -59,7 +65,7 @@ void VideoGrid::SetChild(std::shared_ptr<Video> video, int row, int col)
 	videoGrid[row * colCount + col] = video;
 	videoGridMutex.unlock();
 }
-
+/*
 void VideoGrid::DrawSingleGrid(int row, int col)
 {
 	std::shared_ptr<cv::Mat> gridFrame;
@@ -86,3 +92,4 @@ void VideoGrid::DrawSingleGrid(int row, int col)
 		}
 	}
 }
+*/

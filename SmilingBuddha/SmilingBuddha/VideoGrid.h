@@ -33,7 +33,6 @@ public:
 private:
 	void DrawSingleGrid(int row, int col);
 
-	std::shared_ptr<cv::Mat> frame;
 	std::vector<std::shared_ptr<Video>> videoGrid;
 	std::vector<cv::Point> layout;
 	std::mutex videoGridMutex;
