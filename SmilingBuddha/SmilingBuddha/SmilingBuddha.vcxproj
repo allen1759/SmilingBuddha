@@ -119,6 +119,7 @@
     <ClCompile Include="ActorVideoSet.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioPlayer.cpp" />
+    <ClCompile Include="AudioPool.cpp" />
     <ClCompile Include="BlendingTransitionVideo.cpp" />
     <ClCompile Include="BroadcastState.cpp" />
     <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="AnimatedVideo.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioPlayer.h" />
+    <ClInclude Include="AudioPool.h" />
     <ClInclude Include="BlendingTransitionVideo.h" />
     <ClInclude Include="BroadcastState.h" />
     <ClInclude Include="ChangeBackgroundAnimatedVideo.h" />
