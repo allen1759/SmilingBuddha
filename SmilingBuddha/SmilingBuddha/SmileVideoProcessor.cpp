@@ -29,9 +29,6 @@ SmileVideoProcessor::SmileVideoProcessor()
 		throw std::runtime_error("Cascade file not found.");
 	dlib::deserialize("resources\\shape_predictor_68_face_landmarks.dat") >> eyePredictor;
 
-	// TODO: singleton
-	recognizer = new SmileRecognizer();
-
 	lastIntensity = 0;
 	lastLeftEyePosition = cv::Point(910, 540);
 	lastRightEyePosition = cv::Point(1010, 540);
@@ -114,7 +111,7 @@ std::shared_ptr<cv::Mat> SmileVideoProcessor::CaptureFace(const cv::Mat &originF
 		float weight = GetSmoothWeight(currentLeftEyePosition - lastLeftEyePosition, currentRightEyePosition - lastRightEyePosition);
 		currentLeftEyePosition = (1.0f - weight) * lastLeftEyePosition + weight * currentLeftEyePosition;
 		currentRightEyePosition = (1.0f - weight) * lastRightEyePosition + weight * currentRightEyePosition;
-		currentIntensity = (lastIntensity + recognizer->Recognize(faceFrame)) * 0.5;
+		currentIntensity = (lastIntensity + SmileRecognizer::GetInstance()->Recognize(faceFrame)) * 0.5;
 	}
 	else {
 		currentLeftEyePosition = lastLeftEyePosition;

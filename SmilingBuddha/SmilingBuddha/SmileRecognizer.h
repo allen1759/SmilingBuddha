@@ -11,15 +11,19 @@
 #include "opencv2/objdetect.hpp"
 #include "liblinear-2.11/linear.h"
 
-class SmileRecognizer {
-public:
+class SmileRecognizer
+{
+private:
 	/**
 	* Constructor that initialize featureDescriptor and recognitionModel.
 	*
 	*/
 	SmileRecognizer();
 
+public:
 	~SmileRecognizer();
+
+	static SmileRecognizer *GetInstance();
 
 	/**
 	* Return recognition value of the smile expression of the input face image.
@@ -35,6 +39,8 @@ public:
 	double Recognize(const cv::Mat faceImage);
 
 private:
+	static SmileRecognizer *instance;
+
 	// SmileRecognizer constants
 
 	// Recognition image size

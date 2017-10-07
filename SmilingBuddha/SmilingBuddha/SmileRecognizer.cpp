@@ -10,6 +10,8 @@
 #include <vector>
 #include "opencv2/imgproc.hpp"
 
+SmileRecognizer *SmileRecognizer::instance = NULL;
+
 SmileRecognizer::SmileRecognizer()
 {
 	// initialize HOG feature descirptor
@@ -30,6 +32,14 @@ SmileRecognizer::~SmileRecognizer()
 {
 	delete featureDescriptor;
 	delete recognitionModel;
+}
+
+SmileRecognizer * SmileRecognizer::GetInstance()
+{
+	if (instance == NULL)
+		instance = new SmileRecognizer();
+
+	return instance;
 }
 
 double SmileRecognizer::Recognize(const cv::Mat faceImage) {
