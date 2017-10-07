@@ -6,6 +6,7 @@ void PreludeBuddhaState::Update()
 	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - PreludeState::startTime).count();
 
 	if (elapsedTime > PRELUDE_BUDDHA_STATE_TIME) {
+		VideoRenderer::GetInstance()->SetVideo(director->GetVideoGrid());
 		if (buddhaStateCount == MAX_BUDDHA_STATE_COUNT) {
 			// Choose one wave randomly.
 			director->SetInteractionState(PreludeWaveState::CreateRandomWaveState(director, true));

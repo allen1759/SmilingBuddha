@@ -12,11 +12,11 @@
 #include <chrono>
 
 //cpp
+#include "VideoRenderer.h"
 #include "Director.h"
 #include "PreludeWaveState.h"
+#include "BuddhaAnimatedVideo.h"
 
-
-#include  "FadeAnimationVideo.h"
 
 class PreludeBuddhaState : public PreludeState
 {
@@ -26,10 +26,10 @@ public:
 	{
 		this->buddhaStateCount = buddhaStateCount + 1;
 
-		// TODO: add buddha animation
-		director->GetVideoGrid()->SetChild(
-			std::make_shared<FadeAnimationVideo>(director->GetVideoGrid()->GetChild(2, 4), 3.0f, 255, 0, 0),
-			2, 4);
+		
+		// TODO: layout
+		std::shared_ptr<BuddhaAnimatedVideo> buddhaAnimatedVideo = std::make_shared<BuddhaAnimatedVideo>(director->GetVideoGrid(), PRELUDE_BUDDHA_STATE_TIME, 100, 100);
+		VideoRenderer::GetInstance()->SetVideo(buddhaAnimatedVideo);
 	}
 
 	virtual ~PreludeBuddhaState()
@@ -44,7 +44,7 @@ public:
 
 private:
 
-	const float PRELUDE_BUDDHA_STATE_TIME = 1.0f;
+	const float PRELUDE_BUDDHA_STATE_TIME = 10.0f;
 	const int MAX_BUDDHA_STATE_COUNT = 5;
 
 	int buddhaStateCount;
