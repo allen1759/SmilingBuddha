@@ -3,7 +3,9 @@
 #include <iostream>
 #include <conio.h>
 
-#include<glm/gtc/quaternion.hpp>
+#include <glm/gtc/quaternion.hpp>
+
+#include "InputManager.h"
 
 DebugHeadPoseTracker::DebugHeadPoseTracker()
 {
@@ -44,17 +46,22 @@ void DebugHeadPoseTracker::StopTracking()
 void DebugHeadPoseTracker::Tracking()
 {
 	while (isTracking) {
-		char key;
-		if (kbhit()) {
-			key = getch();
-			if (key == 'a' || key == 'A')
-				pitch++;
-			else if (key == 'w' || key == 'W')
-				yaw++;
-			else if (key == 'd' || key == 'D')
-				pitch--;
-			else if (key == 's' || key == 'S')
-				yaw--;
+		char key = InputManager::GetInstance()->GetKey();
+		if (key == 'a' || key == 'A') {
+			pitch++;
+			InputManager::GetInstance()->ResetKey();
+		}
+		else if (key == 'w' || key == 'W') {
+			yaw++;
+			InputManager::GetInstance()->ResetKey();
+		}
+		else if (key == 'd' || key == 'D') {
+			pitch--;
+			InputManager::GetInstance()->ResetKey();
+		}
+		else if (key == 's' || key == 'S') {
+			InputManager::GetInstance()->ResetKey();
+			yaw--;
 		}
 
 		headPose.SetDirection(glm::quat(glm::vec3(glm::radians(yaw), glm::radians(pitch), 0.0f)) * glm::vec3(0.0f, 0.0f, -1.0f));

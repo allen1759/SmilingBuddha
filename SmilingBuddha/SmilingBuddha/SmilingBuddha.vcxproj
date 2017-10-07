@@ -122,6 +122,7 @@
     <ClCompile Include="AudioPool.cpp" />
     <ClCompile Include="BlendingTransitionVideo.cpp" />
     <ClCompile Include="BroadcastState.cpp" />
+    <ClCompile Include="BuddhaAnimatedVideo.cpp" />
     <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp" />
     <ClCompile Include="EndingBuddhaState.cpp" />
     <ClCompile Include="DebugHeadPoseTracker.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="GazeLockState.cpp" />
     <ClCompile Include="GazeState.cpp" />
     <ClCompile Include="GazeWanderState.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InteractionState.cpp" />
     <ClCompile Include="IntroInitialState.cpp" />
     <ClCompile Include="IntroNeutralState.cpp" />
@@ -173,6 +175,7 @@
     <ClInclude Include="AudioPool.h" />
     <ClInclude Include="BlendingTransitionVideo.h" />
     <ClInclude Include="BroadcastState.h" />
+    <ClInclude Include="BuddhaAnimatedVideo.h" />
     <ClInclude Include="ChangeBackgroundAnimatedVideo.h" />
     <ClInclude Include="EndingBuddhaState.h" />
     <ClInclude Include="DebugHeadPoseTracker.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="GazeState.h" />
     <ClInclude Include="GazeWanderState.h" />
     <ClInclude Include="HeadPoseTracker.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="InteractionState.h" />
     <ClInclude Include="IntroInitialState.h" />
     <ClInclude Include="IntroNeutralState.h" />

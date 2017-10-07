@@ -14,6 +14,8 @@
 
 #include <opencv2/highgui/highgui.hpp>
 
+#include "InputManager.h"
+
 class DebugSmileVideoProcessor : public SmileVideoProcessor
 {
 public:
@@ -74,11 +76,9 @@ void DebugSmileVideoProcessor::ProcessSmileVideo()
 
 std::shared_ptr<cv::Mat> DebugSmileVideoProcessor::ReadFrame()
 {
-	char ch;
-	if (kbhit()) {
-		ch = getch();
-		if (ch == 'x' || ch == 'X')
-			ChangeSmile();
+	if (InputManager::GetInstance()->GetKey() == 'x') {
+		ChangeSmile();
+		InputManager::GetInstance()->ResetKey();
 	}
 
 	if (isSmile)
