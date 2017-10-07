@@ -20,8 +20,8 @@
 
 Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker)
 {
-	this->videoGrid = new VideoGrid();
-	//videoRenderer->SetVideo(videoGrid);
+	this->videoGrid = std::make_shared<VideoGrid>();
+	videoRenderer->SetVideo(this->videoGrid);
 
 	this->userImageSequenceRecords = std::make_shared<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>>();
 
@@ -53,6 +53,7 @@ void Director::UpdateLoop()
 		start = std::chrono::high_resolution_clock::now();
 		if (state) {
 			state->Update();
+
 			eventQueueMutex.lock();
 			while (!eventQueue.empty()) {
 				std::shared_ptr<Event> e = eventQueue.front();
@@ -68,7 +69,7 @@ void Director::UpdateLoop()
 	}
 }
 
-VideoGrid * Director::GetVideoGrid()
+std::shared_ptr<VideoGrid> Director::GetVideoGrid()
 {
 	return videoGrid;
 }

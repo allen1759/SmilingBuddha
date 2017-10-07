@@ -71,9 +71,11 @@ VideoRenderer::~VideoRenderer()
 {
 }
 
-void VideoRenderer::SetVideo(Video *video)
+void VideoRenderer::SetVideo(std::shared_ptr<Video> video)
 {
+	videoMutex.lock();
 	this->video = video;
+	videoMutex.unlock();
 }
 
 void VideoRenderer::RenderLoop()
@@ -102,10 +104,12 @@ void VideoRenderer::RenderLoop()
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		
-		//if (video) {
-		//	std::shared_ptr<cv::Mat> videoFrame = video->GetFrame();
-		//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, videoFrame->cols, videoFrame->rows, 0, GL_BGR, GL_UNSIGNED_BYTE, videoFrame->data);
-		//}
+		videoMutex.lock();
+		if (video) {
+			std::shared_ptr<cv::Mat> videoFrame = video->GetFrame();
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, videoFrame->cols, videoFrame->rows, 0, GL_BGR, GL_UNSIGNED_BYTE, videoFrame->data);
+		}
+		videoMutex.unlock();
 		
 		int sampler = glGetUniformLocation(shaderProgram, "uTexture");
 		glUniform1i(sampler, 0);
@@ -117,7 +121,7 @@ void VideoRenderer::RenderLoop()
 
 		end = std::chrono::high_resolution_clock::now();
 		duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-		std::cout << "RENDER LOOP: " << duration.count() << std::endl;
+		//std::cout << "RENDER LOOP: " << duration.count() << std::endl;
 	}
 }
 

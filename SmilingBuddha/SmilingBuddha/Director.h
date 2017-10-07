@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <queue>
+#include <memory>
 #include <mutex>
 #include <thread>
 
@@ -32,7 +33,7 @@ public:
 
 	void UpdateLoop();
 
-	VideoGrid *GetVideoGrid();
+	std::shared_ptr<VideoGrid> GetVideoGrid();
 
 	// ********** If this function called in state's Update(), make   **********
 	// ********** sure to 'retrun;' immediately after function call.  **********
@@ -59,8 +60,13 @@ private:
 	// TODO: should clear user video record when they leave.
 	void ClearUserImageSequenceRecords();
 
-	VideoGrid *videoGrid;
+	// TODO: mutex
+	std::shared_ptr<VideoGrid> videoGrid;
+
 	std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> userImageSequenceRecords;
+
+	// View
+	// TODO: add renderer
 
 	// Controllers
 	SmileVideoProcessor *smileVideoProcessor;

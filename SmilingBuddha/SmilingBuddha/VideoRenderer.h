@@ -7,6 +7,8 @@
 #ifndef _VIDEO_RENDERER_H
 #define _VIDEO_RENDERER_H
 
+#include <mutex>
+
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
@@ -23,7 +25,7 @@ private:
 public:
 	~VideoRenderer();
 
-	void SetVideo(Video *video);
+	void SetVideo(std::shared_ptr<Video> video);
 
 	void RenderLoop();
 
@@ -75,7 +77,8 @@ private:
 
 	GLuint texture;
 
-	Video *video;
+	std::shared_ptr<Video> video;
+	std::mutex videoMutex;
 };
 
 #endif // !_VIRTUAL_CAMERA_H
