@@ -15,7 +15,7 @@
 BuddhaAnimatedVideo::BuddhaAnimatedVideo(std::shared_ptr<Video> video, float duration, int centerX, int centerY)
 	: AnimatedVideo(video, duration)
 {
-	buddhaFrame = std::make_shared<cv::Mat>(cv::imread("D:\\buddha_animation_image.png", -1));
+	buddhaFrame = std::make_shared<cv::Mat>(cv::imread("resources\\buddha_animation_image.png", -1));
 	
 	std::shared_ptr<cv::Mat> frame = video->GetFrame();
 	
@@ -68,7 +68,7 @@ std::shared_ptr<cv::Mat> BuddhaAnimatedVideo::GetFrame()
 					float offsetRow = rowIndex - buddhaFrame->rows / 2;
 					float offsetCol = colIndex - buddhaFrame->cols / 2;
 
-					float alpha = std::max(1.0f - std::pow(std::sqrt(offsetRow * offsetRow + offsetCol * offsetCol) / buddhaRadius, 2.0f) - weight, 0.0f);
+					float alpha = std::max(1.0f - std::pow(std::sqrt(offsetRow * offsetRow + offsetCol * offsetCol) / buddhaRadius, 5.0f) - weight, 0.0f);
 
 					blendFrame->at<cv::Vec3b>(i, j)[0] = buddhaFrame->at<cv::Vec4b>(rowIndex, colIndex)[0] * alpha + blendFrame->at<cv::Vec3b>(i, j)[0] * (1.0f - alpha);
 					blendFrame->at<cv::Vec3b>(i, j)[1] = buddhaFrame->at<cv::Vec4b>(rowIndex, colIndex)[1] * alpha + blendFrame->at<cv::Vec3b>(i, j)[1] * (1.0f - alpha);
