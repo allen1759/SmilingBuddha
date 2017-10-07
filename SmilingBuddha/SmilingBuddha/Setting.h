@@ -51,10 +51,6 @@ public:
 
 
 private:
-	void GetRandomRowColInIntroStateGrid(int &row, int &col);
-
-	void GetNearbyRowColInIntroStateGrid(int row, int col, int &nearbyRow, int &nearbyCol);
-
 
 
 	static Setting *instance;

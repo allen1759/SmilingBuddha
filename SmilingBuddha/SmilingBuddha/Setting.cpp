@@ -142,22 +142,10 @@ bool Setting::IsInIntroStateGrid(int row, int col)
 
 void Setting::GetPairRowColInIntroStateGrid(int & row, int & col, int & nearbyRow, int & nearbyCol)
 {
-	// TODO: merge.
-	GetRandomRowColInIntroStateGrid(row, col);
-	GetNearbyRowColInIntroStateGrid(row, col, nearbyRow, nearbyCol);
-}
-
-void Setting::GetRandomRowColInIntroStateGrid(int & row, int & col)
-{
 	int index = rand() % SQUARE_SIZE;
 	row = ROW_CENTER + DIRECTION[index][1];
 	col = COL_CENTER + DIRECTION[index][0];
-}
 
-void Setting::GetNearbyRowColInIntroStateGrid(int row, int col, int & nearbyRow, int & nearbyCol)
-{
-	if (!IsInIntroStateGrid(row, col))
-		return;
 
 	int startIndex = rand() % (SQUARE_SIZE - 1);
 	for (int i = 0; i < (SQUARE_SIZE - 1); ++i) {
@@ -172,3 +160,4 @@ void Setting::GetNearbyRowColInIntroStateGrid(int row, int col, int & nearbyRow,
 		}
 	}
 }
+
