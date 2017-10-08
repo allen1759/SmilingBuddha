@@ -7,6 +7,7 @@
 #include "InteractionState.h"
 
 #include "Director.h"
+#include "PreludeInitialState.h"
 
 InteractionState::InteractionState(Director * director)
 {
@@ -36,5 +37,6 @@ void InteractionState::OnUserDetect()
 
 void InteractionState::OnUserLeave()
 {
+	director->SetInteractionState(std::make_shared<PreludeInitialState>(director));
 }
 
