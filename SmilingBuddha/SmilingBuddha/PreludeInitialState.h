@@ -25,6 +25,7 @@ public:
 		  COL_COUNT(Setting::GetInstance()->GetCol())
 	{
 		videoPool = VideoPool::GetInstance();
+		director->StopInteraction();
 
 		InitializeSmileVideo();
 	}

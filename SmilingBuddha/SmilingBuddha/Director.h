@@ -28,7 +28,6 @@
 class Director : public UserObserver, public SmileObserver
 {
 public:
-	//TODO: Add controller
 	Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker, UserDetector *userDetector);
 
 	~Director();
@@ -64,15 +63,11 @@ public:
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;
 
 private:
-	// TODO: should clear user video record when they leave.
-	void ClearUserImageSequenceRecords();
-
-	// TODO: mutex
 	std::shared_ptr<VideoGrid> videoGrid;
 
 	std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> userImageSequenceRecords;
 
-	// Controllers
+	// Controllers.
 	SmileVideoProcessor *smileVideoProcessor;
 	HeadPoseTracker *headPoseTracker;
 

@@ -24,14 +24,15 @@ SmileVideoProcessor::SmileVideoProcessor()
 	isRunning = false;
 	processSmileVideoThread = NULL;
 
+	// TODO: read from file.
 	detectROI = cv::Rect(0, 0, 1920, 1080);
 	if (!faceClassifier.load("resources\\haarcascade_frontalface_default.xml"))
 		throw std::runtime_error("Cascade file not found.");
 	dlib::deserialize("resources\\shape_predictor_68_face_landmarks.dat") >> eyePredictor;
 
 	lastIntensity = 0;
-	lastLeftEyePosition = cv::Point(910, 540);
-	lastRightEyePosition = cv::Point(1010, 540);
+	lastLeftEyePosition = cv::Point(0, 0);
+	lastRightEyePosition = cv::Point(0, 0);
 
 	saver = SmileSaver::GetInstance();
 }

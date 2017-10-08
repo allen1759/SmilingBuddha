@@ -100,6 +100,7 @@ void Director::StopInteraction()
 {
 	smileVideoProcessor->Stop();
 	headPoseTracker->StopTracking();
+	userImageSequenceRecords->clear();
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> Director::GetUserImageSequenceRecords()
@@ -144,9 +145,4 @@ void Director::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>
 	eventQueueMutex.unlock();
 
 	userImageSequenceRecords->push_back(images);
-}
-
-void Director::ClearUserImageSequenceRecords()
-{
-	userImageSequenceRecords->clear();
 }
