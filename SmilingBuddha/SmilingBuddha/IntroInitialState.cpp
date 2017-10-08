@@ -8,6 +8,7 @@
 
 #include "Setting.h"
 #include "Director.h"
+#include "VideoRenderer.h"
 #include "IntroNeutralState.h"
 
 IntroInitialState::IntroInitialState(Director *director)
@@ -19,6 +20,8 @@ IntroInitialState::IntroInitialState(Director *director)
 	director->StartInteraction();
 
 	InitializeVideoGrid();
+
+	VideoRenderer::GetInstance()->SetVideo(director->GetVideoGrid());
 }
 
 IntroInitialState::~IntroInitialState()

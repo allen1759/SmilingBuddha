@@ -198,11 +198,14 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
-    <ClCompile Include="DebugUserDetector.cpp">
-      <Filter>原始程式檔</Filter>
-    </ClCompile>
     <ClCompile Include="ArduinoUserDetector.cpp">
       <Filter>controller\user_detector</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugUserDetector.cpp">
+      <Filter>controller\user_detector</Filter>
+    </ClCompile>
+    <ClCompile Include="PreludeEndingState.cpp">
+      <Filter>state\prelude_state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -415,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="UserDetector.h">
       <Filter>controller\user_detector</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeEndingState.h">
+      <Filter>state\prelude_state</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

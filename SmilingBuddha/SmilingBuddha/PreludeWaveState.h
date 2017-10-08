@@ -15,8 +15,10 @@
 #include <cstdlib>
 #include "Director.h"
 #include "VideoClip.h"
-#include "WaveTransitionalVideo.h"
 #include "PreludeBuddhaState.h"
+#include "PreludeEndingState.h"
+#include "FadeAnimationVideo.h"
+#include "WaveTransitionalVideo.h"
 
 class PreludeWaveState : public PreludeState
 {
@@ -38,7 +40,20 @@ public:
 
 	virtual void Update() override;
 
+	void OnUserDetect() override
+	{
+		// Set Black Fade Animation Video.
+		std::shared_ptr<Video> fadeVideo = std::make_shared<FadeAnimationVideo>(
+			director->GetVideoGrid(),
+			PreludeState::PRELUDE_ENDING_STATE_TIME, 0, 0, 0);
+
+		VideoRenderer::GetInstance()->SetVideo(fadeVideo);
+
+		director->SetInteractionState(std::make_shared<PreludeEndingState>(director));
+	}
+
 protected:
+
 	virtual void AppeartNext() = 0;
 
 	virtual void UpdateAppearTime() = 0;

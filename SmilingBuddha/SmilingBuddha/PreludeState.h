@@ -12,7 +12,7 @@
 #include <chrono>
 
 #include "Director.h"
-#include "IntroInitialState.h"
+
 
 class PreludeState : public InteractionState
 {
@@ -24,16 +24,13 @@ public:
 	}
 
 	virtual ~PreludeState()
-	{}
-
-	virtual void OnUserDetect()
 	{
-		director->SetInteractionState(std::make_shared<IntroInitialState>(director));
 	}
 
 protected:
 
 	const float USER_VIDEO_TIME = 3.0f;
+	const float PRELUDE_ENDING_STATE_TIME = 1.0f;
 
 	std::chrono::high_resolution_clock::time_point startTime;
 };

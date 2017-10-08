@@ -15,8 +15,9 @@
 #include "VideoRenderer.h"
 #include "Director.h"
 #include "PreludeWaveState.h"
+#include "PreludeEndingState.h"
+#include "FadeAnimationVideo.h"
 #include "BuddhaAnimatedVideo.h"
-
 
 class PreludeBuddhaState : public PreludeState
 {
@@ -28,7 +29,7 @@ public:
 
 		
 		// TODO: layout
-		std::shared_ptr<BuddhaAnimatedVideo> buddhaAnimatedVideo = std::make_shared<BuddhaAnimatedVideo>(director->GetVideoGrid(), PRELUDE_BUDDHA_STATE_TIME, 100, 100);
+		buddhaAnimatedVideo = std::make_shared<BuddhaAnimatedVideo>(director->GetVideoGrid(), PRELUDE_BUDDHA_STATE_TIME, 100, 100);
 		VideoRenderer::GetInstance()->SetVideo(buddhaAnimatedVideo);
 	}
 
@@ -42,6 +43,18 @@ public:
 		return "PreludeBuddhaState";
 	}
 
+	void OnUserDetect() override
+	{
+		// Set Black Fade Animation Video.
+		std::shared_ptr<Video> fadeVideo = std::make_shared<FadeAnimationVideo>(
+			buddhaAnimatedVideo,
+			PreludeState::PRELUDE_ENDING_STATE_TIME, 0, 0, 0);
+
+		VideoRenderer::GetInstance()->SetVideo(fadeVideo);
+
+		director->SetInteractionState(std::make_shared<PreludeEndingState>(director));
+	}
+
 private:
 
 	const float PRELUDE_BUDDHA_STATE_TIME = 10.0f;
@@ -49,6 +62,7 @@ private:
 
 	int buddhaStateCount;
 
+	std::shared_ptr<BuddhaAnimatedVideo> buddhaAnimatedVideo;
 };
 
 #endif // !_PRELUDE_BUDDHA_STATE_H
