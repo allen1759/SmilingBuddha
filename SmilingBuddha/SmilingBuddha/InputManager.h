@@ -8,6 +8,7 @@
 #define _INPUT_MANAGER_H
 
 #include <thread>
+#include <mutex>
 #include <conio.h>
 
 class InputManager
@@ -20,16 +21,15 @@ public:
 
 	static InputManager *GetInstance();
 
-	char GetKey();
-
-	void ResetKey();
+	bool GetKey(char key);
 
 private:
 
 	void WaitKey();
 
 	static InputManager *instance;
-	char key;
+	bool keyTable[128];
+	std::mutex keyMutax;
 	std::thread inputManagerThread;
 };
 

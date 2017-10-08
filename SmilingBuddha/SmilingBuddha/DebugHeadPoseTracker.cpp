@@ -46,21 +46,16 @@ void DebugHeadPoseTracker::StopTracking()
 void DebugHeadPoseTracker::Tracking()
 {
 	while (isTracking) {
-		char key = InputManager::GetInstance()->GetKey();
-		if (key == 'a' || key == 'A') {
+		if (InputManager::GetInstance()->GetKey('a')) {
 			pitch++;
-			InputManager::GetInstance()->ResetKey();
 		}
-		else if (key == 'w' || key == 'W') {
+		else if (InputManager::GetInstance()->GetKey('w')) {
 			yaw++;
-			InputManager::GetInstance()->ResetKey();
 		}
-		else if (key == 'd' || key == 'D') {
+		else if (InputManager::GetInstance()->GetKey('d')) {
 			pitch--;
-			InputManager::GetInstance()->ResetKey();
 		}
-		else if (key == 's' || key == 'S') {
-			InputManager::GetInstance()->ResetKey();
+		else if (InputManager::GetInstance()->GetKey('s')) {
 			yaw--;
 		}
 

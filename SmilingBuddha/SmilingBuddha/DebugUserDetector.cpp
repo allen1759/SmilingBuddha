@@ -30,14 +30,12 @@ DebugUserDetector * DebugUserDetector::GetInstance()
 void DebugUserDetector::DetectUser()
 {
 	while (true) {
-		char key = InputManager::GetInstance()->GetKey();
-		if (key == 'u' && observer != NULL) {
+		if (InputManager::GetInstance()->GetKey('u') && observer != NULL) {
 			if (!isUserDetect)
 				observer->OnUserDetect();
 			else
 				observer->OnUserLeave();
 			isUserDetect = !isUserDetect;
-			InputManager::GetInstance()->ResetKey();
 		}
 	}
 }
