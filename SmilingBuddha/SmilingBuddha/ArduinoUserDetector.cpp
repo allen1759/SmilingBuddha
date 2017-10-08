@@ -4,7 +4,7 @@
 *
 */
 
-#include "UserDetector.h"
+#include "ArduinoUserDetector.h"
 
 #include <exception>
 
@@ -13,9 +13,9 @@
 
 #include <iostream>
 
-UserDetector * UserDetector::instance = NULL;
+ArduinoUserDetector * ArduinoUserDetector::instance = NULL;
 
-UserDetector::UserDetector() : ioService(), serialPort(ioService)
+ArduinoUserDetector::ArduinoUserDetector() : ioService(), serialPort(ioService)
 {
 	isRunning = false;
 	detectUserThread = NULL;
@@ -33,15 +33,7 @@ UserDetector::UserDetector() : ioService(), serialPort(ioService)
 	Start();
 }
 
-UserDetector * UserDetector::GetInstance()
-{
-	if (instance == NULL)
-		instance = new UserDetector();
-
-	return instance;
-}
-
-UserDetector::~UserDetector()
+ArduinoUserDetector::~ArduinoUserDetector()
 {
 	isRunning = false;
 	if (detectUserThread) {
@@ -52,20 +44,23 @@ UserDetector::~UserDetector()
 	delete[] signalBuffer;
 }
 
-void UserDetector::SetUserObserver(UserObserver * observer)
+ArduinoUserDetector * ArduinoUserDetector::GetInstance()
 {
-	this->observer = observer;
+	if (instance == NULL)
+		instance = new ArduinoUserDetector();
+
+	return instance;
 }
 
-void UserDetector::Start()
+void ArduinoUserDetector::Start()
 {
 	if (!isRunning) {
 		isRunning = true;
-		detectUserThread = std::make_shared<std::thread>(&UserDetector::DetectUser, this);
+		detectUserThread = std::make_shared<std::thread>(&ArduinoUserDetector::DetectUser, this);
 	}
 }
 
-std::string UserDetector::ReadLine()
+std::string ArduinoUserDetector::ReadLine()
 {
 	char ch;
 	std::string result;
@@ -87,7 +82,7 @@ std::string UserDetector::ReadLine()
 	}
 }
 
-void UserDetector::DetectUser()
+void ArduinoUserDetector::DetectUser()
 {
 	while (isRunning) {
 		try {
@@ -100,7 +95,7 @@ void UserDetector::DetectUser()
 	}
 }
 
-void UserDetector::OpenSerialPort()
+void ArduinoUserDetector::OpenSerialPort()
 {
 	serialPort.open(portName);
 	serialPort.set_option(boost::asio::serial_port_base::baud_rate(BAUD_RATE));
@@ -110,7 +105,7 @@ void UserDetector::OpenSerialPort()
 	serialPort.set_option(boost::asio::serial_port_base::flow_control(boost::asio::serial_port::flow_control::none));
 }
 
-void UserDetector::CloseSerialPort()
+void ArduinoUserDetector::CloseSerialPort()
 {
 	serialPort.close();
 
@@ -122,7 +117,7 @@ void UserDetector::CloseSerialPort()
 }
 
 
-void UserDetector::ProcessSerialData()
+void ArduinoUserDetector::ProcessSerialData()
 {
 	try {
 		while (isRunning) {

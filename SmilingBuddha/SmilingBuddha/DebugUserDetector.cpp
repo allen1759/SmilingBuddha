@@ -6,18 +6,20 @@
 
 #include "DebugUserDetector.h"
 
-inline DebugUserDetector::DebugUserDetector()
+DebugUserDetector *DebugUserDetector::instance = NULL;
+
+DebugUserDetector::DebugUserDetector()
 {
 	isUserDetect = false;
 
 	detectUserThread = std::thread(&DebugUserDetector::DetectUser, this);
 }
 
-inline DebugUserDetector::~DebugUserDetector()
+DebugUserDetector::~DebugUserDetector()
 {
 }
 
-inline DebugUserDetector * DebugUserDetector::GetInstance()
+DebugUserDetector * DebugUserDetector::GetInstance()
 {
 	if (instance == NULL)
 		instance = new DebugUserDetector();
@@ -25,12 +27,7 @@ inline DebugUserDetector * DebugUserDetector::GetInstance()
 	return instance;
 }
 
-inline void DebugUserDetector::SetUserObserver(UserObserver * observer)
-{
-	this->observer = observer;
-}
-
-inline void DebugUserDetector::DetectUser()
+void DebugUserDetector::DetectUser()
 {
 	while (true) {
 		char key = InputManager::GetInstance()->GetKey();

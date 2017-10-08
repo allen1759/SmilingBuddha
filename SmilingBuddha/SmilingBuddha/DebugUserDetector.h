@@ -7,22 +7,22 @@
 #ifndef _DEBUG_USER_DETECTOR_H
 #define _DEBUG_USER_DETECTOR_H
 
+#include "UserDetector.h"
+
 #include <thread>
 
 #include "UserObserver.h"
 #include "InputManager.h"
 
-class DebugUserDetector
+class DebugUserDetector : public UserDetector
 {
 private:
 	DebugUserDetector();
 
 public:
-	~DebugUserDetector();
+	virtual ~DebugUserDetector();
 
 	static DebugUserDetector * GetInstance();
-
-	void SetUserObserver(UserObserver *observer);
 
 private:
 	void DetectUser();
@@ -30,8 +30,7 @@ private:
 	static DebugUserDetector *instance;
 
 	std::thread detectUserThread;
-
-	UserObserver *observer;
+	
 	bool isUserDetect;
 };
 
