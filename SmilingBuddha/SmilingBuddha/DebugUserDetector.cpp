@@ -37,6 +37,7 @@ void DebugUserDetector::DetectUser()
 			else
 				observer->OnUserLeave();
 			isUserDetect = !isUserDetect;
+			InputManager::GetInstance()->ResetKey();
 		}
 	}
 }
