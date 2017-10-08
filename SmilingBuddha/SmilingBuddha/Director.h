@@ -75,7 +75,6 @@ private:
 	// Controllers
 	SmileVideoProcessor *smileVideoProcessor;
 	HeadPoseTracker *headPoseTracker;
-	UserDetector *userDetector;
 
 	bool running;
 	std::thread updateThread;
