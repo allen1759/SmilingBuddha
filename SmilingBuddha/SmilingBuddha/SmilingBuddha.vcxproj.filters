@@ -108,9 +108,6 @@
     <ClCompile Include="SmileSaver.cpp">
       <Filter>controller\smile_processor</Filter>
     </ClCompile>
-    <ClCompile Include="UserDetector.cpp">
-      <Filter>controller\user_detector</Filter>
-    </ClCompile>
     <ClCompile Include="WebcamSmileVideoProcessor.cpp">
       <Filter>controller\smile_processor</Filter>
     </ClCompile>
@@ -201,6 +198,12 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
+    <ClCompile Include="DebugUserDetector.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="ArduinoUserDetector.cpp">
+      <Filter>controller\user_detector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="liblinear-2.11\linear.h">
@@ -277,9 +280,6 @@
     </ClInclude>
     <ClInclude Include="WebcamSmileVideoProcessor.h">
       <Filter>controller\smile_processor</Filter>
-    </ClInclude>
-    <ClInclude Include="UserDetector.h">
-      <Filter>controller\user_detector</Filter>
     </ClInclude>
     <ClInclude Include="UserObserver.h">
       <Filter>controller\user_detector</Filter>
@@ -406,6 +406,15 @@
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugUserDetector.h">
+      <Filter>controller\user_detector</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoUserDetector.h">
+      <Filter>controller\user_detector</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDetector.h">
+      <Filter>controller\user_detector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

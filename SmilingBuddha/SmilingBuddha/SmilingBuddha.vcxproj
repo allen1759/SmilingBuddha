@@ -124,6 +124,7 @@
     <ClCompile Include="BroadcastState.cpp" />
     <ClCompile Include="BuddhaAnimatedVideo.cpp" />
     <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp" />
+    <ClCompile Include="DebugUserDetector.cpp" />
     <ClCompile Include="EndingBuddhaState.cpp" />
     <ClCompile Include="DebugHeadPoseTracker.cpp" />
     <ClCompile Include="Director.cpp" />
@@ -157,7 +158,7 @@
     <ClCompile Include="SmileRecognizer.cpp" />
     <ClCompile Include="SmileSaver.cpp" />
     <ClCompile Include="SmileState.cpp" />
-    <ClCompile Include="UserDetector.cpp" />
+    <ClCompile Include="ArduinoUserDetector.cpp" />
     <ClCompile Include="SmileVideoProcessor.cpp" />
     <ClCompile Include="VideoClip.cpp" />
     <ClCompile Include="VideoFrame.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="BroadcastState.h" />
     <ClInclude Include="BuddhaAnimatedVideo.h" />
     <ClInclude Include="ChangeBackgroundAnimatedVideo.h" />
+    <ClInclude Include="DebugUserDetector.h" />
     <ClInclude Include="EndingBuddhaState.h" />
     <ClInclude Include="DebugHeadPoseTracker.h" />
     <ClInclude Include="DebugSmileVideoProcessor.h" />
@@ -225,6 +227,7 @@
     <ClInclude Include="SmileRecognizer.h" />
     <ClInclude Include="SmileSaver.h" />
     <ClInclude Include="TransitionalVideo.h" />
+    <ClInclude Include="ArduinoUserDetector.h" />
     <ClInclude Include="UserDetector.h" />
     <ClInclude Include="UserObserver.h" />
     <ClInclude Include="SmileVideoProcessor.h" />

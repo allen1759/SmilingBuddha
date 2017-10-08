@@ -7,6 +7,7 @@
 #ifndef _DIRECTOR_H
 #define _DIRECTOR_H
 
+#include "UserObserver.h"
 #include "SmileObserver.h"
 
 #include <vector>
@@ -22,12 +23,13 @@
 // Controllers
 #include "SmileVideoProcessor.h"
 #include "HeadPoseTracker.h"
+#include "UserDetector.h"
 
-class Director : public SmileObserver
+class Director : public UserObserver, public SmileObserver
 {
 public:
 	//TODO: Add controller
-	Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker);
+	Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker, UserDetector *userDetector);
 
 	~Director();
 
@@ -51,6 +53,11 @@ public:
 
 	Ray GetHeadPose();
 
+	// Implement UserObserver's pure virtual function.
+	virtual void OnUserDetect() override;
+
+	virtual void OnUserLeave() override;
+
 	// Implement SmileObserver's pure virtual function.
 	virtual void OnSmile() override;
 
@@ -65,12 +72,10 @@ private:
 
 	std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> userImageSequenceRecords;
 
-	// View
-	// TODO: add renderer
-
 	// Controllers
 	SmileVideoProcessor *smileVideoProcessor;
 	HeadPoseTracker *headPoseTracker;
+	UserDetector *userDetector;
 
 	bool running;
 	std::thread updateThread;

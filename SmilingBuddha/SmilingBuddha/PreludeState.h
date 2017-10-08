@@ -11,6 +11,9 @@
 
 #include <chrono>
 
+#include "Director.h"
+#include "IntroInitialState.h"
+
 class PreludeState : public InteractionState
 {
 public:
@@ -22,6 +25,11 @@ public:
 
 	virtual ~PreludeState()
 	{}
+
+	virtual void OnUserDetect()
+	{
+		director->SetInteractionState(std::make_shared<IntroInitialState>(director));
+	}
 
 protected:
 

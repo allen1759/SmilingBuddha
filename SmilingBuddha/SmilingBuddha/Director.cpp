@@ -9,6 +9,8 @@
 #include <iostream>
 #include <chrono>
 
+#include "OnUserDetectEvent.h"
+#include "OnUserLeaveEvent.h"
 #include "OnSmileEvent.h"
 #include "OnRecordedEvent.h"
 #include "RegularSmileProcessStrategy.h"
@@ -18,7 +20,7 @@
 // for test
 #include "IntroInitialState.h"
 
-Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker)
+Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker, UserDetector *userDetector)
 {
 	this->videoGrid = std::make_shared<VideoGrid>();
 	videoRenderer->SetVideo(this->videoGrid);
@@ -27,10 +29,12 @@ Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideo
 
 	this->smileVideoProcessor = smileVideoProcessor;
 	this->headPoseTracker = headPoseTracker;
+	this->userDetector = userDetector;
+	userDetector->SetUserObserver(this);
 
 	// Create first state.
-	std::shared_ptr<InteractionState> state = std::make_shared<IntroInitialState>(this);
-	//std::shared_ptr<InteractionState> state = std::make_shared<PreludeInitialState>(this);
+	//std::shared_ptr<InteractionState> state = std::make_shared<IntroInitialState>(this);
+	std::shared_ptr<InteractionState> state = std::make_shared<PreludeInitialState>(this);
 	SetInteractionState(state);
 
 	running = true;
@@ -111,6 +115,24 @@ Ray Director::GetHeadPose()
 {
 	return headPoseTracker->GetHeadPose();
 }
+
+// Implement UserObserver's pure virtual function.
+
+void Director::OnUserDetect()
+{
+	eventQueueMutex.lock();
+	eventQueue.push(std::make_shared<OnUserDetectEvent>());
+	eventQueueMutex.unlock();
+}
+
+void Director::OnUserLeave()
+{
+	eventQueueMutex.lock();
+	eventQueue.push(std::make_shared<OnUserLeaveEvent>());
+	eventQueueMutex.unlock();
+}
+
+// Implement SmileObserver's pure virtual function.
 
 void Director::OnSmile()
 {
