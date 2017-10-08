@@ -64,7 +64,6 @@ DebugSmileVideoProcessor * DebugSmileVideoProcessor::GetInstance()
 
 void DebugSmileVideoProcessor::ChangeSmile()
 {
-	std::cout << "change smile" << std::endl;
 	isSmile = !isSmile;
 }
 
@@ -77,9 +76,8 @@ void DebugSmileVideoProcessor::ProcessSmileVideo()
 
 std::shared_ptr<cv::Mat> DebugSmileVideoProcessor::ReadFrame()
 {
-	if (InputManager::GetInstance()->GetKey('x')) {
+	if (InputManager::GetInstance()->GetKey('x'))
 		ChangeSmile();
-	}
 
 	if (isSmile)
 		return std::make_shared<cv::Mat>(*smileFrame);
