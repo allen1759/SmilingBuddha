@@ -100,6 +100,8 @@ void Director::StopInteraction()
 {
 	smileVideoProcessor->Stop();
 	headPoseTracker->StopTracking();
+	if (!userImageSequenceRecords->empty())
+		VideoPool::GetInstance()->AddSmileVideo(userImageSequenceRecords->front());
 	userImageSequenceRecords->clear();
 }
 
