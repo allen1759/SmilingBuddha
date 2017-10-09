@@ -130,8 +130,8 @@ void Kinect1HeadPoseTracker::TrackFace()
 	lastRotation = glm::quat(glm::vec3(0.0f, 0.0f, 0.0f));
 
 	while (isTracking) {
-		// Wait frame signal for 100 milisecond.
-		int signal = WaitForMultipleObjects(sizeof(events) / sizeof(HANDLE), events, true, 100);
+		// Wait frame signal for 1000 milisecond.
+		int signal = WaitForMultipleObjects(sizeof(events) / sizeof(HANDLE), events, true, 1000);
 
 		if (signal == WAIT_TIMEOUT || signal == WAIT_FAILED)
 			throw std::runtime_error("Error tracking face.");
@@ -327,6 +327,7 @@ void Kinect1HeadPoseTracker::ProcessFaceResult()
 		glm::quat currentRotation = glm::mix(rotation, lastRotation, 0.5f);
 		lastRotation = currentRotation;
 		headPose.SetDirection(currentRotation * glm::vec3(0.0f, 0.0f, -1.0f));
+		//std::cout << headPose.ToString() << std::endl;
 	}
 	else
 		faceTrackingResult->Reset();
