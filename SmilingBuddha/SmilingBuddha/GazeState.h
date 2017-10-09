@@ -24,6 +24,8 @@ public:
 
 	virtual void Update() override;
 
+	virtual void OnSmile() override;
+
 protected:
 	std::shared_ptr<Video> GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse);
 

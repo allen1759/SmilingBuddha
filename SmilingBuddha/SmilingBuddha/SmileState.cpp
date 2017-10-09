@@ -70,6 +70,11 @@ std::string SmileState::ToString()
 	return "SmileState";
 }
 
+void SmileState::OnSmile()
+{
+	AudioPlayer::GetInstance()->PlayAudio(AudioPool::GetInstance()->GetSmileBellAudio());
+}
+
 void SmileState::SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 {
 	std::shared_ptr<Video> newVideo = std::make_shared<VideoClip>(images, USER_VIDEO_TIME, true, true);

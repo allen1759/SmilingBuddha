@@ -12,6 +12,9 @@
 #include "ChangeBackgroundAnimatedVideo.h"
 #include "BroadcastState.h"
 
+#include "AudioPool.h"
+#include "AudioPlayer.h"
+
 GazeState::GazeState(Director *director, std::chrono::high_resolution_clock::time_point startTime)
 	: InteractionState(director),
 	  ROW_COUNT(Setting::GetInstance()->GetRow()),
@@ -46,6 +49,11 @@ void GazeState::Update()
 		switchToBroadcastState = true;
 }
 
+void GazeState::OnSmile()
+{
+	AudioPlayer::GetInstance()->PlayAudio(AudioPool::GetInstance()->GetSmileBellAudio());
+}
+
 std::shared_ptr<Video> GazeState::GetActorDirectionVideo(int row, int col, int direction, bool loop, bool reverse)
 {
 	std::shared_ptr<ActorVideoSet> actorVideoSet = videoPool->GetActorVideoSet(row, col);
@@ -70,7 +78,7 @@ void GazeState::HeadPost2RowCol(Ray headPose, int & row, int & col)
 
 	float rowMeter = -intersection.y + PROJECTION_HEIGHT / 2;
 	float colMeter = intersection.x + PROJECTION_WIDTH / 2;
-	std::cout << "Meter row: " << rowMeter << " col: " << colMeter << std::endl;
+	//std::cout << "Meter row: " << rowMeter << " col: " << colMeter << std::endl;
 
 	row = rowMeter / PROJECTION_HEIGHT * ROW_COUNT;
 	col = colMeter / PROJECTION_WIDTH * COL_COUNT;

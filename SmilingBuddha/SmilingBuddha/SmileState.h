@@ -25,6 +25,8 @@ public:
 
 	virtual std::string ToString() override;
 
+	virtual void OnSmile() override;
+
 private:
 	void SetWaveAnimationByImageSequenced(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images);
 

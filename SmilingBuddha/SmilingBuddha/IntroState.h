@@ -22,6 +22,8 @@ protected:
 public:
 	virtual ~IntroState();
 
+	virtual void OnSmile() override;
+
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images) override;
 
 protected:

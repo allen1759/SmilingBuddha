@@ -10,6 +10,9 @@
 #include "Director.h"
 #include "VideoClip.h"
 
+#include "AudioPool.h"
+#include "AudioPlayer.h"
+
 IntroState::IntroState(Director *director)
 	: InteractionState(director)
 {
@@ -23,6 +26,11 @@ IntroState::IntroState(Director *director)
 
 IntroState::~IntroState()
 {
+}
+
+void IntroState::OnSmile()
+{
+	AudioPlayer::GetInstance()->PlayAudio(AudioPool::GetInstance()->GetSmileBellAudio());
 }
 
 void IntroState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)

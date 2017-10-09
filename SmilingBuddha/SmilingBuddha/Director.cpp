@@ -18,9 +18,6 @@
 #include "SeeEachSmileProcessStrategy.h"
 #include "PreludeInitialState.h"
 
-#include "AudioPool.h"
-#include "AudioPlayer.h"
-
 Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker, UserDetector *userDetector)
 {
 	this->videoGrid = std::make_shared<VideoGrid>();
@@ -141,8 +138,6 @@ void Director::OnSmile()
 	eventQueueMutex.lock();
 	eventQueue.push(std::make_shared<OnSmileEvent>());
 	eventQueueMutex.unlock();
-
-	AudioPlayer::GetInstance()->PlayAudio(AudioPool::GetInstance()->GetSmileBellAudio());
 }
 
 void Director::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
