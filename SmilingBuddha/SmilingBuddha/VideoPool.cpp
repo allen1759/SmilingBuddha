@@ -210,6 +210,7 @@ std::shared_ptr<std::list<std::string>> VideoPool::GetLastSmileVideoPath(int day
 
 void VideoPool::LoadAllSmileVideo(const int windowCount)
 {
+	smileVideoList.clear();
 	std::list<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>::iterator it = nonslotSmileVideoList.begin();
 
 	for (int i = 0; i < windowCount; ++i) {
