@@ -26,7 +26,10 @@ VideoRenderer::VideoRenderer()
 	  RESOLUTION_HEIGHT(Setting::GetInstance()->GetResolutionHeight())
 {
 	glfwInit();
+	// For testing.
 	window = glfwCreateWindow(RESOLUTION_WIDTH, RESOLUTION_HEIGHT, "OpenGL", NULL, NULL);
+	// For Full-Screen mode.
+	//window = glfwCreateWindow(RESOLUTION_WIDTH, RESOLUTION_HEIGHT, "OpenGL", glfwGetPrimaryMonitor(), NULL);
 	glfwMakeContextCurrent(window);
 
 	glewExperimental = GL_TRUE;
