@@ -12,19 +12,20 @@
 #include <algorithm>
 
 VideoGrid::VideoGrid()
+	: layout(Setting::GetInstance()->GetLayout())
 {
 	rowCount = Setting::GetInstance()->GetRow();
 	colCount = Setting::GetInstance()->GetCol();
 
 	videoGrid.resize(rowCount * colCount);
-	layout.resize(rowCount * colCount);
+	//layout.resize(rowCount * colCount);
 
-	float gridSizeX = Setting::GetInstance()->GetResolutionWidth() / static_cast<float>(colCount);
-	float gridSizeY = Setting::GetInstance()->GetResolutionHeight() / static_cast<float>(rowCount);
-	for (int i = 0; i < rowCount; ++i) {
-		for (int j = 0; j < colCount; ++j)
-			layout[i * colCount + j] = cv::Point(static_cast<int>(gridSizeX * static_cast<float>(j)), static_cast<int>(gridSizeY * static_cast<float>(i)));
-	}
+	//float gridSizeX = Setting::GetInstance()->GetResolutionWidth() / static_cast<float>(colCount);
+	//float gridSizeY = Setting::GetInstance()->GetResolutionHeight() / static_cast<float>(rowCount);
+	//for (int i = 0; i < rowCount; ++i) {
+	//	for (int j = 0; j < colCount; ++j)
+	//		layout[i * colCount + j] = cv::Point(static_cast<int>(gridSizeX * static_cast<float>(j)), static_cast<int>(gridSizeY * static_cast<float>(i)));
+	//}
 
 	
 }
@@ -35,7 +36,10 @@ VideoGrid::~VideoGrid()
 
 std::shared_ptr<cv::Mat> VideoGrid::GetFrame()
 {
-	std::shared_ptr<cv::Mat> frame = std::make_shared<cv::Mat>(1080, 1920, CV_8UC3);
+	int resolutionWidth = Setting::GetInstance()->GetResolutionWidth();
+	int resolutionHeight = Setting::GetInstance()->GetResolutionHeight();
+
+	std::shared_ptr<cv::Mat> frame = std::make_shared<cv::Mat>(resolutionHeight, resolutionWidth, CV_8UC3);
 	for (int i = 0; i < videoGrid.size(); ++i) {
 		std::shared_ptr<cv::Mat> gridFrame;
 		videoGridMutex.lock();

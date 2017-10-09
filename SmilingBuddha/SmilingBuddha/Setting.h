@@ -7,6 +7,10 @@
 #ifndef _SETTING_H
 #define _SETTING_H
 
+#include <vector>
+
+#include <opencv2\core\core.hpp>
+
 class Setting
 {
 private:
@@ -27,7 +31,6 @@ public:
 
 	int GetCenterRow();
 	int GetCenterCol();
-	//int GetIntroStateGridWidth();
 	int GetMaxDistanceToCenterInGrid();
 	int GetMaxDistanceToCenter();
 
@@ -39,9 +42,15 @@ public:
 
 	int GetResolutionWidth();
 	int GetResolutionHeight();
+	cv::Point GetCenterPositionOfGrid(int row, int col);
 
 	float GetProjectionWidth();
 	float GetProjectionHeight();
+
+	std::vector<cv::Point> &GetLayout()
+	{
+		return layout;
+	}
 
 	int CalculateDistanceToCenter(int row, int col);
 	int CalculateManhattenDistanceToCenter(int row, int col);
@@ -87,6 +96,8 @@ private:
 	// TODO: read from file.
 	const float PROJECTION_WIDTH = 1.92f;
 	const float PROJECTION_HEIGHT = 1.08f;
+
+	std::vector<cv::Point> layout;
 };
 
 

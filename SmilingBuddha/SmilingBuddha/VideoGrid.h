@@ -34,7 +34,7 @@ private:
 	void DrawSingleGrid(int row, int col);
 
 	std::vector<std::shared_ptr<Video>> videoGrid;
-	std::vector<cv::Point> layout;
+	std::vector<cv::Point> &layout;
 	std::mutex videoGridMutex;
 
 	int rowCount;

@@ -12,6 +12,8 @@
 #include <chrono>
 
 //cpp
+#include <cstdlib>
+#include "Setting.h"
 #include "VideoRenderer.h"
 #include "Director.h"
 #include "PreludeWaveState.h"
@@ -29,7 +31,12 @@ public:
 
 		
 		// TODO: layout
-		buddhaAnimatedVideo = std::make_shared<BuddhaAnimatedVideo>(director->GetVideoGrid(), PRELUDE_BUDDHA_STATE_TIME, 100, 100);
+		int randomRow = rand() % Setting::GetInstance()->GetRow();
+		int randomCol = rand() % Setting::GetInstance()->GetCol();
+		cv::Point buddhaPoint = Setting::GetInstance()->GetCenterPositionOfGrid(randomRow, randomCol);
+		
+		buddhaAnimatedVideo = std::make_shared<BuddhaAnimatedVideo>(
+			director->GetVideoGrid(), PRELUDE_BUDDHA_STATE_TIME, buddhaPoint.x, buddhaPoint.y);
 		VideoRenderer::GetInstance()->SetVideo(buddhaAnimatedVideo);
 	}
 

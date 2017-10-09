@@ -13,6 +13,14 @@ Setting *Setting::instance = NULL;
 
 Setting::Setting()
 {
+	layout.resize(WINDOW_ROW_COUNT * WINDOW_COL_COUNT);
+
+	float gridSizeX = GetResolutionWidth() / static_cast<float>(WINDOW_COL_COUNT);
+	float gridSizeY = GetResolutionHeight() / static_cast<float>(WINDOW_ROW_COUNT);
+	for (int i = 0; i < WINDOW_ROW_COUNT; ++i) {
+		for (int j = 0; j < WINDOW_COL_COUNT; ++j)
+			layout[i * WINDOW_COL_COUNT + j] = cv::Point(static_cast<int>(gridSizeX * (float)j), static_cast<int>(gridSizeY * (float)i));
+	}
 }
 
 Setting::~Setting()
@@ -62,11 +70,6 @@ int Setting::GetCenterCol()
 	return COL_CENTER;
 }
 
-//int Setting::GetIntroStateGridWidth()
-//{
-//	return INTRO_STATE_GRID_WIDTH;
-//}
-
 int Setting::GetMaxDistanceToCenterInGrid()
 {
 	return INTRO_STATE_GRID_WIDTH / 2;
@@ -109,6 +112,15 @@ int Setting::GetResolutionWidth()
 int Setting::GetResolutionHeight()
 {
 	return RESOLUTION_HEIGHT;
+}
+
+cv::Point Setting::GetCenterPositionOfGrid(int row, int col)
+{
+	cv::Point ret = layout[row * WINDOW_COL_COUNT + col];
+	ret.y += GetImageHeight() / 2;
+	ret.x += GetImageWidth() / 2;
+
+	return ret;
 }
 
 float Setting::GetProjectionWidth()
