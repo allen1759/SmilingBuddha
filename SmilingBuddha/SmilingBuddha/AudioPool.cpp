@@ -10,12 +10,12 @@ AudioPool *AudioPool::instance = NULL;
 
 AudioPool::AudioPool()
 {
-	preludeAudio = std::make_shared<Audio>("resources\\prelude.wav");
-	introAudio = std::make_shared<Audio>("resources\\intro.wav");
-	mainAudio = std::make_shared<Audio>("resources\\main.wav");
+	preludeAudio = std::make_shared<Audio>("resources\\audio\\prelude.wav");
+	introAudio = std::make_shared<Audio>("resources\\audio\\intro.wav");
+	mainAudio = std::make_shared<Audio>("resources\\audio\\main.wav");
 
-	bellAudio = std::make_shared<Audio>("resources\\bell.wav");
-	smileBellAudio = std::make_shared<Audio>("resources\\smile_bell.wav");
+	bellAudio = std::make_shared<Audio>("resources\\audio\\bell.wav");
+	smileBellAudio = std::make_shared<Audio>("resources\\audio\\smile_bell.wav");
 }
 
 AudioPool::~AudioPool()
@@ -24,30 +24,33 @@ AudioPool::~AudioPool()
 
 AudioPool *AudioPool::GetInstance()
 {
+	if (instance == NULL)
+		instance = new AudioPool();
+
 	return instance;
 }
 
-inline std::shared_ptr<Audio> AudioPool::GetPreludeAudio()
+std::shared_ptr<Audio> AudioPool::GetPreludeAudio()
 {
-	return preludeAudio;
+	return std::make_shared<Audio>(*preludeAudio);
 }
 
-inline std::shared_ptr<Audio> AudioPool::GetIntroAudio()
+std::shared_ptr<Audio> AudioPool::GetIntroAudio()
 {
-	return introAudio;
+	return std::make_shared<Audio>(*introAudio);
 }
 
-inline std::shared_ptr<Audio> AudioPool::GetMainAudio()
+std::shared_ptr<Audio> AudioPool::GetMainAudio()
 {
-	return mainAudio;
+	return std::make_shared<Audio>(*mainAudio);
 }
 
-inline std::shared_ptr<Audio> AudioPool::GetBellAudio()
+std::shared_ptr<Audio> AudioPool::GetBellAudio()
 {
-	return bellAudio;
+	return std::make_shared<Audio>(*bellAudio);
 }
 
-inline std::shared_ptr<Audio> AudioPool::GetSmileBellAudio()
+std::shared_ptr<Audio> AudioPool::GetSmileBellAudio()
 {
-	return smileBellAudio;
+	return std::make_shared<Audio>(*smileBellAudio);
 }

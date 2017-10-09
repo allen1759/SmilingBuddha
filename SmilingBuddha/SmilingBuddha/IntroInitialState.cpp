@@ -11,6 +11,9 @@
 #include "VideoRenderer.h"
 #include "IntroNeutralState.h"
 
+#include "AudioPool.h"
+#include "AudioPlayer.h"
+
 IntroInitialState::IntroInitialState(Director *director)
 	: IntroState(director),
 	  ROW_COUNT(Setting::GetInstance()->GetRow()),
@@ -22,6 +25,8 @@ IntroInitialState::IntroInitialState(Director *director)
 	InitializeVideoGrid();
 
 	VideoRenderer::GetInstance()->SetVideo(director->GetVideoGrid());
+
+	AudioPlayer::GetInstance()->PlayBackgroundAudio(AudioPool::GetInstance()->GetIntroAudio());
 }
 
 IntroInitialState::~IntroInitialState()

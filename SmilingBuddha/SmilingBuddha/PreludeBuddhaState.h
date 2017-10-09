@@ -21,6 +21,9 @@
 #include "FadeAnimationVideo.h"
 #include "BuddhaAnimatedVideo.h"
 
+#include "AudioPool.h"
+#include "AudioPlayer.h"
+
 class PreludeBuddhaState : public PreludeState
 {
 public:
@@ -29,19 +32,21 @@ public:
 	{
 		this->buddhaStateCount = buddhaStateCount + 1;
 
-		
-		// TODO: layout
+		// Select random grid.
 		int randomRow = rand() % Setting::GetInstance()->GetRow();
 		int randomCol = rand() % Setting::GetInstance()->GetCol();
-		cv::Point buddhaPoint = Setting::GetInstance()->GetCenterPositionOfGrid(randomRow, randomCol);
+		cv::Point buddhaPoint = Setting::GetInstance()->GetForeheadPositionOfGrid(randomRow, randomCol);
 		
 		buddhaAnimatedVideo = std::make_shared<BuddhaAnimatedVideo>(
 			director->GetVideoGrid(), PRELUDE_BUDDHA_STATE_TIME, buddhaPoint.x, buddhaPoint.y);
 		VideoRenderer::GetInstance()->SetVideo(buddhaAnimatedVideo);
+
+		AudioPlayer::GetInstance()->PlayAudio(AudioPool::GetInstance()->GetBellAudio());
 	}
 
 	virtual ~PreludeBuddhaState()
-	{}
+	{
+	}
 
 	virtual void Update() override;
 

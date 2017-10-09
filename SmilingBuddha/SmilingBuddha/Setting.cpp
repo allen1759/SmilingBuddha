@@ -114,10 +114,10 @@ int Setting::GetResolutionHeight()
 	return RESOLUTION_HEIGHT;
 }
 
-cv::Point Setting::GetCenterPositionOfGrid(int row, int col)
+cv::Point Setting::GetForeheadPositionOfGrid(int row, int col)
 {
 	cv::Point ret = layout[row * WINDOW_COL_COUNT + col];
-	ret.y += GetImageHeight() / 2;
+	ret.y += GetImageHeight() / 3;
 	ret.x += GetImageWidth() / 2;
 
 	return ret;

@@ -16,6 +16,9 @@
 #include "VideoClip.h"
 #include "PreludeBuddhaState.h"
 
+#include "AudioPool.h"
+#include "AudioPlayer.h"
+
 class PreludeInitialState : public PreludeState
 {
 public:
@@ -28,6 +31,8 @@ public:
 		director->StopInteraction();
 
 		InitializeSmileVideo();
+
+		AudioPlayer::GetInstance()->PlayBackgroundAudio(AudioPool::GetInstance()->GetPreludeAudio());
 	}
 
 	virtual ~PreludeInitialState()

@@ -42,7 +42,7 @@ public:
 
 	int GetResolutionWidth();
 	int GetResolutionHeight();
-	cv::Point GetCenterPositionOfGrid(int row, int col);
+	cv::Point GetForeheadPositionOfGrid(int row, int col);
 
 	float GetProjectionWidth();
 	float GetProjectionHeight();

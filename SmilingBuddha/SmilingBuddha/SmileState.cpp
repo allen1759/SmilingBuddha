@@ -11,10 +11,10 @@
 #include "VideoClip.h"
 #include "BlendingTransitionVideo.h"
 #include "WaveTransitionalVideo.h"
-
-
-//#include "TransitionState.h"
 #include "GazeInitialState.h"
+
+#include "AudioPool.h"
+#include "AudioPlayer.h"
 
 SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
 	: InteractionState(director),
@@ -37,6 +37,8 @@ SmileState::SmileState(Director *director, std::shared_ptr<std::vector<std::shar
 	director->SetRegularSmileProcessorStrategy();
 
 	SetWaveAnimationByImageSequenced(images);
+
+	AudioPlayer::GetInstance()->PlayBackgroundAudio(AudioPool::GetInstance()->GetMainAudio());
 }
 
 SmileState::~SmileState()
@@ -58,7 +60,6 @@ void SmileState::Update()
 	}
 	else if (elapsedTime > endSeeBackElapsedTime) {
 		SetNeutralVideo();
-		//director->SetInteractionState(std::make_shared<TransitionState>(director));
 		director->SetInteractionState(std::make_shared<GazeInitialState>(director));
 		return;
 	}
