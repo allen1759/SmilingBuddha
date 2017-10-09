@@ -94,8 +94,11 @@ void VideoPool::LoadSlotSmileVideo(const int windowCount)
 			if (!it->path().has_extension()) {
 				int slotIndex = std::stoi(it->path().filename().string());
 				// Check the number(folder name) exceed total windowCount or not.
-				if (slotIndex < windowCount)
-					slotSmileVideoSet[slotIndex] = LoadOneSlotVideo(it->path().string());
+				if (slotIndex < windowCount) {
+					std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> imgs = LoadOneSlotVideo(it->path().string());
+					if (imgs != NULL)
+						slotSmileVideoSet[slotIndex] = imgs;
+				}
 			}
 		}
 		// If string to int failed, catch exeption.
