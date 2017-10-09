@@ -15,7 +15,7 @@ EndingState::EndingState(Director *director)
 	  ROW_CENTER(Setting::GetInstance()->GetCenterRow()),
 	  COL_CENTER(Setting::GetInstance()->GetCenterCol()),
 	  MAX_DISTANCE_TO_CENTER(Setting::GetInstance()->GetMaxDistanceToCenter()),
-	  APEAR_TIME_FOR_EACH(APEAR_TIME / Setting::GetInstance()->GetMaxDistanceToCenter())
+	  APPEAR_TIME_FOR_EACH(APEAR_TIME / Setting::GetInstance()->GetMaxDistanceToCenter())
 {
 	this->videoPool = VideoPool::GetInstance();
 

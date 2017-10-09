@@ -32,17 +32,17 @@ void EndingFadeState::Update()
 	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - startTime).count();
 
 	if (elapsedTime > ENDING_FADE_STATE_TIME) {
-		for (int row = 0; row < EndingState::ROW_COUNT; ++row) {
-			for (int col = 0; col < EndingState::COL_COUNT; ++col)
-				director->GetVideoGrid()->SetChild(NULL, row, col);
-		}
-		director->SetInteractionState(std::make_shared<IntroInitialState>(director));
+		//for (int row = 0; row < EndingState::ROW_COUNT; ++row) {
+		//	for (int col = 0; col < EndingState::COL_COUNT; ++col)
+		//		director->GetVideoGrid()->SetChild(NULL, row, col);
+		//}
+		//director->SetInteractionState(std::make_shared<IntroInitialState>(director));
 		return;
 	}
 	else if (elapsedTime > nextAppearElapsedTime) {
 		EndingState::AppearAnimation(currentDistance);
 		currentDistance++;
-		nextAppearElapsedTime += APEAR_TIME_FOR_EACH;
+		nextAppearElapsedTime += APPEAR_TIME_FOR_EACH;
 	}
 }
 

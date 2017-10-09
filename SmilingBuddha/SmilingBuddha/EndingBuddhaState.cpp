@@ -9,7 +9,7 @@
 #include "Setting.h"
 #include "Director.h"
 #include "VideoClip.h"
-#include "BlendingTransitionVideo.h"
+#include "WaveTransitionalVideo.h"
 #include "EndingFadeState.h"
 
 EndingBuddhaState::EndingBuddhaState(Director *director)
@@ -37,7 +37,7 @@ void EndingBuddhaState::Update()
 	else if (elapsedTime > nextAppearElapsedTime) {
 		EndingState::AppearAnimation(currentDistance);
 		currentDistance++;
-		nextAppearElapsedTime += APEAR_TIME_FOR_EACH;
+		nextAppearElapsedTime += APPEAR_TIME_FOR_EACH;
 	}
 }
 
@@ -48,7 +48,7 @@ std::string EndingBuddhaState::ToString()
 
 void EndingBuddhaState::SetTransition(int row, int col)
 {
-	std::shared_ptr<Video> blendingVideo = std::make_shared<BlendingTransitionVideo>(
+	std::shared_ptr<Video> blendingVideo = std::make_shared<WaveTransitionalVideo>(
 		director->GetVideoGrid()->GetChild(row, col)->GetVideo(),
 		buddhaVideo,
 		WAVE_TIME);

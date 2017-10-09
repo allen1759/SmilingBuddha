@@ -39,7 +39,7 @@ protected:
 	const int MAX_DISTANCE_TO_CENTER;
 
 	const float APEAR_TIME = 3.0f;
-	const float APEAR_TIME_FOR_EACH;
+	const float APPEAR_TIME_FOR_EACH;
 
 	int maxManhattanDistanceToCenter;
 

@@ -18,16 +18,6 @@ VideoGrid::VideoGrid()
 	colCount = Setting::GetInstance()->GetCol();
 
 	videoGrid.resize(rowCount * colCount);
-	//layout.resize(rowCount * colCount);
-
-	//float gridSizeX = Setting::GetInstance()->GetResolutionWidth() / static_cast<float>(colCount);
-	//float gridSizeY = Setting::GetInstance()->GetResolutionHeight() / static_cast<float>(rowCount);
-	//for (int i = 0; i < rowCount; ++i) {
-	//	for (int j = 0; j < colCount; ++j)
-	//		layout[i * colCount + j] = cv::Point(static_cast<int>(gridSizeX * static_cast<float>(j)), static_cast<int>(gridSizeY * static_cast<float>(i)));
-	//}
-
-	
 }
 
 VideoGrid::~VideoGrid()
@@ -69,31 +59,3 @@ void VideoGrid::SetChild(std::shared_ptr<Video> video, int row, int col)
 	videoGrid[row * colCount + col] = video;
 	videoGridMutex.unlock();
 }
-/*
-void VideoGrid::DrawSingleGrid(int row, int col)
-{
-	std::shared_ptr<cv::Mat> gridFrame;
-	int gridIndex = row * colCount + col;
-
-	videoGridMutex.lock();
-	if (videoGrid[gridIndex])
-		gridFrame = videoGrid[gridIndex]->GetFrame();
-	videoGridMutex.unlock();
-
-	if (!gridFrame)
-		return;
-
-	cv::Point gridLayout = layout[gridIndex];
-
-	#pragma omp parallel for schedule(dynamic, 1) num_threads(4)
-	for (int i = 0; i < gridFrame->rows; ++i) {
-		int frameIndex = ((gridLayout.y + i) * frame->cols + gridLayout.x) * 3;
-		int gridFrameIndex = i * gridFrame->cols * 3;
-		for (int j = 0; j < gridFrame->cols; ++j) {
-			frame->data[frameIndex++] = gridFrame->data[gridFrameIndex++];
-			frame->data[frameIndex++] = gridFrame->data[gridFrameIndex++];
-			frame->data[frameIndex++] = gridFrame->data[gridFrameIndex++];
-		}
-	}
-}
-*/

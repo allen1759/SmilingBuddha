@@ -26,7 +26,7 @@ private:
 	virtual void SetTransition(int row, int col);
 
 
-	const float BUDDHA_STATE_TIME = 18.0f;
+	const float BUDDHA_STATE_TIME = 30.0f;
 	// TODO: change to videoFrame
 	const float BUDDHA_VIDEO_TIME = 10.0f;
 	const float WAVE_TIME = 3.0f;

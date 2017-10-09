@@ -26,11 +26,11 @@ public:
 	virtual std::string ToString() override;
 
 private:
-	void SetBlendingVideo(int row, int col, std::shared_ptr<Video> newVideo);
+	void SetTransition(int row, int col, std::shared_ptr<Video> newVideo);
 
 
 	const int COL_COUNT;
-	const float BROADCAST_STATE_TIME = 28.0f;
+	const float BROADCAST_STATE_TIME = 35.0f;
 	const float ALL_APPEAR_TIME = 8.0f;
 	const float APPEAR_TIME_FOR_EACH;
 	const float USER_VIDEO_TIME = 3.0f;

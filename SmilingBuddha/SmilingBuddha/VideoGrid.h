@@ -31,7 +31,6 @@ public:
 	virtual void SetChild(std::shared_ptr<Video> video, int row, int col) override;
 
 private:
-	void DrawSingleGrid(int row, int col);
 
 	std::vector<std::shared_ptr<Video>> videoGrid;
 	std::vector<cv::Point> &layout;
