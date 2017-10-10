@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{87E22168-DCEF-4EBC-BE44-208A27CE6406}</ProjectGuid>
+    <RootNamespace>SmilingBuddha</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SmileBuddhaDebug.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="SmileBuddhaRelease.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ActorVideoSet.cpp" />
+    <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="AudioPlayer.cpp" />
+    <ClCompile Include="AudioPool.cpp" />
+    <ClCompile Include="BlendingTransitionVideo.cpp" />
+    <ClCompile Include="BroadcastState.cpp" />
+    <ClCompile Include="BuddhaAnimatedVideo.cpp" />
+    <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp" />
+    <ClCompile Include="DebugUserDetector.cpp" />
+    <ClCompile Include="EndingBuddhaState.cpp" />
+    <ClCompile Include="DebugHeadPoseTracker.cpp" />
+    <ClCompile Include="Director.cpp" />
+    <ClCompile Include="EndingFadeState.cpp" />
+    <ClCompile Include="EndingState.cpp" />
+    <ClCompile Include="FadeAnimationVideo.cpp" />
+    <ClCompile Include="GazeInitialState.cpp" />
+    <ClCompile Include="GazeLockState.cpp" />
+    <ClCompile Include="GazeState.cpp" />
+    <ClCompile Include="GazeWanderState.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InteractionState.cpp" />
+    <ClCompile Include="IntroInitialState.cpp" />
+    <ClCompile Include="IntroNeutralState.cpp" />
+    <ClCompile Include="IntroSeeEachState.cpp" />
+    <ClCompile Include="IntroState.cpp" />
+    <ClCompile Include="Kinect1HeadPoseTracker.cpp" />
+    <ClCompile Include="liblinear-2.11\blas\daxpy.c" />
+    <ClCompile Include="liblinear-2.11\blas\ddot.c" />
+    <ClCompile Include="liblinear-2.11\blas\dnrm2.c" />
+    <ClCompile Include="liblinear-2.11\blas\dscal.c" />
+    <ClCompile Include="liblinear-2.11\linear.cpp" />
+    <ClCompile Include="liblinear-2.11\tron.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PreludeBuddhaState.cpp" />
+    <ClCompile Include="PreludeEndingState.cpp" />
+    <ClCompile Include="PreludeState.cpp" />
+    <ClCompile Include="PreludeWaveState.cpp" />
+    <ClCompile Include="RegularSmileProcessStrategy.cpp" />
+    <ClCompile Include="SeeEachSmileProcessStrategy.cpp" />
+    <ClCompile Include="Setting.cpp" />
+    <ClCompile Include="SmileProcessStrategy.cpp" />
+    <ClCompile Include="SmileRecognizer.cpp" />
+    <ClCompile Include="SmileSaver.cpp" />
+    <ClCompile Include="SmileState.cpp" />
+    <ClCompile Include="ArduinoUserDetector.cpp" />
+    <ClCompile Include="SmileVideoProcessor.cpp" />
+    <ClCompile Include="VideoClip.cpp" />
+    <ClCompile Include="VideoFrame.cpp" />
+    <ClCompile Include="VideoGrid.cpp" />
+    <ClCompile Include="VideoPool.cpp" />
+    <ClCompile Include="VideoRenderer.cpp" />
+    <ClCompile Include="WaveTransitionalVideo.cpp" />
+    <ClCompile Include="WebcamSmileVideoProcessor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ActorVideoSet.h" />
+    <ClInclude Include="AnimatedVideo.h" />
+    <ClInclude Include="Audio.h" />
+    <ClInclude Include="AudioPlayer.h" />
+    <ClInclude Include="AudioPool.h" />
+    <ClInclude Include="BlendingTransitionVideo.h" />
+    <ClInclude Include="BroadcastState.h" />
+    <ClInclude Include="BuddhaAnimatedVideo.h" />
+    <ClInclude Include="ChangeBackgroundAnimatedVideo.h" />
+    <ClInclude Include="DebugUserDetector.h" />
+    <ClInclude Include="EndingBuddhaState.h" />
+    <ClInclude Include="DebugHeadPoseTracker.h" />
+    <ClInclude Include="DebugSmileVideoProcessor.h" />
+    <ClInclude Include="Director.h" />
+    <ClInclude Include="EndingFadeState.h" />
+    <ClInclude Include="EndingState.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="FadeAnimationVideo.h" />
+    <ClInclude Include="GazeInitialState.h" />
+    <ClInclude Include="GazeLockState.h" />
+    <ClInclude Include="GazeState.h" />
+    <ClInclude Include="GazeWanderState.h" />
+    <ClInclude Include="HeadPoseTracker.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InteractionState.h" />
+    <ClInclude Include="IntroInitialState.h" />
+    <ClInclude Include="IntroNeutralState.h" />
+    <ClInclude Include="IntroSeeEachState.h" />
+    <ClInclude Include="Kinect1HeadPoseTracker.h" />
+    <ClInclude Include="LayoutState.h" />
+    <ClInclude Include="OnLayoutTriggerEvent.h" />
+    <ClInclude Include="OnRecordedEvent.h" />
+    <ClInclude Include="OnSmileEvent.h" />
+    <ClInclude Include="OnUserDetectEvent.h" />
+    <ClInclude Include="OnUserLeaveEvent.h" />
+    <ClInclude Include="PreludeBuddhaState.h" />
+    <ClInclude Include="PreludeEndingState.h" />
+    <ClInclude Include="PreludeInitialState.h" />
+    <ClInclude Include="PreludeState.h" />
+    <ClInclude Include="PreludeWave2BottomState.h" />
+    <ClInclude Include="PreludeWave2LeftState.h" />
+    <ClInclude Include="PreludeWave2RandomState.h" />
+    <ClInclude Include="PreludeWave2RightState.h" />
+    <ClInclude Include="PreludeWave2UpState.h" />
+    <ClInclude Include="PreludeWaveState.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="SmileState.h" />
+    <ClInclude Include="IntroState.h" />
+    <ClInclude Include="liblinear-2.11\blas\blas.h" />
+    <ClInclude Include="liblinear-2.11\blas\blasp.h" />
+    <ClInclude Include="liblinear-2.11\linear.h" />
+    <ClInclude Include="liblinear-2.11\tron.h" />
+    <ClInclude Include="RegularSmileProcessStrategy.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SeeEachSmileProcessStrategy.h" />
+    <ClInclude Include="Setting.h" />
+    <ClInclude Include="SmileObserver.h" />
+    <ClInclude Include="SmileProcessStrategy.h" />
+    <ClInclude Include="SmileRecognizer.h" />
+    <ClInclude Include="SmileSaver.h" />
+    <ClInclude Include="TransitionalVideo.h" />
+    <ClInclude Include="ArduinoUserDetector.h" />
+    <ClInclude Include="UserDetector.h" />
+    <ClInclude Include="UserObserver.h" />
+    <ClInclude Include="SmileVideoProcessor.h" />
+    <ClInclude Include="Video.h" />
+    <ClInclude Include="VideoClip.h" />
+    <ClInclude Include="VideoFrame.h" />
+    <ClInclude Include="VideoGrid.h" />
+    <ClInclude Include="VideoPool.h" />
+    <ClInclude Include="VideoRenderer.h" />
+    <ClInclude Include="WaveTransitionalVideo.h" />
+    <ClInclude Include="WebcamSmileVideoProcessor.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

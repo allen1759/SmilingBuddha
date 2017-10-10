@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="原始程式檔">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="標頭檔">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="資源檔">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="liblinear">
+      <UniqueIdentifier>{820edd41-7f56-4a2b-976e-367653c531f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="state">
+      <UniqueIdentifier>{f9e5aa6f-e107-40dc-abb3-0ecb01430473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="state\intro_state">
+      <UniqueIdentifier>{244a485a-2653-4131-99cb-a7ac4dfe6f0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="state\ending_state">
+      <UniqueIdentifier>{f0e627bd-385f-4c6c-befc-72d5eb8b21f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="state\gaze_state">
+      <UniqueIdentifier>{2aabbcfc-9b60-45a5-9373-02a479d731f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller">
+      <UniqueIdentifier>{951340c3-60df-45d4-9862-fb89245ffa47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller\head_pose_tracker">
+      <UniqueIdentifier>{37914243-b05c-44b7-9db9-cdc305ae227b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller\user_detector">
+      <UniqueIdentifier>{81a65853-b47c-45b2-b2a9-15730c06a5f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="controller\smile_processor">
+      <UniqueIdentifier>{c29065ed-ab95-4a9e-982d-e2d1b81390c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="event">
+      <UniqueIdentifier>{d67fe009-109e-4901-8ca5-0328320645a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="video">
+      <UniqueIdentifier>{d336c3a5-d756-4355-ae79-83770bf0bfef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="state\prelude_state">
+      <UniqueIdentifier>{6db64e1e-a1a8-436d-b26e-22a5390a3591}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\linear.cpp">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\tron.cpp">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\daxpy.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\ddot.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\dnrm2.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="liblinear-2.11\blas\dscal.c">
+      <Filter>liblinear</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoRenderer.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Director.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorVideoSet.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Setting.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoClip.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoGrid.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoPool.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileVideoProcessor.cpp">
+      <Filter>controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularSmileProcessStrategy.cpp">
+      <Filter>controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="SeeEachSmileProcessStrategy.cpp">
+      <Filter>controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileRecognizer.cpp">
+      <Filter>controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileSaver.cpp">
+      <Filter>controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="WebcamSmileVideoProcessor.cpp">
+      <Filter>controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroInitialState.cpp">
+      <Filter>state\intro_state</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroNeutralState.cpp">
+      <Filter>state\intro_state</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroSeeEachState.cpp">
+      <Filter>state\intro_state</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroState.cpp">
+      <Filter>state\intro_state</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractionState.cpp">
+      <Filter>state</Filter>
+    </ClCompile>
+    <ClCompile Include="BlendingTransitionVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileProcessStrategy.cpp">
+      <Filter>controller\smile_processor</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugHeadPoseTracker.cpp">
+      <Filter>controller\head_pose_tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="SmileState.cpp">
+      <Filter>state</Filter>
+    </ClCompile>
+    <ClCompile Include="BroadcastState.cpp">
+      <Filter>state</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingBuddhaState.cpp">
+      <Filter>state\ending_state</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingFadeState.cpp">
+      <Filter>state\ending_state</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingState.cpp">
+      <Filter>state\ending_state</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeState.cpp">
+      <Filter>state\gaze_state</Filter>
+    </ClCompile>
+    <ClCompile Include="Kinect1HeadPoseTracker.cpp">
+      <Filter>controller\head_pose_tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeWanderState.cpp">
+      <Filter>state\gaze_state</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeLockState.cpp">
+      <Filter>state\gaze_state</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeBackgroundAnimatedVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveTransitionalVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeAnimationVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeInitialState.cpp">
+      <Filter>state\gaze_state</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoFrame.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="PreludeWaveState.cpp">
+      <Filter>state\prelude_state</Filter>
+    </ClCompile>
+    <ClCompile Include="PreludeBuddhaState.cpp">
+      <Filter>state\prelude_state</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioPlayer.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioPool.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="BuddhaAnimatedVideo.cpp">
+      <Filter>video</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="ArduinoUserDetector.cpp">
+      <Filter>controller\user_detector</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugUserDetector.cpp">
+      <Filter>controller\user_detector</Filter>
+    </ClCompile>
+    <ClCompile Include="PreludeEndingState.cpp">
+      <Filter>state\prelude_state</Filter>
+    </ClCompile>
+    <ClCompile Include="PreludeState.cpp">
+      <Filter>state\prelude_state</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="liblinear-2.11\linear.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="liblinear-2.11\tron.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="liblinear-2.11\blas\blas.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="liblinear-2.11\blas\blasp.h">
+      <Filter>liblinear</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoRenderer.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Director.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorVideoSet.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoPool.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>event</Filter>
+    </ClInclude>
+    <ClInclude Include="OnRecordedEvent.h">
+      <Filter>event</Filter>
+    </ClInclude>
+    <ClInclude Include="OnSmileEvent.h">
+      <Filter>event</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugHeadPoseTracker.h">
+      <Filter>controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadPoseTracker.h">
+      <Filter>controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugSmileVideoProcessor.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="RegularSmileProcessStrategy.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="SeeEachSmileProcessStrategy.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileObserver.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileProcessStrategy.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileRecognizer.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileSaver.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileVideoProcessor.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="WebcamSmileVideoProcessor.h">
+      <Filter>controller\smile_processor</Filter>
+    </ClInclude>
+    <ClInclude Include="UserObserver.h">
+      <Filter>controller\user_detector</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroInitialState.h">
+      <Filter>state\intro_state</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroNeutralState.h">
+      <Filter>state\intro_state</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroSeeEachState.h">
+      <Filter>state\intro_state</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroState.h">
+      <Filter>state\intro_state</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractionState.h">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="SmileState.h">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="BlendingTransitionVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeAnimationVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionalVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="Video.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoClip.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoGrid.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastState.h">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingBuddhaState.h">
+      <Filter>state\ending_state</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingFadeState.h">
+      <Filter>state\ending_state</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingState.h">
+      <Filter>state\ending_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeInitialState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeWanderState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="GazeLockState.h">
+      <Filter>state\gaze_state</Filter>
+    </ClInclude>
+    <ClInclude Include="Kinect1HeadPoseTracker.h">
+      <Filter>controller\head_pose_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeBackgroundAnimatedVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveTransitionalVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWaveState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeBuddhaState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeInitialState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2UpState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2BottomState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2LeftState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2RightState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeWave2RandomState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoFrame.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="OnUserDetectEvent.h">
+      <Filter>event</Filter>
+    </ClInclude>
+    <ClInclude Include="OnUserLeaveEvent.h">
+      <Filter>event</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioPlayer.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioPool.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="BuddhaAnimatedVideo.h">
+      <Filter>video</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugUserDetector.h">
+      <Filter>controller\user_detector</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoUserDetector.h">
+      <Filter>controller\user_detector</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDetector.h">
+      <Filter>controller\user_detector</Filter>
+    </ClInclude>
+    <ClInclude Include="PreludeEndingState.h">
+      <Filter>state\prelude_state</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutState.h">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="OnLayoutTriggerEvent.h">
+      <Filter>event</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
