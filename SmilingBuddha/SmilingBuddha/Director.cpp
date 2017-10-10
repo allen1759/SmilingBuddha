@@ -9,14 +9,21 @@
 #include <iostream>
 #include <chrono>
 
+// Event
 #include "OnUserDetectEvent.h"
 #include "OnUserLeaveEvent.h"
 #include "OnSmileEvent.h"
 #include "OnRecordedEvent.h"
+#include "OnLayoutTriggerEvent.h"
 
+// Controller
 #include "RegularSmileProcessStrategy.h"
 #include "SeeEachSmileProcessStrategy.h"
+
+// State
 #include "PreludeInitialState.h"
+
+#include "InputManager.h"
 
 Director::Director(VideoRenderer* videoRenderer, SmileVideoProcessor *smileVideoProcessor, HeadPoseTracker *headPoseTracker, UserDetector *userDetector)
 {
@@ -62,6 +69,8 @@ void Director::UpdateLoop()
 			}
 			eventQueueMutex.unlock();
 		}
+
+		CheckKeyboardTrigger();
 
 		end = std::chrono::high_resolution_clock::now();
 		duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
@@ -147,4 +156,13 @@ void Director::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>
 	eventQueueMutex.unlock();
 
 	userImageSequenceRecords->push_back(images);
+}
+
+void Director::CheckKeyboardTrigger()
+{
+	if (InputManager::GetInstance()->GetKey('l')) {
+		eventQueueMutex.lock();
+		eventQueue.push(std::make_shared<OnLayoutTriggerEvent>());
+		eventQueueMutex.unlock();
+	}
 }

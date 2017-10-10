@@ -4,32 +4,31 @@
 *
 */
 
-#ifndef _ON_SMILE_EVENT_H
-#define _ON_SMILE_EVENT_H
+#ifndef _ON_LAYOUT_TRIGGER_EVENT_H
+#define _ON_LAYOUT_TRIGGER_EVENT_H
 
 #include "Event.h"
 
 #include "InteractionState.h"
 
-class OnSmileEvent : public Event
+class OnLayoutTriggerEvent : public Event
 {
 public:
-	OnSmileEvent()
+	OnLayoutTriggerEvent()
 	{
 	}
 
-	virtual ~OnSmileEvent()
+	virtual ~OnLayoutTriggerEvent()
 	{
 	}
 
 	virtual void Dispatch(std::shared_ptr<InteractionState> state) override
 	{
-		state->OnSmile();
+		state->OnLayoutTrigger();
 	}
 
 private:
 
-
 };
 
-#endif // !_ON_SMILE_EVENT_H
+#endif // !_ON_LAYOUT_TRIGGER_EVENT_H

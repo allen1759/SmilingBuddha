@@ -11,6 +11,8 @@
 
 #include <opencv2\core\core.hpp>
 
+#include <fstream>
+
 class Setting
 {
 private:
@@ -47,9 +49,29 @@ public:
 	float GetProjectionWidth();
 	float GetProjectionHeight();
 
-	std::vector<cv::Point> &GetLayout()
+	const std::vector<cv::Point> &GetLayout()
 	{
 		return layout;
+	}
+	
+	void SetLayout(int row, int col, cv::Point point)
+	{
+		point.x = std::max(0, point.x);
+		point.y = std::max(0, point.y);
+
+		point.x = std::min(RESOLUTION_WIDTH - IMAGE_WIDTH - 1, point.x);
+		point.y = std::min(RESOLUTION_HEIGHT - IMAGE_HEIGHT - 1, point.y);
+
+		layout[row * WINDOW_COL_COUNT + col] = point;
+	}
+
+	void SaveLayout()
+	{
+		std::fstream layoutFile(layoutPath, std::ios::out);
+		for (int i = 0; i < layout.size(); ++i)
+			layoutFile << layout[i].x << "\t" << layout[i].y << std::endl;
+
+		layoutFile << "// xPosition\tyPosition" << std::endl;
 	}
 
 	int CalculateDistanceToCenter(int row, int col);
@@ -98,6 +120,7 @@ private:
 	const float PROJECTION_HEIGHT = 1.08f;
 
 	std::vector<cv::Point> layout;
+	std::string layoutPath = "resources\\settings\\layout.txt";
 };
 
 

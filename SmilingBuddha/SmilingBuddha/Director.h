@@ -67,6 +67,8 @@ private:
 
 	std::shared_ptr<std::vector<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>> userImageSequenceRecords;
 
+	void CheckKeyboardTrigger();
+
 	// Controllers.
 	SmileVideoProcessor *smileVideoProcessor;
 	HeadPoseTracker *headPoseTracker;

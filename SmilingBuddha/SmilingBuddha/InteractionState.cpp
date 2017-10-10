@@ -23,14 +23,6 @@ void InteractionState::SignalEvent(std::shared_ptr<Event> e)
 	e->Dispatch(shared_from_this());
 }
 
-void InteractionState::OnSmile()
-{
-}
-
-void InteractionState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
-{
-}
-
 void InteractionState::OnUserDetect()
 {
 }
@@ -40,3 +32,15 @@ void InteractionState::OnUserLeave()
 	director->SetInteractionState(std::make_shared<PreludeInitialState>(director));
 }
 
+void InteractionState::OnSmile()
+{
+}
+
+void InteractionState::OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images)
+{
+}
+
+void InteractionState::OnLayoutTrigger()
+{
+
+}

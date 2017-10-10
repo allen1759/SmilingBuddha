@@ -15,11 +15,19 @@ Setting::Setting()
 {
 	layout.resize(WINDOW_ROW_COUNT * WINDOW_COL_COUNT);
 
-	float gridSizeX = GetResolutionWidth() / static_cast<float>(WINDOW_COL_COUNT);
-	float gridSizeY = GetResolutionHeight() / static_cast<float>(WINDOW_ROW_COUNT);
-	for (int i = 0; i < WINDOW_ROW_COUNT; ++i) {
-		for (int j = 0; j < WINDOW_COL_COUNT; ++j)
-			layout[i * WINDOW_COL_COUNT + j] = cv::Point(static_cast<int>(gridSizeX * (float)j), static_cast<int>(gridSizeY * (float)i));
+	// Read layout file.
+	std::fstream layoutFile(layoutPath, std::ios::in);
+	if (layoutFile.is_open()) {
+		for (int i = 0; i < layout.size(); ++i)
+			layoutFile >> layout[i].x >> layout[i].y;
+	}
+	else {
+		float gridSizeX = GetResolutionWidth() / static_cast<float>(WINDOW_COL_COUNT);
+		float gridSizeY = GetResolutionHeight() / static_cast<float>(WINDOW_ROW_COUNT);
+		for (int i = 0; i < WINDOW_ROW_COUNT; ++i) {
+			for (int j = 0; j < WINDOW_COL_COUNT; ++j)
+				layout[i * WINDOW_COL_COUNT + j] = cv::Point(static_cast<int>(gridSizeX * (float)j), static_cast<int>(gridSizeY * (float)i));
+		}
 	}
 }
 

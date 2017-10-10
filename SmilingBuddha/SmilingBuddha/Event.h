@@ -14,6 +14,8 @@ class InteractionState;
 class Event
 {
 public:
+	virtual ~Event() {}
+
 	virtual void Dispatch(std::shared_ptr<InteractionState> state) = 0;
 
 };

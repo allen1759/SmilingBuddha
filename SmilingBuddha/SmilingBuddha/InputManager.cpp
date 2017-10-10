@@ -8,8 +8,6 @@
 
 #include <cctype>
 
-#include <iostream>
-
 InputManager *InputManager::instance = NULL;
 
 inline InputManager::InputManager()
@@ -55,7 +53,5 @@ void InputManager::WaitKey()
 				keyTable[key] = true;
 			keyMutax.unlock();
 		}
-		//if (key != '\0')
-		//	std::cout << "current key = " << key << std::endl;
 	}
 }

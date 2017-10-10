@@ -31,13 +31,15 @@ public:
 
 	virtual void SignalEvent(std::shared_ptr<Event> e);
 
+	virtual void OnUserDetect();
+
+	virtual void OnUserLeave();
+
 	virtual void OnSmile();
 
 	virtual void OnRecorded(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> images);
 
-	virtual void OnUserDetect();
-
-	virtual void OnUserLeave();
+	virtual void OnLayoutTrigger();
 
 protected:
 	Director *director;

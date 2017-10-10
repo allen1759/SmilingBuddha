@@ -24,7 +24,7 @@ public:
 		this->images = images;
 	}
 
-	~OnRecordedEvent()
+	virtual ~OnRecordedEvent()
 	{
 	}
 

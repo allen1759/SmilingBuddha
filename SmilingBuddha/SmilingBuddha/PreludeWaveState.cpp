@@ -38,7 +38,7 @@ std::shared_ptr<PreludeWaveState> PreludeWaveState::CreateRandomWaveState(Direct
 	}
 }
 
-inline void PreludeWaveState::Update()
+void PreludeWaveState::Update()
 {
 	std::chrono::high_resolution_clock::time_point currentTime = std::chrono::high_resolution_clock::now();
 	float elapsedTime = std::chrono::duration_cast<std::chrono::duration<float>>(currentTime - PreludeState::startTime).count();

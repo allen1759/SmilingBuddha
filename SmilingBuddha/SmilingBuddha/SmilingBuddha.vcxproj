@@ -151,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PreludeBuddhaState.cpp" />
     <ClCompile Include="PreludeEndingState.cpp" />
+    <ClCompile Include="PreludeState.cpp" />
     <ClCompile Include="PreludeWaveState.cpp" />
     <ClCompile Include="RegularSmileProcessStrategy.cpp" />
     <ClCompile Include="SeeEachSmileProcessStrategy.cpp" />
@@ -199,6 +200,8 @@
     <ClInclude Include="IntroNeutralState.h" />
     <ClInclude Include="IntroSeeEachState.h" />
     <ClInclude Include="Kinect1HeadPoseTracker.h" />
+    <ClInclude Include="LayoutState.h" />
+    <ClInclude Include="OnLayoutTriggerEvent.h" />
     <ClInclude Include="OnRecordedEvent.h" />
     <ClInclude Include="OnSmileEvent.h" />
     <ClInclude Include="OnUserDetectEvent.h" />

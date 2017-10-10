@@ -11,21 +11,14 @@
 
 #include <chrono>
 
-#include "Director.h"
-
-
 class PreludeState : public InteractionState
 {
 public:
-	PreludeState(Director *director)
-		: InteractionState(director)
-	{
-		this->startTime = std::chrono::high_resolution_clock::now();
-	}
+	PreludeState(Director *director);
 
-	virtual ~PreludeState()
-	{
-	}
+	virtual ~PreludeState();
+
+	virtual void OnLayoutTrigger() override;
 
 protected:
 
