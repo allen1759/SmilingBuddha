@@ -55,7 +55,7 @@ public:
 		return "PreludeBuddhaState";
 	}
 
-	void OnUserDetect() override
+	virtual void OnUserDetect() override
 	{
 		// Set Black Fade Animation Video.
 		std::shared_ptr<Video> fadeVideo = std::make_shared<FadeAnimationVideo>(

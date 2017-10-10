@@ -33,7 +33,7 @@ public:
 private:
 
 	std::vector<std::shared_ptr<Video>> videoGrid;
-	std::vector<cv::Point> &layout;
+	const std::vector<cv::Point> &layout;
 	std::mutex videoGridMutex;
 
 	int rowCount;
