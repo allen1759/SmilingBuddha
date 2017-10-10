@@ -1,3 +1,5 @@
+#include <WinSock2.h>
+
 #include "VideoPool.h"
 #include "VideoRenderer.h"
 #include "Director.h"
