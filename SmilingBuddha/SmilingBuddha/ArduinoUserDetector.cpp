@@ -6,12 +6,11 @@
 
 #include "ArduinoUserDetector.h"
 
+#include <iostream>
 #include <exception>
 
 #include <boost/exception/diagnostic_information.hpp>
 #include <boost/exception_ptr.hpp>
-
-#include <iostream>
 
 ArduinoUserDetector * ArduinoUserDetector::instance = NULL;
 

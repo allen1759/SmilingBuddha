@@ -6,6 +6,10 @@
 
 #include "ActorVideoSet.h"
 
+#include <boost\filesystem.hpp>
+#include <opencv2\highgui\highgui.hpp>
+#include <opencv2\imgproc\imgproc.hpp>
+
 #include "Setting.h"
 
 ActorVideoSet::ActorVideoSet(int order)
@@ -24,9 +28,6 @@ ActorVideoSet::ActorVideoSet(int order)
 	ReadDirectionVideo(order, RIGHT_DOWN);
 	ReadDirectionVideo(order, RIGHT_UP);
 	ReadDirectionVideo(order, UP);
-
-	// Read morphing video in every direction.
-	//ReadMorphingVideo(order);
 }
 
 ActorVideoSet::~ActorVideoSet()
@@ -70,16 +71,12 @@ int ActorVideoSet::GetDirectionIndex(int fromRow, int fromCol, int atRow, int at
 			return LEFT;
 		}
 		else {
-			// Should return direction in this case???
+			// TODO: Should return direction in this case???
 			return CENTER;
 		}
 	}
 }
 
-//std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> ActorVideoSet::GetMorphingVideo(int index)
-//{
-//	return morphingSet[index];
-//}
 
 void ActorVideoSet::ReadDirectionVideo(int order, int direction)
 {
@@ -94,22 +91,6 @@ void ActorVideoSet::ReadDirectionVideo(int order, int direction)
 		}
 	}
 }
-
-//void ActorVideoSet::ReadMorphingVideo(int order)
-//{
-//	for (int i = 1; i <= MORPHING_SIZE; ++i) {
-//		boost::filesystem::path p(DIRECTION_PATH + "\\" + std::to_string(order) + "\\0-" + std::to_string(i));
-//
-//		for (boost::filesystem::directory_iterator it(p); it != boost::filesystem::directory_iterator(); ++it) {
-//			if (it->path().extension().string() == FILE_TYPE) {
-//				if (morphingSet[i] == NULL)
-//					morphingSet[i] = std::make_shared<std::vector<std::shared_ptr<cv::Mat>>>();
-//
-//				morphingSet[i]->push_back(ReadImage(it->path().string()));
-//			}
-//		}
-//	}
-//}
 
 std::shared_ptr<cv::Mat> ActorVideoSet::ReadImage(const std::string &path)
 {

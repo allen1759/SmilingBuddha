@@ -37,6 +37,13 @@ public:
 
 private:
 	/**
+	* Calulate the order of SmileVideo. The newest video should be centor of view.
+	* As time goes by, the videos will move out circularly.
+	*
+	*/
+	void CalculateSmileVideoOrder(const int windowCount);
+
+	/**
 	* Load slot smile video from file. The filesystem hierarchy show as followe:
 	*		SLOT_PATH----00 (Sequence of images in folder)
 	*				 |---05 (Sequence of images in folder)
@@ -78,14 +85,15 @@ private:
 	*/
 	void LoadBuddhasImages();
 
+
 	// Read image from file and resize.
 	std::shared_ptr<cv::Mat> ReadImage(const std::string path);
 
 
 	static VideoPool *instance;
 
-	const int WINDOW_COL_COUNT;
-	const int WINDOW_ROW_COUNT;
+	const int ROW_COUNT;
+	const int COL_COUNT;
 	const int IMAGE_SEQUENCE_LENGTH;
 
 	const int ACTOR_COUNT = 38;
@@ -99,6 +107,8 @@ private:
 
 	std::vector<std::shared_ptr<ActorVideoSet>> actorVideoSets;
 
+	// Order of smile video.
+	std::vector<std::pair<int, int>> smileVideoOrder;
 	// Slot videos.
 	std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> slotSmileVideoSet;
 	// Non-slot videos. The 1st element is the newest; the last one is the oldest.

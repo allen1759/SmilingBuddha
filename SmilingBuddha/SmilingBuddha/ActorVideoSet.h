@@ -12,10 +12,10 @@
 #include <unordered_map>
 #include <memory>
 
-#include <boost\filesystem.hpp>
-#include <opencv2\highgui\highgui.hpp>
-#include <opencv2\imgproc\imgproc.hpp>
-
+namespace cv
+{
+	class Mat;
+}
 
 class ActorVideoSet
 {
@@ -25,9 +25,6 @@ public:
 	~ActorVideoSet();
 
 	std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetDirectionVideo(int direction);
-
-	// Don't use Morphing anymore.
-	//std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> GetMorphingVideo(int index);
 
 	static int GetDirectionIndex(int fromRow, int fromCol, int atRow, int atCol);
 
@@ -49,17 +46,11 @@ private:
 
 	void ReadDirectionVideo(int order, int direction);
 
-	// Don't use Morphing anymore.
-	//void ReadMorphingVideo(int order);
-
 	// Read image from file and resize.
 	std::shared_ptr<cv::Mat> ReadImage(const std::string &path);
 
 
 	const static int DIRECTION_SIZE = 11;
-
-	// Don't use Morphing anymore.
-	//const static int MORPHING_SIZE = 9;
 
 	const std::string DIRECTION_PATH = "D:\\Direction";
 	const std::string DIRECTION_FOLDER[DIRECTION_SIZE] = { "Neu", "left_down", "down", "right_down", "left", "center", "right", "left_up", "up", "right_up", "Ran" };
@@ -69,10 +60,6 @@ private:
 	const int IMAGE_HEIGHT;
 
 	std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> directionSet;
-	// Don't use Morphing anymore.
-	//std::unordered_map<int, std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>> morphingSet;
 };
-
-
 
 #endif // !_ACTOR_VIDEO_SET_H

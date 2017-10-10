@@ -10,24 +10,27 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/date_time.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 #include "Setting.h"
 
 VideoPool * VideoPool::instance = NULL;
 
-VideoPool::VideoPool() : WINDOW_COL_COUNT(Setting::GetInstance()->GetCol()),
-					     WINDOW_ROW_COUNT(Setting::GetInstance()->GetRow()),
+VideoPool::VideoPool() : COL_COUNT(Setting::GetInstance()->GetCol()),
+					     ROW_COUNT(Setting::GetInstance()->GetRow()),
 						 IMAGE_SEQUENCE_LENGTH(Setting::GetInstance()->GetImageSequenceLength()),
 						 IMAGE_WIDTH(Setting::GetInstance()->GetImageWidth()),
 						 IMAGE_HEIGHT(Setting::GetInstance()->GetImageHeight())
 {
-	LoadSlotSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
-	LoadNonSlotSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
+	CalculateSmileVideoOrder(COL_COUNT * ROW_COUNT);
+	LoadSlotSmileVideo(COL_COUNT * ROW_COUNT);
+	LoadNonSlotSmileVideo(COL_COUNT * ROW_COUNT);
 
-	LoadAllSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
+	LoadAllSmileVideo(COL_COUNT * ROW_COUNT);
 
-	for (int i = 0; i < WINDOW_ROW_COUNT; ++i) {
-		for (int j = 0; j < WINDOW_COL_COUNT; ++j) {
+	for (int i = 0; i < ROW_COUNT; ++i) {
+		for (int j = 0; j < COL_COUNT; ++j) {
 			// ========== for debug ==========
 			if (i != 0 || j != 0) {
 				actorVideoSets.push_back(actorVideoSets[0]);
@@ -57,7 +60,7 @@ VideoPool * VideoPool::GetInstance()
 
 std::shared_ptr<ActorVideoSet> VideoPool::GetActorVideoSet(int row, int col)
 {
-	return actorVideoSets[row * WINDOW_COL_COUNT + col];
+	return actorVideoSets[row * COL_COUNT + col];
 }
 
 void VideoPool::AddSmileVideo(std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> newSmileVideo)
@@ -65,12 +68,12 @@ void VideoPool::AddSmileVideo(std::shared_ptr<std::vector<std::shared_ptr<cv::Ma
 	nonslotSmileVideoList.pop_back();
 	nonslotSmileVideoList.push_front(newSmileVideo);
 
-	LoadAllSmileVideo(WINDOW_COL_COUNT * WINDOW_ROW_COUNT);
+	LoadAllSmileVideo(COL_COUNT * ROW_COUNT);
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetSmileVideoList(int row, int col)
 {
-	return smileVideoList[row * WINDOW_COL_COUNT + col];
+	return smileVideoList[row * COL_COUNT + col];
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetBuddhaAnimationVideo()
@@ -82,6 +85,64 @@ std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>> VideoPool::GetNextBuddhaV
 {
 	buddhaImageListIndex = (buddhaImageListIndex + 1) % buddhaVideoList.size();
 	return buddhaVideoList.at(buddhaImageListIndex);
+}
+
+void VideoPool::CalculateSmileVideoOrder(const int windowCount)
+{
+	// Row and column of center grid.
+	std::pair<int, int> position;
+	position.first = Setting::GetInstance()->GetCenterRow();
+	position.second = Setting::GetInstance()->GetCenterCol();
+
+	smileVideoOrder.push_back(position);
+	int level = 1;
+	while (smileVideoOrder.size() < windowCount) {
+		// Move up one position.
+		position.first--;
+		if (position.first >= 0 && position.first < ROW_COUNT &&
+			position.second >= 0 && position.second < COL_COUNT) {
+			smileVideoOrder.push_back(position);
+		};
+
+		// Width of current level.
+		int width = level * 2;
+
+		// Add top line to order.
+		for (int i = 0; i < width - 1; ++i) {
+			position.second++;
+			if (position.first >= 0 && position.first < ROW_COUNT &&
+				position.second >= 0 && position.second < COL_COUNT) {
+				smileVideoOrder.push_back(position);
+			}
+		}
+		// Add right line to order.
+		for (int i = 0; i < width; ++i) {
+			position.first++;
+			if (position.first >= 0 && position.first < ROW_COUNT &&
+				position.second >= 0 && position.second < COL_COUNT) {
+				smileVideoOrder.push_back(position);
+			}
+		}
+		// Add bottom line to order.
+		for (int i = 0; i < width; ++i) {
+			position.second--;
+			if (position.first >= 0 && position.first < ROW_COUNT &&
+				position.second >= 0 && position.second < COL_COUNT) {
+				smileVideoOrder.push_back(position);
+			}
+		}
+		// Add left line to order.
+		for (int i = 0; i < width; ++i) {
+			position.first--;
+			if (position.first >= 0 && position.first < ROW_COUNT &&
+				position.second >= 0 && position.second < COL_COUNT) {
+				smileVideoOrder.push_back(position);
+			}
+		}
+
+		// Move to next level
+		level++;
+	}
 }
 
 void VideoPool::LoadSlotSmileVideo(const int windowCount)
@@ -214,16 +275,19 @@ std::shared_ptr<std::list<std::string>> VideoPool::GetLastSmileVideoPath(int day
 void VideoPool::LoadAllSmileVideo(const int windowCount)
 {
 	smileVideoList.clear();
+	smileVideoList.resize(windowCount);
 	std::list<std::shared_ptr<std::vector<std::shared_ptr<cv::Mat>>>>::iterator it = nonslotSmileVideoList.begin();
 
 	for (int i = 0; i < windowCount; ++i) {
 		// If current index has no slotSmileVideo
-		if (slotSmileVideoSet[i] == NULL) {
-			smileVideoList.push_back(*it);
+		int currentIndex = smileVideoOrder[i].first * COL_COUNT + smileVideoOrder[i].second;
+
+		if (slotSmileVideoSet[currentIndex] == NULL) {
+			smileVideoList.at(currentIndex) = (*it);
 			it++;
 		}
 		else
-			smileVideoList.push_back(slotSmileVideoSet[i]);
+			smileVideoList.at(currentIndex) = slotSmileVideoSet[currentIndex];
 	}
 }
 
