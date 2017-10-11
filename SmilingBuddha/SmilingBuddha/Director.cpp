@@ -15,6 +15,7 @@
 #include "OnSmileEvent.h"
 #include "OnRecordedEvent.h"
 #include "OnLayoutTriggerEvent.h"
+#include "OnRoiTriggerEvent.h"
 
 // Controller
 #include "RegularSmileProcessStrategy.h"
@@ -163,6 +164,12 @@ void Director::CheckKeyboardTrigger()
 	if (InputManager::GetInstance()->GetKey('l')) {
 		eventQueueMutex.lock();
 		eventQueue.push(std::make_shared<OnLayoutTriggerEvent>());
+		eventQueueMutex.unlock();
+	}
+
+	if (InputManager::GetInstance()->GetKey('r')) {
+		eventQueueMutex.lock();
+		eventQueue.push(std::make_shared<OnRoiTriggerEvent>());
 		eventQueueMutex.unlock();
 	}
 }

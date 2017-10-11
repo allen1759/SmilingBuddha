@@ -11,6 +11,7 @@
 
 // State
 #include "LayoutState.h"
+#include "RoiState.h"
 
 PreludeState::PreludeState(Director * director)
 	: InteractionState(director)
@@ -25,4 +26,9 @@ PreludeState::~PreludeState()
 void PreludeState::OnLayoutTrigger()
 {
 	director->SetInteractionState(std::make_shared<LayoutState>(director));
+}
+
+void PreludeState::OnRoiTrigger()
+{
+	director->SetInteractionState(std::make_shared<RoiState>(director));
 }

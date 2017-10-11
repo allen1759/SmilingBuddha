@@ -20,6 +20,8 @@ public:
 
 	virtual void OnLayoutTrigger() override;
 
+	virtual void OnRoiTrigger() override;
+
 protected:
 
 	const float USER_VIDEO_TIME = 3.0f;

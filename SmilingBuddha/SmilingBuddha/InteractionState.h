@@ -41,6 +41,8 @@ public:
 
 	virtual void OnLayoutTrigger();
 
+	virtual void OnRoiTrigger();
+
 protected:
 	Director *director;
 };

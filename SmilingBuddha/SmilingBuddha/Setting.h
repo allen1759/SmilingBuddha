@@ -47,6 +47,8 @@ public:
 	int GetResolutionWidth();
 	int GetResolutionHeight();
 
+	int GetCameraIndex();
+
 	cv::Point GetForeheadPositionOfGrid(int row, int col);
 
 
@@ -60,6 +62,15 @@ public:
 	void SetLayout(int row, int col, cv::Point point);
 
 	void SaveLayout();
+
+	const cv::Rect &GetDetectRoi()
+	{
+		return DETECT_ROI;
+	}
+
+	void SetDetectRoi(cv::Rect newRoi);
+
+	void SaveDetectRoi();
 
 private:
 
@@ -95,6 +106,8 @@ private:
 	static const int RESOLUTION_WIDTH = 1920;
 	static const int RESOLUTION_HEIGHT = 1080;
 
+	static const int CAMERA_INDEX = 0;
+
 	// Projection width, height on the projection plane.
 	float PROJECTION_WIDTH = 1.92f;
 	float PROJECTION_HEIGHT = 1.08f;
@@ -107,6 +120,10 @@ private:
 	// Layout of grids.
 	std::vector<cv::Point> layout;
 	std::string layoutPath = "resources\\settings\\layout.txt";
+
+	// Rect of ROI
+	cv::Rect DETECT_ROI;
+	std::string detectRoiPath = "resources\\settings\\detect_roi.txt";
 };
 
 

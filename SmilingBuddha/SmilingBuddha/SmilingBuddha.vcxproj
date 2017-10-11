@@ -203,6 +203,7 @@
     <ClInclude Include="LayoutState.h" />
     <ClInclude Include="OnLayoutTriggerEvent.h" />
     <ClInclude Include="OnRecordedEvent.h" />
+    <ClInclude Include="OnRoiTriggerEvent.h" />
     <ClInclude Include="OnSmileEvent.h" />
     <ClInclude Include="OnUserDetectEvent.h" />
     <ClInclude Include="OnUserLeaveEvent.h" />
@@ -217,6 +218,7 @@
     <ClInclude Include="PreludeWave2UpState.h" />
     <ClInclude Include="PreludeWaveState.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RoiState.h" />
     <ClInclude Include="SmileState.h" />
     <ClInclude Include="IntroState.h" />
     <ClInclude Include="liblinear-2.11\blas\blas.h" />

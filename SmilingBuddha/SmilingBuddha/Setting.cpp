@@ -46,6 +46,17 @@ Setting::Setting()
 		}
 	}
 	layoutFile.close();
+
+	// Read detect ROI
+	std::fstream detectRoiFile(detectRoiPath, std::ios::in);
+	if (detectRoiFile.is_open())
+		detectRoiFile >> DETECT_ROI.x >> DETECT_ROI.y >> DETECT_ROI.width >> DETECT_ROI.height;
+	else {
+		DETECT_ROI.x = 0;
+		DETECT_ROI.y = 0;
+		DETECT_ROI.width = RESOLUTION_WIDTH;
+		DETECT_ROI.height = RESOLUTION_HEIGHT;
+	}
 }
 
 Setting::~Setting()
@@ -179,6 +190,11 @@ int Setting::GetResolutionHeight()
 	return RESOLUTION_HEIGHT;
 }
 
+int Setting::GetCameraIndex()
+{
+	return CAMERA_INDEX;
+}
+
 cv::Point Setting::GetForeheadPositionOfGrid(int row, int col)
 {
 	cv::Point ret = layout[row * COL_COUNT + col];
@@ -213,8 +229,8 @@ void Setting::SetLayout(int row, int col, cv::Point point)
 	point.x = std::max(0, point.x);
 	point.y = std::max(0, point.y);
 
-	point.x = std::min(RESOLUTION_WIDTH - IMAGE_WIDTH - 1, point.x);
-	point.y = std::min(RESOLUTION_HEIGHT - IMAGE_HEIGHT - 1, point.y);
+	point.x = std::min(RESOLUTION_WIDTH - IMAGE_WIDTH, point.x);
+	point.y = std::min(RESOLUTION_HEIGHT - IMAGE_HEIGHT, point.y);
 
 	layout[row * COL_COUNT + col] = point;
 }
@@ -226,4 +242,29 @@ void Setting::SaveLayout()
 		layoutFile << layout[i].x << "\t" << layout[i].y << std::endl;
 
 	layoutFile << "// xPosition\tyPosition" << std::endl;
+	layoutFile.close();
+}
+
+void Setting::SetDetectRoi(cv::Rect newRoi)
+{
+	newRoi.width = std::min(RESOLUTION_WIDTH, newRoi.width);
+	newRoi.height = std::min(RESOLUTION_HEIGHT, newRoi.height);
+
+	newRoi.x = std::max(0, newRoi.x);
+	newRoi.y = std::max(0, newRoi.y);
+
+	newRoi.x = std::min(RESOLUTION_WIDTH - newRoi.width, newRoi.x);
+	newRoi.y = std::min(RESOLUTION_HEIGHT - newRoi.height, newRoi.y);
+
+	DETECT_ROI = newRoi;
+}
+
+void Setting::SaveDetectRoi()
+{
+	std::fstream detectRoiFile(detectRoiPath, std::ios::out);
+	detectRoiFile << DETECT_ROI.x << "\t" << DETECT_ROI.y << "\t"
+				  << DETECT_ROI.width << "\t" << DETECT_ROI.height << std::endl;
+	detectRoiFile << "//x\ty\twidth\theight" << std::endl;
+
+	detectRoiFile.close();
 }

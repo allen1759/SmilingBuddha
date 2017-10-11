@@ -44,3 +44,7 @@ void InteractionState::OnLayoutTrigger()
 {
 
 }
+
+void InteractionState::OnRoiTrigger()
+{
+}

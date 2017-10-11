@@ -431,5 +431,11 @@
     <ClInclude Include="OnLayoutTriggerEvent.h">
       <Filter>event</Filter>
     </ClInclude>
+    <ClInclude Include="RoiState.h">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="OnRoiTriggerEvent.h">
+      <Filter>event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
