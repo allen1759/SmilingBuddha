@@ -6,6 +6,7 @@
 
 #include "Setting.h"
 
+#include <iostream>
 #include <cstdlib>
 #include <algorithm>
 
@@ -13,22 +14,38 @@ Setting *Setting::instance = NULL;
 
 Setting::Setting()
 {
-	layout.resize(WINDOW_ROW_COUNT * WINDOW_COL_COUNT);
+	// Read projection parameters.
+	std::fstream projectionFile(projectionParametersPath, std::ios::in);
+	if (projectionFile.is_open())
+		projectionFile >> PROJECTION_WIDTH >> PROJECTION_HEIGHT;
+	else
+		std::cerr << "Projection file not found." << std::endl;
+	projectionFile.close();
+
+	// Read comport file.
+	std::fstream comportFile(comportPath, std::ios::in);
+	if (comportFile.is_open())
+		comportFile >> COMPORT;
+	else
+		std::cerr << "Comport file not found." << std::endl;
+	comportFile.close();
 
 	// Read layout file.
+	layout.resize(ROW_COUNT * COL_COUNT);
 	std::fstream layoutFile(layoutPath, std::ios::in);
 	if (layoutFile.is_open()) {
 		for (int i = 0; i < layout.size(); ++i)
 			layoutFile >> layout[i].x >> layout[i].y;
 	}
 	else {
-		float gridSizeX = GetResolutionWidth() / static_cast<float>(WINDOW_COL_COUNT);
-		float gridSizeY = GetResolutionHeight() / static_cast<float>(WINDOW_ROW_COUNT);
-		for (int i = 0; i < WINDOW_ROW_COUNT; ++i) {
-			for (int j = 0; j < WINDOW_COL_COUNT; ++j)
-				layout[i * WINDOW_COL_COUNT + j] = cv::Point(static_cast<int>(gridSizeX * (float)j), static_cast<int>(gridSizeY * (float)i));
+		float gridSizeX = GetResolutionWidth() / static_cast<float>(COL_COUNT);
+		float gridSizeY = GetResolutionHeight() / static_cast<float>(ROW_COUNT);
+		for (int i = 0; i < ROW_COUNT; ++i) {
+			for (int j = 0; j < COL_COUNT; ++j)
+				layout[i * COL_COUNT + j] = cv::Point(static_cast<int>(gridSizeX * (float)j), static_cast<int>(gridSizeY * (float)i));
 		}
 	}
+	layoutFile.close();
 }
 
 Setting::~Setting()
@@ -45,27 +62,17 @@ Setting * Setting::GetInstance()
 
 int Setting::GetRow()
 {
-	return WINDOW_ROW_COUNT;
+	return ROW_COUNT;
 }
 
 int Setting::GetCol()
 {
-	return WINDOW_COL_COUNT;
+	return COL_COUNT;
 }
 
 int Setting::GetWindowCount()
 {
-	return WINDOW_COL_COUNT * WINDOW_ROW_COUNT;
-}
-
-int Setting::GetImageSequenceLength()
-{
-	return IMAGE_SEQUENCE_LENGTH;
-}
-
-int Setting::GetActorIndex(int row, int col)
-{
-	return ACTOR_INDEX[row * WINDOW_COL_COUNT + col];
+	return COL_COUNT * ROW_COUNT;
 }
 
 int Setting::GetCenterRow()
@@ -86,10 +93,60 @@ int Setting::GetMaxDistanceToCenterInGrid()
 int Setting::GetMaxDistanceToCenter()
 {
 	int ret = 0;
-	ret = std::max(ROW_CENTER, std::max(WINDOW_ROW_COUNT - ROW_CENTER - 1, ret));
-	ret = std::max(COL_CENTER, std::max(WINDOW_COL_COUNT - COL_CENTER - 1, ret));
+	ret = std::max(ROW_CENTER, std::max(ROW_COUNT - ROW_CENTER - 1, ret));
+	ret = std::max(COL_CENTER, std::max(COL_COUNT - COL_CENTER - 1, ret));
 
 	return ret;
+}
+
+void Setting::GetPairRowColInIntroStateGrid(int & row, int & col, int & nearbyRow, int & nearbyCol)
+{
+	int index = rand() % SQUARE_SIZE;
+	row = ROW_CENTER + DIRECTION[index][1];
+	col = COL_CENTER + DIRECTION[index][0];
+
+
+	int startIndex = rand() % (SQUARE_SIZE - 1);
+	for (int i = 0; i < (SQUARE_SIZE - 1); ++i) {
+		int index = (startIndex + i) % (SQUARE_SIZE - 1);
+		int anotherRow = row + NEAR_BY_DIRECTION[index][1];
+		int anotherCol = col + NEAR_BY_DIRECTION[index][0];
+
+		if (Setting::GetInstance()->IsInIntroStateGrid(anotherRow, anotherCol)) {
+			nearbyRow = anotherRow;
+			nearbyCol = anotherCol;
+			return;
+		}
+	}
+}
+
+int Setting::CalculateDistanceToCenter(int row, int col)
+{
+	int dist = 0;
+	dist = std::max(dist, std::abs(row - ROW_CENTER));
+	dist = std::max(dist, std::abs(col - COL_CENTER));
+
+	return dist;
+}
+
+int Setting::CalculateManhattenDistanceToCenter(int row, int col)
+{
+	return std::abs(row - ROW_CENTER) + std::abs(col - COL_CENTER);
+}
+
+bool Setting::IsInIntroStateGrid(int row, int col)
+{
+	return CalculateDistanceToCenter(row, col) <= GetMaxDistanceToCenterInGrid();
+}
+
+int Setting::GetActorIndex(int row, int col)
+{
+	return ACTOR_INDEX[row * COL_COUNT + col];
+}
+
+int Setting::GetImageSequenceLength()
+{
+	return IMAGE_SEQUENCE_LENGTH;
 }
 
 int Setting::GetImageWidth()
@@ -124,7 +181,7 @@ int Setting::GetResolutionHeight()
 
 cv::Point Setting::GetForeheadPositionOfGrid(int row, int col)
 {
-	cv::Point ret = layout[row * WINDOW_COL_COUNT + col];
+	cv::Point ret = layout[row * COL_COUNT + col];
 	ret.y += GetImageHeight() / 3;
 	ret.x += GetImageWidth() / 2;
 
@@ -141,43 +198,32 @@ float Setting::GetProjectionHeight()
 	return PROJECTION_HEIGHT;
 }
 
-int Setting::CalculateDistanceToCenter(int row, int col)
+std::string Setting::GetComport()
 {
-	int dist = 0;
-	dist = std::max(dist, std::abs(row - ROW_CENTER));
-	dist = std::max(dist, std::abs(col - COL_CENTER));
-
-	return dist;
+	return COMPORT;
 }
 
-int Setting::CalculateManhattenDistanceToCenter(int row, int col)
+const std::vector<cv::Point>& Setting::GetLayout()
 {
-	return std::abs(row - ROW_CENTER) + std::abs(col - COL_CENTER);
+	return layout;
 }
 
-bool Setting::IsInIntroStateGrid(int row, int col)
+void Setting::SetLayout(int row, int col, cv::Point point)
 {
-	return CalculateDistanceToCenter(row, col) <= GetMaxDistanceToCenterInGrid();
+	point.x = std::max(0, point.x);
+	point.y = std::max(0, point.y);
+
+	point.x = std::min(RESOLUTION_WIDTH - IMAGE_WIDTH - 1, point.x);
+	point.y = std::min(RESOLUTION_HEIGHT - IMAGE_HEIGHT - 1, point.y);
+
+	layout[row * COL_COUNT + col] = point;
 }
 
-void Setting::GetPairRowColInIntroStateGrid(int & row, int & col, int & nearbyRow, int & nearbyCol)
+void Setting::SaveLayout()
 {
-	int index = rand() % SQUARE_SIZE;
-	row = ROW_CENTER + DIRECTION[index][1];
-	col = COL_CENTER + DIRECTION[index][0];
+	std::fstream layoutFile(layoutPath, std::ios::out);
+	for (int i = 0; i < layout.size(); ++i)
+		layoutFile << layout[i].x << "\t" << layout[i].y << std::endl;
 
-
-	int startIndex = rand() % (SQUARE_SIZE - 1);
-	for (int i = 0; i < (SQUARE_SIZE - 1); ++i) {
-		int index = (startIndex + i) % (SQUARE_SIZE - 1);
-		int anotherRow = row + NEAR_BY_DIRECTION[index][1];
-		int anotherCol = col + NEAR_BY_DIRECTION[index][0];
-
-		if (Setting::GetInstance()->IsInIntroStateGrid(anotherRow, anotherCol)) {
-			nearbyRow = anotherRow;
-			nearbyCol = anotherCol;
-			return;
-		}
-	}
+	layoutFile << "// xPosition\tyPosition" << std::endl;
 }
-
