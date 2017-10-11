@@ -19,8 +19,7 @@ public:
 	virtual std::shared_ptr<cv::Mat> GetFrame() override;
 
 private:
-	//TODO: make constant.
-	float PERIOD = 3.14159f * 80.0f;
+	const float PERIOD = 3.14159f * 80.0f;
 	
 	float WAVE_AMPLITUDE = 0.025f;
 

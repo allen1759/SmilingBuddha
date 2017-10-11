@@ -12,6 +12,8 @@
 #include <boost/exception/diagnostic_information.hpp>
 #include <boost/exception_ptr.hpp>
 
+#include "Setting.h"
+
 ArduinoUserDetector * ArduinoUserDetector::instance = NULL;
 
 ArduinoUserDetector::ArduinoUserDetector() : ioService(), serialPort(ioService)
@@ -19,8 +21,7 @@ ArduinoUserDetector::ArduinoUserDetector() : ioService(), serialPort(ioService)
 	isRunning = false;
 	detectUserThread = NULL;
 
-	// TODO: read comport from file
-	portName = "COM3";
+	portName = Setting::GetInstance()->GetComport();
 
 	signalBuffer = new bool[DETECT_SIGNAL_WINDOW_SIZE];
 	for (int i = 0; i < DETECT_SIGNAL_WINDOW_SIZE; ++i)

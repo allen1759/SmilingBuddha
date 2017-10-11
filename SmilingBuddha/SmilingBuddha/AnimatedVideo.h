@@ -11,10 +11,6 @@
 
 #include <chrono>
 
-#include <iostream>
-
-// TODO: this is abstract class
-
 class AnimatedVideo : public Video
 {
 public:
